@@ -1,0 +1,192 @@
+Mini Project: An Explainable and Robust Cyber-Defence Model 
+
+AI for Cybersecurity 
+
+Note: the mini project pulls together everything from all modules, on a problem you choose yourselves. You are not 
+asked to invent a new method. You are asked to build a working detector, explain it, test whether it survives with 
+imperfect data, and report all of that honestly. A negative result, reported clearly, is worth more than a good number 
+you cannot defend. 
+
+1. Choosing your problem and dataset 
+Your group picks one security problem and one public dataset. 
+Some options: 
+
+• UNSW-NB15 ,network intrusion with a different feature set from CICIDS. 
+• NSL-KDD ,the classic intrusion benchmark. Small and fast, but dated, say so in your report. 
+• CIC-DDoS2019 ,several DDoS attack types, strongly imbalanced. 
+• CIC-IoT2023 or Bot-IoT ,traffic from IoT devices. 
+• SMS spam / smishing ,text data, so your pipeline will differ from the labs. 
+• Your own proposal ,any public, labelled cybersecurity dataset 
+These are only suggestions. You are free to use any public, labelled cybersecurity dataset, including the one used by 
+the paper your group presented at the seminar. Taking that paper's dataset and rebuilding part of its pipeline 
+yourselves is a good way to start, and it means you already know the problem 
+
+2. What you must build 
+Parts A to E and Part G are required. Part F is required for grade 5. Make sure your notebook runs from top to bottom 
+in under five minutes. Subsample if you need to, and say that you did. 
+
+Part A. The problem and the data 
+
+• State the security problem in two or three sentences: what is being detected, who would use the system, and 
+what a false alarm costs them. 
+• Load and clean the data. Report how many records and features you have, and the class balance. 
+• Split 60 / 20 / 20 into training, validation and test, stratified. 
+• Report the trivial baseline: the accuracy of always predicting the majority class, and its recall. Every later score 
+is compared against this. 
+Part B. Supervised models 
+
+• Train at least one glass box (decision tree or logistic regression) and one black box (random forest or gradient 
+boosting). 
+• Report macro-F1, recall, PR-AUC and FAR on the test set, next to the trivial baseline. 
+• Choose all settings on the validation set. The test set is touched once, at the end. 
+Part C. Learning with fewer labels 
+
+• Keep only 5 to 10 per cent of the training labels. Train your black box on those alone. This is your lower line. 
+• Then try either semi-supervised pseudo-labelling or a self-supervised pretext task followed by a classifier 
+trained on the few labels. 
+• Say plainly whether the unlabelled data helped.. A clear negative result, properly explained, scores as well as a 
+positive one. 
+Part D. Explanation 
+
+• Global: SHAP on your black box. Which features drive it, and do they make sense to a security person? 
+• Local: explain three cases with SHAP and with LIME ,a confident correct detection, a confident correct negative, 
+and a mistake. 
+• Fidelity: run a deletion test. Replace the top SHAP features with training medians and compare the drop with 
+that from the same number of random features. 
+
+• Stability: run LIME several times with different seeds and report how often the top three features stay the 
+same. 
+Part E. Robustness 
+
+At least one of the following, reported with numbers at several levels: 
+
+• Noise ,add Gaussian noise scaled to each feature's training standard deviation. 
+• Missing features ,replace a fraction of each record's values with the training median. 
+• Evasion ,a constrained attack. State which features an attacker could realistically change and in which direction, 
+and keep to it. 
+• Say what broke first, and at what level you would stop trusting the model. 
+Part F. A knowledge-based layer 
+
+• Take the two most important features from Part D and build a BRB: three referential values each, nine rules. 
+• Compare it with a tree and a forest that see only those same two features, so the comparison is fair. 
+• Show the belief output for one case, including the Unknown part. 
+• Say what the BRB gives you that the forest does not, and what it costs you. 
+Part G. Adaptability 
+
+Everything above tests your model on the same kind of data it was trained on. But attacks change. A new variant 
+appears that nobody has seen before, and a model that scored well last month quietly starts missing things. This part 
+measures that, on your own single dataset. You do not need any extra data. 
+
+Step 1. Hide one attack from the model. Pick one attack type in your data, for example one DDoS variant, one 
+malware family, or one category of fraud. Remove every row of that type from your training set only. Keep them in 
+the test set. Now train your black box again on this reduced training set. Your model has never seen this attack. 
+
+Step 2. Measure what it costs. On the test set, report two numbers: overall recall, and recall on the hidden attack 
+type by itself. The second number is usually very low. That is the point: the model did not get worse at what it knew, 
+the world moved and the model stayed still. 
+
+Step 3. Adapt. Now imagine an analyst has just labelled a small number of examples of the new attack, say 50 to 100 
+rows. Add only those to your training set, retrain, and measure the same two numbers again. Report the gain: recall 
+on the new attack before adapting, and after. 
+
+Step 4. Say what you would do. In one short paragraph: was a small number of labels enough? How would you notice 
+
+this problem in a real system, where nobody tells you a new attack has appeared? 
+If your dataset has only attack and normal labels, with no attack types, use any column that marks a period, a 
+source or a site instead. Train on some values of that column and test on the rest. If there is nothing like that either, 
+sort the rows by time or by index, train on the first 70 per cent and test on the last 30 per cent. Say in your report 
+which of these you did and why. 
+
+3. The presentation 
+The presentation is on 15 October. There is no second date and no alternative to presenting. 
+
+• Thirteen minutes per group, then questions. Keep to time. 
+• Every member speaks and explains the part they built. Divide the work so that this is possible within thirteen 
+minutes. 
+• Run your code during the presentation or show a demo of it running. A slide showing results you obtained 
+earlier is not enough. If a full run is too slow, run a reduced version live, or play a recording of the real run and 
+say which it is. (you don't have to use full dataset in you code you can choose (4000 to 5000) rows but make 
+sure there are a mix of attack and normal labels. 
+• Expect questions about any part of the work, not only your own part. ( you already did all labs work, you don't 
+have to worry about the questions) 
+• A member who is absent receives F. The presentation is held once. 
+
+4. What to hand in 
+Your code: one notebook that runs from top to bottom, plus a short README naming the dataset, where to get it, the 
+libraries, and how to run. A report of 6 to 8 pages with these headings: 
+
+Heading What to write 
+1. Problem and data The security problem, who uses the system, what a false alarm costs. The 
+dataset, its size, its class balance, and the baseline. And the results before and 
+after validation test 
+2. Method Your models, your splits, how settings were chosen, and your approach in Part C. 
+3. Results One table with all models and all four metrics, against the trivial baseline. Say 
+whether the unlabelled data helped. 
+4. Explanation The global SHAP picture, your three explained cases, and the fidelity and stability 
+results. Do SHAP and LIME agree? 
+5. Robustness What you tested, at what levels, and what broke first. 
+6. Adaptability Which attack type you hid, recall on it before and after adapting, and how many 
+labels you needed. How would you notice this in a real system? 
+7. Discussion Go through Parts A to G in order. For each one, quote your own main result and 
+say what it means, not just what the number is. Then pull it together: would you 
+deploy this? What would an attacker fake? Which of your numbers do you least 
+trust, and why? 
+8. Who did what One or two lines per member. 
+
+5. Deadlines 
+• Notebook, README and report uploaded; 15 Oct , 8:00 AM 
+• Presentation ,15 October from 14:45 to 18:00 
+Grading 
+
+The mini project is graded 5, 4, 3 or F, where 5 is the highest. 
+
+
+Grade What the work must show 
+5 Everything required for grade 4, and: 
+• Part F is done: a working BRB, compared fairly against models that see the same two 
+features, with the Unknown part shown and discussed. 
+• The discussion shows real judgement: which numbers are trustworthy, which are not, what 
+an attacker would fake, and where the method would fail outside this dataset. 
+• The explanation work goes past producing plots. The fidelity and stability results are 
+interpreted, and disagreement between SHAP and LIME is investigated rather than ignored. 
+4 Everything required for grade 3, and: 
+• Part C and Part E are complete, with results reported at several levels rather than a single 
+number. 
+• Part G is complete: recall on the hidden attack is reported before and after adapting, and the 
+group says what they would do in a real system. 
+• Models are compared properly: the same test set, the same metrics, and the trivial baseline 
+shown alongside. 
+• The report offers criticism of its own results, not only a description of them. 
+• Whether the unlabelled data helped is answered clearly, including when the answer is no. 
+3 All of the following: 
+• Parts A, B and D are done and correct. The notebook runs from top to bottom and 
+reproduces the numbers in the report. 
+• Settings were chosen on the validation set, and the test set was used once. 
+• The trivial baseline is reported next to the model scores. 
+• Explanations are produced and described at a basic level. 
+• Part G is attempted: one attack type is hidden from training and the loss of recall is reported, 
+even if the adaptation step is incomplete. 
+• The code was run or demonstrated during the presentation, and every member explained 
+their own part. 
+• The report is readable, the figures are captioned, and the who-did-what section is present. 
+F Any of the following: 
+• Not submitted by the deadline. 
+• The member is absent from the presentation on 15 October. 
+• The member does not speak during the presentation. 
+• The code was neither run nor demonstrated during the presentation. 
+• The notebook does not run, or its numbers do not match the report. 
+• A required part is missing. 
+• The test set was used to choose settings, or the labels of the hidden set were used in 
+training. 
+• Work is copied without citation, or AI assistance is used without being declared. 
+
+One attempt only. There is no resubmission and no second presentation date. The grade awarded after 15 October is final. 
+
+Submitting your work 
+
+• Where. Upload to CANVAS by the deadline: your code as a zip or a repository link, and the report as a PDF. 
+• Group work. Every member contributes to the code, not only to the report. The who-did-what section is read and may affect individual 
+grades. 
+• Honesty. You may use libraries, tutorials and public code, just cite them. If you use an AI assistant, say so in the report and describe what it 
+was used for. 
+

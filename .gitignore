@@ -1,0 +1,15 @@
+# Copies of earlier labs, kept locally for reference only
+PreviousLabs/
+
+# Environment and tool caches
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+
+# Data: clean.csv is 150 MB (over GitHub's 100 MB limit) and the raw CICIDS2017 day-files are
+# 844 MB, so neither is committed. data/README.md says where to get them.
+data/processed/*.csv
+data/raw/*.csv
+
+# Cached trained models (rebuilt by the setup notebook)
+models/*.joblib
