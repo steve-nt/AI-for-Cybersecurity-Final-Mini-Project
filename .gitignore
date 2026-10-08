@@ -1,6 +1,7 @@
 # Copies of earlier labs, kept locally for reference only
 PreviousLabs/
-
+UNSW-NB15/
+CIC-DDoS2019/
 # Environment and tool caches
 .venv/
 __pycache__/
