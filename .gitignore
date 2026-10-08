@@ -1,16 +1,13 @@
 # Copies of earlier labs, kept locally for reference only
 PreviousLabs/
+
+# Datasets: too big for GitHub (Data.csv is 188 MB, the limit is 100 MB). README.md says where to
+# get them and how to check them.
 UNSW-NB15/
 CIC-DDoS2019/
+
 # Environment and tool caches
 .venv/
 __pycache__/
 .ipynb_checkpoints/
-
-# Data: clean.csv is 150 MB (over GitHub's 100 MB limit) and the raw CICIDS2017 day-files are
-# 844 MB, so neither is committed. data/README.md says where to get them.
-data/processed/*.csv
-data/raw/*.csv
-
-# Cached trained models (rebuilt by the setup notebook)
-models/*.joblib
+.pytest_cache/

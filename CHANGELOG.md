@@ -18,3 +18,23 @@ The user asked which suggested dataset is the easiest option and wanted the answ
 
 **Why**
 The group has the UNSW-NB15 and CIC-DDoS2019 datasets locally, not NSL-KDD. After inspecting both folders, UNSW-NB15 is faster and easier to explain, and the user asked for the file to be rewritten for it.
+
+## 2026-10-09 00:20 EEST: Task list, project layout and files copied from earlier labs
+
+**What**
+- `TASKLIST.md`: created. Step-by-step tasks for Parts A–G of the brief plus setup, optional extras, presentation and hand-in. Includes a plain-language glossary (programming, security, ML, metrics, SHAP/LIME, BRB, adaptability), facts about the UNSW-NB15 data, results of a trial run, decisions already made, the parallel workflow (part notebooks, step markers, stand-ins, shared names, the test-set rule, git), five work tracks with mappings for 2–4 people, sync points and a day-by-day plan up to 15 Oct, a grading checklist and questions for the teacher.
+- Copied from the earlier labs so the project does not depend on `PreviousLabs/`:
+  - `requirements.txt` (Lab 4.2; header retitled, `pytest==9.1.1` added for the unit tests)
+  - `tools/assemble.py`, `tools/feature_glossary.py`, `tools/check_report_numbers.py` (Lab 4.2, unchanged; the task list says what to edit)
+  - `src/brbes.py`, `src/test_brbes.py`, `src/test_xai_tools.py` (Lab 3, unchanged); `src/xai_tools.py` (Lab 3, `import config` replaced by a local `SEED = 42`, because this project has no config module)
+  - `report/build_report.py`, `report/build_docx.py`, `report/title_page_template.docx`, `report/fonts/` (Lab 4.2, unchanged)
+  - `reference/lab4_1_phishing/` (Lab 4.1 part notebooks and report) and `reference/lab4_2_robustness/` (Lab 4.2 part notebooks, README, report, references), as read-only code examples
+- Created empty folders `parts/`, `results/figures/`, `results/tables/`, `report/figures/` (each with `.gitkeep`).
+- `.gitignore`: rewritten for this project (data folders `UNSW-NB15/` and `CIC-DDoS2019/`, `PreviousLabs/`, environment and cache folders); removed the Lab 4.2 lines about `data/processed`, `data/raw` and `models/`.
+- `Dataset_Choice.md`: corrected three claims after checking the data. `CICFlowMeter_out.csv` holds all 3,540,241 flows, not the same rows as `Data.csv` (which keeps all attacks and about 10% of benign flows). There are no infinite values, but there are 141,742 duplicate rows, 1,068 conflicting rows and 9 constant columns. The Part G advice now recommends Fuzzers instead of Reconnaissance.
+
+**Why**
+The user asked for a task list that people with no background can follow, split so several people can work at once, and for everything needed from `PreviousLabs/` to be copied into this folder. Before writing it, the data was profiled and a trial pipeline was run (5,000-row sample, 60/20/20 split, forest, SHAP, hidden attack types) so that the task list gives real counts. The trial showed that hiding Reconnaissance barely lowers its recall (0.974), while hiding Fuzzers drops it to 0.859, so the plan hides Fuzzers. Global SHAP is computed on validation rows so that the Part F feature choice never uses the test set.
+
+**Verified**
+`python -m pytest src` passes (16 tests) in a temporary environment built from `requirements.txt`. The split counts, the 66 features and the 300/2,700 label split in the task list come from the trial run. The trial scripts and the temporary environment were in `/tmp` and have been deleted.
