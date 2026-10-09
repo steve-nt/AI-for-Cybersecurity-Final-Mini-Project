@@ -142,3 +142,16 @@ The user asked to implement B2.
 
 **Verified**
 The notebook ran without errors. Validation scores of the final model: macro-F1 0.9713, recall 0.9924, PR-AUC 0.9807, FAR 0.0282. It used all 100 trees allowed (`max_iter` cap); this is noted in the notebook.
+
+## 2026-10-09 19:51 EEST: B3 done: test scores next to the baseline
+
+**What**
+- `parts/10_baseline_models.ipynb`: added step B3 (explanation, code, interpretation). The always-benign baseline, tree, logistic regression and gradient boosting are scored on validation and test, and the difference is shown. Executed.
+- `results/tables/B3_val_scores.csv`, `results/tables/B3_test_scores.csv`: written.
+- `TASKLIST.md`: B3 ticked, result note added.
+
+**Why**
+The user asked to implement B3. It is the first use of the test set; all settings were fixed beforehand in B1 and B2.
+
+**Verified**
+The notebook ran without errors. Test: gradient boosting macro-F1 0.9718, recall 0.9923, PR-AUC 0.9814, FAR 0.0276; tree 0.9690 / 0.9849 / 0.9677 / 0.0279; logistic regression 0.9608 / 0.9962 / 0.9527 / 0.0413. Test minus validation is at most 0.003 for every score.

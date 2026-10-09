@@ -525,7 +525,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 |---|---|---|---|---|
 | B1 | Glass boxes | Decision tree and logistic regression, settings chosen on validation | T3 | ☑ |
 | B2 | Black box | Gradient boosting, settings chosen on validation; publishes `BOOST_SETTINGS`, `make_boost`, `boost` | T3 | ☑ |
-| B3 | Test scores | Four metrics on the test set, next to the trivial baseline | B1, B2, A4 | ☐ |
+| B3 | Test scores | Four metrics on the test set, next to the trivial baseline | B1, B2, A4 | ☑ |
 | B4 | Where the models go wrong | Confusion matrices and recall per attack type | B3 | ☐ |
 
 ### Part C: learning with fewer labels
@@ -940,13 +940,19 @@ the chosen settings (tree depth 12, `C` = 10, boosting 0.1 / 31).
 **Why:** The brief's main supervised result: the four metrics on the test set, with the trivial
 baseline on the same rows.
 
-- [ ] One table, rows: always benign, tree, logreg, boosting; columns: macro-F1, recall, PR-AUC, FAR
+- [x] One table, rows: always benign, tree, logreg, boosting; columns: macro-F1, recall, PR-AUC, FAR
       (+ accuracy); on the **test** set. Also the same table on validation (the brief's "results before
       and after validation test" in report section 1). Save `results/tables/B3_test_scores.csv` and
       `B3_val_scores.csv`.
-- [ ] Two sentences: how much better than the baseline is each model? Are the glass boxes good enough?
+- [x] Two sentences: how much better than the baseline is each model? Are the glass boxes good enough?
 
 **Done when:** both tables are saved.
+
+**Result (2026-10-09):** `parts/10_baseline_models.ipynb`, step B3 (explanation, code, interpretation).
+Test set: always benign 0.424 / 0 / 0.263 / 0; tree 0.969 / 0.985 / 0.968 / 0.028; logistic regression
+0.961 / 0.996 / 0.953 / 0.041; **gradient boosting 0.972 / 0.992 / 0.981 / 0.028** (macro-F1 / recall /
+PR-AUC / FAR). Test and validation differ by at most 0.003. Saved as `B3_test_scores.csv` and
+`B3_val_scores.csv`.
 
 **Goes into the report:** section 3 (the results table, together with C4).
 
