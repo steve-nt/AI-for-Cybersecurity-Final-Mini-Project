@@ -207,3 +207,16 @@ The user asked to implement C3. The brief requires a plain answer to whether the
 
 **Verified**
 The notebook ran without errors. Every number in the verdict was checked against the table: macro-F1 0.9679 → 0.9681 (upper 0.9713, 3.9% of the gap closed), recall 0.9862 → 0.9899 (60% closed), FAR 0.0296 → 0.0308, PR-AUC 0.9743 → 0.9727.
+
+## 2026-10-09 21:33 EEST: C4 done: the results table on the test set
+
+**What**
+- `parts/20_few_labels.ipynb`: added a `# STANDIN A4` cell (always-benign baseline) and step C4. The test-set table covers all six models of Parts A–C with macro-F1, recall, PR-AUC, FAR and accuracy; an assert checks that the Part B rows equal `B3_test_scores.csv`. The C3 comparison is repeated on test, followed by an interpretation. Executed.
+- `results/tables/C4_all_models_test.csv`: written (the report's main results table).
+- `TASKLIST.md`: C4 ticked, result note added. Part C is complete.
+
+**Why**
+The user asked to implement C4.
+
+**Verified**
+The notebook ran without errors; the Part B rows match B3. On test, pseudo-labelling is 0.0003 macro-F1 below the lower line (0.9685 against 0.9688), so the "did not help" verdict holds.

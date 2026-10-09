@@ -535,7 +535,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 | C1 | Keep 10% of the labels; lower line | Boosting on 18,306 labelled rows only | B2 | ☑ |
 | C2 | Pseudo-labelling | Cutoff chosen on validation; how many guesses were right | C1 | ☑ |
 | C3 | Did the unlabelled data help? | Validation comparison and a plain yes/no with the reason | C2 | ☑ |
-| C4 | The results table | All models, four metrics, trivial baseline, test set: the report's main table | C3, B3 | ☐ |
+| C4 | The results table | All models, four metrics, trivial baseline, test set: the report's main table | C3, B3 | ☑ |
 
 ### Part D: explanation
 
@@ -1056,12 +1056,20 @@ upper line 0.9713 (about 4% of the gap closed). Pseudo-labelling shifted the bal
 **Why:** Report section 3 asks for "one table with all models and all four metrics, against the trivial
 baseline". It gathers Part B and Part C on the same test set.
 
-- [ ] Rows: always benign, tree, logreg, boosting (100% labels), boosting (10% labels), boosting +
+- [x] Rows: always benign, tree, logreg, boosting (100% labels), boosting (10% labels), boosting +
       pseudo-labels (+ X1 if done). Columns: macro-F1, recall, PR-AUC, FAR (+ accuracy). **Test set.**
       Save `results/tables/C4_all_models_test.csv`.
-- [ ] Repeat the C3 verdict with the test numbers: same answer?
+- [x] Repeat the C3 verdict with the test numbers: same answer?
 
 **Done when:** the table is saved and matches B3 for the Part B rows.
+
+**Result (2026-10-09):** `parts/20_few_labels.ipynb`, step C4 (stand-in A4 added; explanation, table,
+test-set check of the verdict, interpretation). Test macro-F1 / recall / PR-AUC / FAR: always benign
+0.424 / 0 / 0.263 / 0; tree 0.969 / 0.985 / 0.968 / 0.028; logistic regression 0.961 / 0.996 / 0.953 /
+0.041; **boosting all labels 0.972 / 0.992 / 0.981 / 0.028**; boosting 10% labels 0.969 / 0.987 / 0.976 /
+0.029; boosting + pseudo-labels 0.969 / 0.989 / 0.974 / 0.030. The Part B rows match B3 (asserted).
+The verdict holds on test: pseudo-labelling minus lower line = −0.0003 macro-F1. Saved as
+`results/tables/C4_all_models_test.csv`.
 
 **Goes into the report:** section 2 (Part C approach), section 3 (the table and the verdict).
 

@@ -1,0 +1,7 @@
+model (test set),macro_f1,recall,pr_auc,far,accuracy
+always benign (trivial baseline),0.4243,0.0000,0.2631,0.0000,0.7369
+"decision tree, all labels",0.9690,0.9849,0.9677,0.0279,0.9755
+"logistic regression, all labels",0.9608,0.9962,0.9527,0.0413,0.9686
+"gradient boosting, all labels (upper line)",0.9718,0.9923,0.9814,0.0276,0.9776
+"gradient boosting, 10% labels (lower line)",0.9688,0.9872,0.9755,0.0290,0.9753
+"gradient boosting, 10% labels + pseudo-labels (cutoff 0.95)",0.9685,0.9894,0.9735,0.0301,0.9750
