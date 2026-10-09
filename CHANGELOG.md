@@ -38,3 +38,15 @@ The user asked for a task list that people with no background can follow, split 
 
 **Verified**
 `python -m pytest src` passes (16 tests) in a temporary environment built from `requirements.txt`. The split counts, the 66 features and the 300/2,700 label split in the task list come from the trial run. The trial scripts and the temporary environment were in `/tmp` and have been deleted.
+
+## 2026-10-09 08:05 EEST: Task list updated for one person and all rows; dataset citation checked
+
+**What**
+- `TASKLIST.md`: rewritten for a one-person group using all 305,105 clean rows. Tracks, branches and sync points replaced by one order of work and a day-by-day plan. Black box changed from random forest to gradient boosting (`HistGradientBoostingClassifier`), with `BOOST_SETTINGS`, `make_boost()` and `boost` as the shared names. Logistic regression moved to an optional extra. Settings searches train candidates on a stratified 20% part of the training set (`TUNE_IDX`) and score them on validation. All counts, split sizes and trial numbers updated to the full data; time budget per part added. Part D notes the SHAP differences for gradient boosting (no class axis, log-odds). Part F keeps a random forest on the two BRB features. Optional extras replaced where the sample no longer exists (X4 learning curve, X8 logistic regression). The dataset citation is recorded in section 5 and T1's citation item is ticked.
+- `Dataset_Choice.md`: added an update note on using all rows and gradient boosting.
+
+**Why**
+The user said the group is one person and chose to use all rows, then chose the "all rows, lean" option to keep within the brief's 5-minute run limit. Timing trials on the full data showed a 300-tree random forest needs 487 s to train and 756 s for SHAP, while gradient boosting trains in 9–21 s and its SHAP takes under 2 s. Logistic regression takes 48–101 s per setting. On all rows, hiding Fuzzers drops its recall from 0.989 to 0.696 on validation, so Fuzzers stays the hidden type. The dataset page (https://www.unb.ca/cic/datasets/cic-unsw-nb15.html) was checked for the exact name and citation.
+
+**Verified**
+The full-data trial (load, clean, split, two models, SHAP, one pseudo-labelling round, six hidden-type models) ran in 107 s and gave the counts in the task list. The temporary environment and trial scripts in `/tmp` were deleted.

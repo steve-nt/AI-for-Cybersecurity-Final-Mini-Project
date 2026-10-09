@@ -50,3 +50,10 @@
 - It needs more cleaning: an index column, identifier columns (Flow ID, IPs, timestamp) that must be dropped, and column names with leading spaces.
 
 The CIC-DDoS2019 folder is not needed for the project.
+
+## Update 2026-10-09: all rows, not a sample
+
+We use all 305,105 clean rows instead of a 5,000-row sample. On all rows, hiding Fuzzers drops its
+recall from 0.989 to 0.696 (validation, 5,202 rows), a much clearer result than in the 5,000-row trial
+above. A random forest is too slow on this many rows (8 minutes to train), so the black box is gradient
+boosting. Details and timings: `TASKLIST.md`, sections 1.3 and 1.5.
