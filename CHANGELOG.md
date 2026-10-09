@@ -129,3 +129,16 @@ The user asked to implement B1.
 
 **Verified**
 Both notebooks ran without errors or warnings. Chosen: tree depth 12 (validation macro-F1 0.9685, recall 0.9844, FAR 0.0282) and logistic regression `C` = 10 (converged; macro-F1 0.9608, recall 0.9965, FAR 0.0414).
+
+## 2026-10-09 17:40 EEST: B2 done: black box (gradient boosting)
+
+**What**
+- `parts/10_baseline_models.ipynb`: added step B2 (explanation, settings search, interpretation). `learning_rate` in `[0.05, 0.1]` × `max_leaf_nodes` in `[31, 63]`, each candidate trained on the 20% part and scored on validation. Chosen 0.1 / 31; `BOOST_SETTINGS`, `make_boost()`, `boost` (trained on all training rows) and `MODELS` (tree, logreg, boosting) defined. Executed.
+- `results/tables/B2_boost_grid.csv`: written.
+- `TASKLIST.md`: B2 ticked, result note added; the B2 stand-in in section 2.3 now holds the chosen settings (tree depth 12, `C` = 10, boosting 0.1 / 31).
+
+**Why**
+The user asked to implement B2.
+
+**Verified**
+The notebook ran without errors. Validation scores of the final model: macro-F1 0.9713, recall 0.9924, PR-AUC 0.9807, FAR 0.0282. It used all 100 trees allowed (`max_iter` cap); this is noted in the notebook.

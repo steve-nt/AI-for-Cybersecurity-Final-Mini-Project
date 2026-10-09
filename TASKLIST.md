@@ -408,8 +408,9 @@ These names connect the parts. **Do not rename them.**
 | `add_missing(X, frac, seed=SEED)` | copy of `X` with a share of each row's values set to `TRAIN_MEDIAN` | E2 | X3 |
 | `HIDDEN = "Fuzzers"` | the hidden attack type | G1 | G2–G4, X4 |
 
-**Ready-made stand-ins.** Use the version below until B1/B2/D1/D2 are done; afterwards, paste the
-**real** cell (with its chosen settings) under the same `# STANDIN` marker.
+**Ready-made stand-ins.** The B2 stand-in below already holds the settings chosen in B1 and B2. The D1
+and D2 stand-ins are quick versions until those steps are done; afterwards, paste the **real** cell
+under the same `# STANDIN` marker.
 
 ```python
 # STANDIN B2
@@ -419,13 +420,14 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.tree import DecisionTreeClassifier
 
-BOOST_SETTINGS = {"random_state": SEED}          # replace with the settings chosen in B2
+# Settings chosen on validation in B1 and B2 (2026-10-09).
+BOOST_SETTINGS = {"learning_rate": 0.1, "max_leaf_nodes": 31, "random_state": SEED}
 def make_boost():
     return HistGradientBoostingClassifier(**BOOST_SETTINGS)
 
-tree = DecisionTreeClassifier(max_depth=8, random_state=SEED).fit(X_train, y_train)   # depth from B1
-logreg = Pipeline([("scale", StandardScaler()),                                      # C from B1
-                   ("model", LogisticRegression(C=1.0, max_iter=2000, random_state=SEED))]).fit(X_train, y_train)
+tree = DecisionTreeClassifier(max_depth=12, random_state=SEED).fit(X_train, y_train)
+logreg = Pipeline([("scale", StandardScaler()),
+                   ("model", LogisticRegression(C=10.0, max_iter=2000, random_state=SEED))]).fit(X_train, y_train)
 boost = make_boost().fit(X_train, y_train)
 MODELS = {"tree": tree, "logreg": logreg, "boosting": boost}
 ```
@@ -522,7 +524,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 | ID | Task | What it is and why | Needs | Done |
 |---|---|---|---|---|
 | B1 | Glass boxes | Decision tree and logistic regression, settings chosen on validation | T3 | ☑ |
-| B2 | Black box | Gradient boosting, settings chosen on validation; publishes `BOOST_SETTINGS`, `make_boost`, `boost` | T3 | ☐ |
+| B2 | Black box | Gradient boosting, settings chosen on validation; publishes `BOOST_SETTINGS`, `make_boost`, `boost` | T3 | ☑ |
 | B3 | Test scores | Four metrics on the test set, next to the trivial baseline | B1, B2, A4 | ☐ |
 | B4 | Where the models go wrong | Confusion matrices and recall per attack type | B3 | ☐ |
 
@@ -915,16 +917,23 @@ validation or test data). If logistic regression warns that it did not converge,
 **Why:** The strongest model, and the one every later part explains, disturbs and adapts. Its settings
 become the shared `BOOST_SETTINGS`, so every part uses the same model.
 
-- [ ] Grid on the 20% part, scored on validation: `learning_rate` in `[0.05, 0.1]` × `max_leaf_nodes`
+- [x] Grid on the 20% part, scored on validation: `learning_rate` in `[0.05, 0.1]` × `max_leaf_nodes`
       in `[31, 63]`, `random_state=SEED` (4 models, about 6 s). Best validation macro-F1 wins. Save
       `results/tables/B2_boost_grid.csv`.
-- [ ] Publish `BOOST_SETTINGS`, `make_boost()`, `boost` (trained on **all** of `X_train`) and `MODELS`
+- [x] Publish `BOOST_SETTINGS`, `make_boost()`, `boost` (trained on **all** of `X_train`) and `MODELS`
       (section 2.3). Then update the `# STANDIN B2` cell in section 2.3 (and in your other part
       notebooks) with the chosen settings.
-- [ ] One sentence for the report on why gradient boosting and not a random forest (section 1.3:
+- [x] One sentence for the report on why gradient boosting and not a random forest (section 1.3:
       8 minutes to train, 12.5 minutes for SHAP on all rows).
 
 **Done when:** `BOOST_SETTINGS` and `boost` exist.
+
+**Result (2026-10-09):** `parts/10_baseline_models.ipynb`, step B2 (explanation, code, interpretation).
+All four settings within 0.001 (validation macro-F1 0.969–0.970 on the 20% part); chosen
+`learning_rate = 0.1`, `max_leaf_nodes = 31` (= scikit-learn's defaults). Final model: 100 trees (the
+`max_iter` cap; early stopping did not stop it). Validation: **macro-F1 0.9713, recall 0.9924, PR-AUC
+0.9807, FAR 0.0282**. Saved as `results/tables/B2_boost_grid.csv`. The B2 stand-in in section 2.3 now holds
+the chosen settings (tree depth 12, `C` = 10, boosting 0.1 / 31).
 
 #### B3 · Test scores next to the baseline
 
