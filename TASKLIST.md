@@ -532,7 +532,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 
 | ID | Task | What it is and why | Needs | Done |
 |---|---|---|---|---|
-| C1 | Keep 10% of the labels; lower line | Boosting on 18,306 labelled rows only | B2 | ☐ |
+| C1 | Keep 10% of the labels; lower line | Boosting on 18,306 labelled rows only | B2 | ☑ |
 | C2 | Pseudo-labelling | Cutoff chosen on validation; how many guesses were right | C1 | ☐ |
 | C3 | Did the unlabelled data help? | Validation comparison and a plain yes/no with the reason | C2 | ☐ |
 | C4 | The results table | All models, four metrics, trivial baseline, test set: the report's main table | C3, B3 | ☐ |
@@ -992,13 +992,19 @@ Example code for all of Part C: `reference/lab4_1_phishing/20_label_scarce.ipynb
 **Why:** A pseudo-labelling score means nothing on its own. The **lower line** (the same model on the
 few labels alone) shows whether the unlabelled rows added anything.
 
-- [ ] Split `X_train` (not `X`!) into labelled and unlabelled parts:
+- [x] Split `X_train` (not `X`!) into labelled and unlabelled parts:
       `X_lab, X_unlab, y_lab, y_hidden = train_test_split(X_train, y_train, train_size=0.10,
       stratify=type_train, random_state=SEED)` → 18,306 labelled, 164,757 unlabelled.
-- [ ] Comment next to `y_hidden`: "only used to count how many pseudo-labels were right; never trained on".
-- [ ] `boost_few = make_boost().fit(X_lab, y_lab)`; its validation scores.
+- [x] Comment next to `y_hidden`: "only used to count how many pseudo-labels were right; never trained on".
+- [x] `boost_few = make_boost().fit(X_lab, y_lab)`; its validation scores.
 
 **Done when:** `boost_few` exists with validation scores.
+
+**Result (2026-10-09):** new notebook `parts/20_few_labels.ipynb` (stand-ins A0 and B2, then step C1:
+explanation, split with checks, lower line, interpretation). 18,306 labelled flows (4,815 attacks) and
+164,757 unlabelled, same attack-type mix. Lower line (validation): **macro-F1 0.9679, recall 0.9862,
+PR-AUC 0.9743, FAR 0.0296**, against the upper line 0.9713 / 0.9924 / 0.9807 / 0.0282: a gap of only
+0.0034 macro-F1, the most C2 can win back. Saved as `results/tables/C1_lower_line_val.csv`.
 
 #### C2 · Pseudo-labelling
 

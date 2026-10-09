@@ -168,3 +168,16 @@ The user asked to implement B4. The model colours come from the dataviz referenc
 
 **Verified**
 The notebook ran without errors or warnings, and both figures were inspected after the fix. Gradient boosting misses 124 attacks and raises 1,241 false alarms on the test set. About 65 of the misses are Fuzzers. At realistic traffic only 48% of its alerts would be real attacks.
+
+## 2026-10-09 20:45 EEST: C1 done: 10% of the labels and the lower line
+
+**What**
+- `parts/20_few_labels.ipynb`: created, the notebook for Part C. It holds stand-ins for A0 (setup) and B2 (the three Part B models with the chosen settings), then step C1: an explanation, a stratified 10% / 90% split of the training set into labelled and unlabelled flows (with checks that no validation or test flow is involved), the lower line `boost_few`, its validation scores next to the upper line, and an interpretation. Executed.
+- `results/tables/C1_lower_line_val.csv`: written.
+- `TASKLIST.md`: C1 ticked, result note added.
+
+**Why**
+The user asked to implement C1.
+
+**Verified**
+The notebook ran without errors. 18,306 labelled (4,815 attacks) and 164,757 unlabelled flows. Lower line on validation: macro-F1 0.9679, recall 0.9862, PR-AUC 0.9743, FAR 0.0296 (upper line 0.9713 / 0.9924 / 0.9807 / 0.0282).
