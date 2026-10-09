@@ -512,7 +512,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 
 | ID | Task | What it is and why | Needs | Done |
 |---|---|---|---|---|
-| A1 | State the problem | 2–3 sentences: what is detected, who uses it, what a false alarm costs | T1 | ☐ |
+| A1 | State the problem | 2–3 sentences: what is detected, who uses it, what a false alarm costs | T1 | ☑ |
 | A2 | Load and clean (in T3) | Counts of records and features, class balance, cleaning steps | T3 | ☑ |
 | A3 | Split 60/20/20 (in T3) | Stratified split, checked | T3 | ☑ |
 | A4 | Trivial baseline | Always-benign accuracy and recall on validation and test: the line every model must beat | T3 | ☐ |
@@ -827,15 +827,20 @@ the same as in the setup notebook (it asserts 305,105 clean rows and 183,063 × 
 **Why:** The brief asks for it first, and every later number is judged against it: a false alarm and a
 missed attack cost different things.
 
-- [ ] A `<!-- STEP A1 -->` Markdown cell, 2–3 sentences: **what** is detected (malicious network flows
+- [x] A `<!-- STEP A1 -->` Markdown cell, 2–3 sentences: **what** is detected (malicious network flows
       on an organisation's network: exploits, fuzzing, scanning, DoS, backdoors, worms …), **who** uses
       it (the SOC analysts who receive the alerts), and **what a false alarm costs** them (minutes of an
       analyst's time per alert; with millions of flows a day even a small FAR means many alerts, and
       people start ignoring them). Also one sentence on what a missed attack costs.
-- [ ] Add the dataset in one sentence: CIC-UNSW-NB15 (UNSW-NB15 recorded in 2015, CICFlowMeter
+- [x] Add the dataset in one sentence: CIC-UNSW-NB15 (UNSW-NB15 recorded in 2015, CICFlowMeter
       features), all 305,105 clean flows.
 
 **Done when:** the cell reads well to someone who has never seen the project.
+
+**Result (2026-10-09):** Markdown cell `<!-- STEP A1 -->` in `parts/10_baseline_models.ipynb`, after
+the `# STANDIN A0` cell that runs the setup. It covers what is detected, who uses it (SOC analysts),
+the cost of a false alarm (alert fatigue; 1% FAR ≈ 10,000 false alarms per million normal flows), the
+cost of a missed attack, and the data (all 305,105 clean flows, 26.3% attacks).
 
 **Goes into the report:** section 1, first paragraph.
 

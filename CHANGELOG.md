@@ -89,3 +89,15 @@ The user agreed to correctness first and runtime at the end, asked to add logist
 
 **Verified**
 The script ran and asserted 305,105 clean rows and a 183,063 × 67 training set. Output: 67 features, proposed groups 27 Free / 5 Costly / 35 Fixed, 18 twin groups covering 42 features.
+
+## 2026-10-09 11:42 EEST: A1 done: problem statement
+
+**What**
+- `parts/10_baseline_models.ipynb`: created, the notebook for Parts A and B. It holds a `# STANDIN A0` cell (runs `00_setup.ipynb`) and the Markdown cell `<!-- STEP A1 -->`: what is detected, who uses it, the cost of a false alarm and of a missed attack, and the data.
+- `TASKLIST.md`: A1 ticked, result note added.
+
+**Why**
+The user asked to implement A1.
+
+**Verified**
+`tools/assemble.py --no-execute` places A1 between the setup's A0 and A2 cells; the test output was deleted.
