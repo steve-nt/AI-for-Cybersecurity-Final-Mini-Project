@@ -194,3 +194,16 @@ The user asked to implement C2.
 
 **Verified**
 The notebook ran without errors or warnings. Cutoff 0.95: 150,327 guesses added, 99.1% right; validation macro-F1 0.9681 against 0.9679 for the lower line.
+
+## 2026-10-09 21:22 EEST: C3 done: the unlabelled data did not help
+
+**What**
+- `parts/20_few_labels.ipynb`: added step C3. A validation table compares the lower line, pseudo-labelling (cutoff 0.95) and the upper line, with the difference and the share of the gap closed. A verdict cell answers "no", with numbers, the three reasons, and when pseudo-labelling could help (far fewer labels, optional X2). Executed; one number in the text was corrected after the run (about 4% of the gap closed, not 6%).
+- `results/tables/C3_did_it_help_val.csv`: written.
+- `TASKLIST.md`: C3 ticked, result note added.
+
+**Why**
+The user asked to implement C3. The brief requires a plain answer to whether the unlabelled data helped, including when the answer is no.
+
+**Verified**
+The notebook ran without errors. Every number in the verdict was checked against the table: macro-F1 0.9679 → 0.9681 (upper 0.9713, 3.9% of the gap closed), recall 0.9862 → 0.9899 (60% closed), FAR 0.0296 → 0.0308, PR-AUC 0.9743 → 0.9727.

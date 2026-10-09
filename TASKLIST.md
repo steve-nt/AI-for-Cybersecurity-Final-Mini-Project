@@ -534,7 +534,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 |---|---|---|---|---|
 | C1 | Keep 10% of the labels; lower line | Boosting on 18,306 labelled rows only | B2 | ☑ |
 | C2 | Pseudo-labelling | Cutoff chosen on validation; how many guesses were right | C1 | ☑ |
-| C3 | Did the unlabelled data help? | Validation comparison and a plain yes/no with the reason | C2 | ☐ |
+| C3 | Did the unlabelled data help? | Validation comparison and a plain yes/no with the reason | C2 | ☑ |
 | C4 | The results table | All models, four metrics, trivial baseline, test set: the report's main table | C3, B3 | ☐ |
 
 ### Part D: explanation
@@ -1035,14 +1035,21 @@ guesses (91% of the unlabelled flows), 99.1% right: round 1 143,824 (99.5% right
 **Why:** The brief: "Say plainly whether the unlabelled data helped. A clear negative result, properly
 explained, scores as well as a positive one."
 
-- [ ] On validation: lower line, pseudo-labelling, upper line (Part B model, all labels). Differences
+- [x] On validation: lower line, pseudo-labelling, upper line (Part B model, all labels). Differences
       in macro-F1, recall, FAR.
-- [ ] A Markdown cell: **yes or no**, by how much, and why. The trial suggests "hardly": 18,306 labels
+- [x] A Markdown cell: **yes or no**, by how much, and why. The trial suggests "hardly": 18,306 labels
       already give macro-F1 0.968, close to the 0.971 of all labels, so there is little left to gain;
       confident guesses are rows the model already gets right, so they add nothing new; wrong guesses add
       noise. X2 tests whether it helps with far fewer labels.
 
 **Done when:** the verdict is written with numbers.
+
+**Result (2026-10-09):** `parts/20_few_labels.ipynb`, step C3 (comparison table + verdict). **Verdict:
+no, the unlabelled data did not help.** Validation macro-F1: lower line 0.9679, pseudo-labelling 0.9681,
+upper line 0.9713 (about 4% of the gap closed). Pseudo-labelling shifted the balance: recall 0.986 →
+0.990, but FAR 0.0296 → 0.0308 and PR-AUC 0.974 → 0.973. Reasons written out: little left to gain
+(18,306 labels is plenty), confident guesses not new, round-2 guesses about 10% wrong. Saved as
+`results/tables/C3_did_it_help_val.csv`.
 
 #### C4 · The results table (all models, test set)
 

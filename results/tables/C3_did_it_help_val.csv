@@ -1,0 +1,6 @@
+validation set,macro_f1,recall,pr_auc,far,accuracy
+lower line: 10% labels,0.9679,0.9862,0.9743,0.0296,0.9746
+pseudo-labelling (cutoff 0.95),0.9681,0.9899,0.9727,0.0308,0.9746
+upper line: all labels,0.9713,0.9924,0.9807,0.0282,0.9772
+pseudo-labelling minus lower line,0.0001,0.0037,-0.0016,0.0013,0.0000
+share of the gap closed,0.0393,0.6000,-0.2581,-0.9194,0.0185
