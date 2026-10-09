@@ -305,7 +305,7 @@ results for the report: the report's numbers come from the assembled notebook (H
 
 | Part | Budget | What uses the time |
 |---|---:|---|
-| Setup (A0, A2, A3) | 60 s | Reading the CSVs, removing duplicates |
+| Setup (A0, A2, A3) | 60 s (measured: 46 s) | Reading the CSVs, removing duplicates |
 | A + B | 45 s | 5 tree depths and 4 boosting settings on 20% (≈ 15 s), 2 final models (≈ 25 s) |
 | C | 70 s | Lower line (1 s), 3 cutoffs × 2 rounds (≈ 60 s) |
 | D | 30 s | SHAP (2 s), LIME 3 cases + 30 stability runs + D6 experiments (≈ 20 s), deletion test |
@@ -500,7 +500,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 |---|---|---|---|---|
 | T1 | Kickoff | Read the brief and this file, accept the decisions, check the dataset citation | – | ☐ (citation checked; the rest is yours) |
 | T2 | Environment and assembly script | Install the libraries; `assemble.py` knows this project's steps | T1 | ☑ |
-| T3 | Setup notebook (steps A0, A2, A3) | Load, clean, split; build every shared name of section 2.3 | T2 | ☐ |
+| T3 | Setup notebook (steps A0, A2, A3) | Load, clean, split; build every shared name of section 2.3 | T2 | ☑ |
 | T4 | Feature glossary | One table: what each of the 67 features means in plain words. Needed to read SHAP results | T2 | ☐ |
 
 ### Part A: the problem and the data
@@ -508,8 +508,8 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 | ID | Task | What it is and why | Needs | Done |
 |---|---|---|---|---|
 | A1 | State the problem | 2–3 sentences: what is detected, who uses it, what a false alarm costs | T1 | ☐ |
-| A2 | Load and clean (in T3) | Counts of records and features, class balance, cleaning steps | T3 | ☐ |
-| A3 | Split 60/20/20 (in T3) | Stratified split, checked | T3 | ☐ |
+| A2 | Load and clean (in T3) | Counts of records and features, class balance, cleaning steps | T3 | ☑ |
+| A3 | Split 60/20/20 (in T3) | Stratified split, checked | T3 | ☑ |
 | A4 | Trivial baseline | Always-benign accuracy and recall on validation and test: the line every model must beat | T3 | ☐ |
 
 ### Part B: supervised models
@@ -711,15 +711,15 @@ the data" and "split 60/20/20".
 (install check, imports, working folder, loading, split, helpers, final check of the shared names). Copy
 its structure; change the data part.
 
-- [ ] `# STEP A0` cell 1: install shap and lime **only if they are missing** (Colab); copy it from the
+- [x] `# STEP A0` cell 1: install shap and lime **only if they are missing** (Colab); copy it from the
       Lab 4.2 setup notebook.
-- [ ] `# STEP A0` cell 2: imports, `SEED = 42`, `warnings.filterwarnings("ignore", message="Unknown solver
+- [x] `# STEP A0` cell 2: imports, `SEED = 42`, `warnings.filterwarnings("ignore", message="Unknown solver
       options")` (a harmless scikit-learn/scipy warning), and
       `if Path.cwd().name == "parts": os.chdir("..")` so paths work in both the part notebooks and the
       final notebook. Create `results/tables` and `results/figures`. Define `TABLES`, `FIGURES`.
       Data folder: `UNSW-NB15/`, or the notebook's own folder if the CSVs were uploaded next to it (Colab).
       Start a timer (`SETUP_START = time.time()`).
-- [ ] `# STEP A0` cell 3: `score(model, X, y, threshold=0.5)` and `score_proba(y, p, threshold=0.5)`:
+- [x] `# STEP A0` cell 3: `score(model, X, y, threshold=0.5)` and `score_proba(y, p, threshold=0.5)`:
       ```python
       def score_proba(y, p, threshold=0.5):
           pred = (np.asarray(p) >= threshold).astype(int)
@@ -733,7 +733,7 @@ its structure; change the data part.
       def score(model, X, y, threshold=0.5):
           return score_proba(y, model.predict_proba(X)[:, 1], threshold)
       ```
-- [ ] `# STEP A2` cells: load and clean.
+- [x] `# STEP A2` cells: load and clean.
   - `X_raw = pd.read_csv(".../Data.csv")`, `labels = pd.read_csv(".../Label.csv")["Label"]`;
     `assert len(X_raw) == len(labels) == 447_915`.
   - `ATTACK_NAMES` from `Readme.txt` (section 0.2 table); `attack_type = labels.map(ATTACK_NAMES)`.
@@ -750,7 +750,7 @@ its structure; change the data part.
     number of section 1.2.
   - Print the class balance (attack types, and attack vs benign) before and after cleaning; save it as
     `results/tables/A2_class_balance.csv`.
-- [ ] `# STEP A3` cells: split.
+- [x] `# STEP A3` cells: split.
   - `y = (df["attack_type"] != "Benign").astype(int)`; split as in section 1.5, stratified on
     `df["attack_type"]`; keep `type_train/val/test`. `assert` 183,063 / 61,021 / 61,021 rows.
   - Drop the columns that are constant **in `X_train`** from all three sets; `FEATURES` = the remaining
@@ -761,7 +761,7 @@ its structure; change the data part.
     random_state=SEED)[0]`.
   - Print a table: rows and attack share per part, and counts per attack type per part (section 1.2);
     save it as `results/tables/A3_split.csv`.
-- [ ] Last `# STEP A0` cell: assert that every shared name of section 2.3 (first table) exists, and print
+- [x] Last `# STEP A3` cell (an A0 cell would be sorted to the top by the assembly script): assert that every shared name of section 2.3 (first table) exists, and print
       the time the setup took.
 
 **Pitfalls:**
@@ -773,7 +773,18 @@ its structure; change the data part.
 **Done when:** `%run 00_setup.ipynb` from another notebook in `parts/` gives every shared name, in about
 a minute, with the counts of section 1.2.
 
+**Result (2026-10-09):** `parts/00_setup.ipynb` (13 cells: A0 setup and `score()`, A2 load and clean,
+A3 split and shared names). All counts match section 1.2: 447,915 → 306,173 (141,742 duplicates) →
+305,105 (1,068 conflicts); split 183,063 / 61,021 / 61,021; 9 constant columns dropped → 67 features
+(65 continuous, 0/1: `Fwd PSH Flags`, `RST Flag Count`); `TUNE_IDX` = 36,612 rows. It writes
+`results/tables/A2_class_balance.csv` and `A3_split.csv`. **Run time 46 s** (reading `Data.csv` ≈ 20 s).
+Three speed-ups, each checked to give the same result: the table is kept as one block of decimal
+numbers; duplicates are found by hashing rows (same rows as `drop_duplicates()`, 4 s instead of 21 s);
+the split selects row positions first. `%run 00_setup.ipynb` from another part notebook and
+`tools/assemble.py` both work.
+
 **Goes into the report:** section 1 (records, features, class balance, cleaning steps, split).
+
 
 #### T4 · Feature glossary
 

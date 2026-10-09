@@ -63,3 +63,16 @@ The user asked to do T2. The title cell names Stefanos Ntentopoulos, taken from 
 
 **Verified**
 `python -m pytest src`: 16 passed. SHA-256 of `Data.csv` and `Label.csv` match the task list. A dummy part notebook (STEP A1, STANDIN A0, STEP G4) assembled correctly, `--strict` exited with an error listing the 30 missing steps, and the built notebook executed; the dummy and the output notebook were deleted.
+
+## 2026-10-09 09:42 EEST: T3 done: setup notebook
+
+**What**
+- `parts/00_setup.ipynb`: created and executed. Steps A0 (install check, imports, seed, working folder, data folder, `score()` and `score_proba()`), A2 (load `Data.csv` and `Label.csv`, label names from `Readme.txt`, remove exact duplicates and conflicting rows, class balance) and A3 (stratified 60/20/20 split, constant columns dropped, `FEATURES`, `FLAG_COLS`, `CONT_COLS`, `TRAIN_MEDIAN`, `TRAIN_STD`, `TUNE_IDX`, split table, check that every shared name exists).
+- `results/tables/A2_class_balance.csv`, `results/tables/A3_split.csv`: written by the notebook.
+- `TASKLIST.md`: T3, A2 and A3 marked done; result note added; the final check cell is marked STEP A3 instead of A0 (an A0 cell would be sorted to the top of the hand-in notebook); measured setup time added to the time budget.
+
+**Why**
+The user asked to do T3. The first version took 68 s, over the 60 s budget. Three speed-ups brought it to 46 s, each checked to give identical results: one float block for the table, hash-based duplicate removal (same rows as `drop_duplicates()`), and splitting row positions before selecting rows.
+
+**Verified**
+All asserted counts match the task list (447,915 / 306,173 / 305,105 rows; 183,063 / 61,021 / 61,021 split; 67 features; 15,606 / 5,202 / 5,202 Fuzzers; 16,052 test attacks). `%run 00_setup.ipynb` from a test part notebook gave every shared name, and `tools/assemble.py` built and executed the hand-in notebook. The test notebook, the generated hand-in notebook and the build script in `/tmp` were deleted.
