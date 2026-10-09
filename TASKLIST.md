@@ -543,7 +543,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 | ID | Task | What it is and why | Needs | Done |
 |---|---|---|---|---|
 | D1 | Global SHAP | Which features drive the model; do they make sense to a security person? | B2 | ☑ |
-| D2 | Pick the three cases | Confident detection, confident negative, a mistake (test set) | B2 | ☐ |
+| D2 | Pick the three cases | Confident detection, confident negative, a mistake (test set) | B2 | ☑ |
 | D3 | Local SHAP and LIME | Explain the three cases with both methods | D2 | ☐ |
 | D4 | Fidelity: deletion test | Top-k SHAP features vs k random features, replaced with medians | D1 | ☐ |
 | D5 | Stability of LIME | LIME with 10 seeds: how often is the top 3 the same? | D3 | ☐ |
@@ -1130,12 +1130,20 @@ behaviour features below them do make sense to an analyst. Saved: `D1_shap_top.c
 
 **Why:** The brief asks for "a confident correct detection, a confident correct negative, and a mistake".
 
-- [ ] From the boosting model's test probabilities: highest-probability true attack (`detection`),
+- [x] From the boosting model's test probabilities: highest-probability true attack (`detection`),
       lowest-probability true benign (`negative`), the most confident wrong answer (`mistake`). Store
       `CASES` (section 2.3; the stand-in shows the code).
-- [ ] Table `results/tables/D2_cases.csv`: position, attack type, true label, probability.
+- [x] Table `results/tables/D2_cases.csv`: position, attack type, true label, probability.
 
 **Done when:** `CASES` and the table exist.
+
+**Result (2026-10-09):** `parts/30_explanation.ipynb`, step D2 (explanation, selection, fingerprint
+check, interpretation). `CASES = {"detection": 50065, "negative": 47114, "mistake": 10048}` (test
+positions; no ties). Detection: Exploits, p = 0.9996; negative: Benign, p = 2e-7; **mistake: a benign
+flow called attack with p = 0.9989 that carries the attacker fingerprint** (`Fwd Seg Size Min` = 20,
+window 16,383), like the detection. Fingerprint check on test: 1,197 of 1,241 false alarms (96%) carry
+it; benign flows with it are called attack 69% of the time, without it 0.1%; attacks without it are
+still caught 99.5%; 120 of 124 missed attacks carry it. Saved: `D2_cases.csv`, `D2_fingerprint_check.csv`.
 
 #### D3 · Local explanations with SHAP and LIME
 

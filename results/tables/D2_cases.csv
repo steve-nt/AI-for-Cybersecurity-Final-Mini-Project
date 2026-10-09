@@ -1,0 +1,4 @@
+case,test_position,attack_type,true_label,called,attack_probability,Fwd Seg Size Min,FWD Init Win Bytes,Bwd Packets/s
+detection,50065,Exploits,attack,attack,0.999576,20,16383,22.6757
+negative,47114,Benign,benign,benign,2.0616e-07,8,0,2006.02
+mistake,10048,Benign,benign,attack,0.998908,20,16383,23.2142

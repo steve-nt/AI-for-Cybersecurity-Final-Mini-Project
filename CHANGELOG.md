@@ -233,3 +233,16 @@ The user asked to implement D1. SHAP runs on validation flows because Part F pic
 
 **Verified**
 The notebook ran without errors, and the additivity check passed. Top 3 features: Fwd Seg Size Min 42%, FWD Init Win Bytes 21%, Bwd Packets/s 13% of the SHAP weight. A separate check on the training split found that window 16,383 occurs in 95% of attacks and 0% of the flows with window 5,792; this supports the shortcut written in the notebook.
+
+## 2026-10-09 22:15 EEST: D2 done: the three flows to explain
+
+**What**
+- `parts/30_explanation.ipynb`: added step D2 (explanation, case selection, fingerprint check, interpretation). From the black box's test probabilities: the true attack with the highest probability, the true benign flow with the lowest, and the most confident mistake, stored as `CASES` (test positions 50065, 47114, 10048). A check counts how test-set mistakes relate to the attacker fingerprint found in D1 (`Fwd Seg Size Min` = 20 and `FWD Init Win Bytes` = 16,383). Executed.
+- `results/tables/D2_cases.csv`, `results/tables/D2_fingerprint_check.csv`: written.
+- `TASKLIST.md`: D2 ticked, result note added.
+
+**Why**
+The user asked to implement D2. The fingerprint check was added because the chosen mistake turned out to be a benign flow with the attacker fingerprint; it measures how general that is.
+
+**Verified**
+The notebook ran without errors, and no ties occurred in the selection. The mistake is a false alarm at p = 0.9989. 1,197 of the 1,241 test false alarms carry the fingerprint. Attacks without it are caught 99.5% of the time.

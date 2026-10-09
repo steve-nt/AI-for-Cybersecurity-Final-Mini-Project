@@ -1,0 +1,5 @@
+test flows with,true label,flows,called attack
+fingerprint,attack,15303,0.9922
+fingerprint,benign,1731,0.6915
+no fingerprint,attack,749,0.9947
+no fingerprint,benign,43238,0.0010
