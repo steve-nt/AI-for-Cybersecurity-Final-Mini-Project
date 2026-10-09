@@ -1,0 +1,11 @@
+feature,weight,pushes towards
+ACK Flag Count,18.5098,attack
+Flow Duration,14.5326,attack
+Fwd IAT Total,-14.4275,benign
+PSH Flag Count,-12.7274,benign
+Bwd Packets/s,-10.0743,benign
+Total Bwd packets,9.0075,attack
+Bwd Header Length,-8.5618,benign
+Total Length of Bwd Packet,-6.9850,benign
+Fwd Header Length,-6.2670,benign
+Fwd IAT Std,6.0185,attack

@@ -521,7 +521,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 
 | ID | Task | What it is and why | Needs | Done |
 |---|---|---|---|---|
-| B1 | Glass boxes | Decision tree and logistic regression, settings chosen on validation | T3 | ☐ |
+| B1 | Glass boxes | Decision tree and logistic regression, settings chosen on validation | T3 | ☑ |
 | B2 | Black box | Gradient boosting, settings chosen on validation; publishes `BOOST_SETTINGS`, `make_boost`, `boost` | T3 | ☐ |
 | B3 | Test scores | Four metrics on the test set, next to the trivial baseline | B1, B2, A4 | ☐ |
 | B4 | Where the models go wrong | Confusion matrices and recall per attack type | B3 | ☐ |
@@ -880,17 +880,17 @@ warning when a model never predicts "attack", `score_proba()` in the setup noteb
 box, it may be the better choice for a security team. Two glass boxes of different kinds (questions
 vs. weights) show whether "readable" really costs accuracy.
 
-- [ ] Try `max_depth` in `[3, 5, 8, 12, None]`, `random_state=SEED`. Train each on the 20% part
+- [x] Try `max_depth` in `[3, 5, 8, 12, None]`, `random_state=SEED`. Train each on the 20% part
       (`X_train.iloc[TUNE_IDX]`), score on **validation**; keep the depth with the best macro-F1 (ties →
       the smaller tree). Save `results/tables/B1_tree_depth.csv`.
-- [ ] Train `tree` with that depth on **all** of `X_train`.
-- [ ] Print the tree's first levels with `sklearn.tree.export_text(tree, feature_names=FEATURES,
+- [x] Train `tree` with that depth on **all** of `X_train`.
+- [x] Print the tree's first levels with `sklearn.tree.export_text(tree, feature_names=FEATURES,
       max_depth=3)`. Write in plain English what its first question asks (use T4's glossary).
-- [ ] Logistic regression: `Pipeline([("scale", StandardScaler()), ("model",
+- [x] Logistic regression: `Pipeline([("scale", StandardScaler()), ("model",
       LogisticRegression(C=C, max_iter=2000, random_state=SEED))])`. Try `C` in `[0.01, 0.1, 1, 10]` on the
       20% part, score on validation, keep the best macro-F1. Save `results/tables/B1_logreg_C.csv`. Train
       `logreg` with that `C` on all of `X_train`.
-- [ ] The 10 largest weights (`logreg.named_steps["model"].coef_[0]`, on scaled features, so they are
+- [x] The 10 largest weights (`logreg.named_steps["model"].coef_[0]`, on scaled features, so they are
       comparable): which features push towards "attack", which towards "benign"? Save
       `results/tables/B1_logreg_weights.csv`.
 
@@ -898,6 +898,17 @@ vs. weights) show whether "readable" really costs accuracy.
 validation or test data). If logistic regression warns that it did not converge, raise `max_iter`.
 
 **Done when:** `tree` and `logreg` exist with their validation scores and chosen settings.
+
+**Result (2026-10-09):** `parts/10_baseline_models.ipynb`, step B1 (5 cells, incl. an interpretation).
+- Tree: depth **12** chosen (validation macro-F1 0.9643 on the 20% part; depth 8: 0.9641 with 82
+  instead of 287 leaves; no limit overfits, recall 0.919). Final tree: 449 leaves; validation macro-F1
+  0.9685, recall 0.9844, PR-AUC 0.965, FAR 0.0282. First question: `FWD Init Win Bytes` ≤ 16,368.5 (the
+  TCP-settings shortcut).
+- Logistic regression: `C` = **10** chosen (0.958–0.960 for all four values), converged. Validation
+  macro-F1 0.9608, recall 0.9965, PR-AUC 0.950, FAR 0.0414. Largest weights include the twins
+  `Flow Duration` (+14.5) and `Fwd IAT Total` (−14.4), which cancel out.
+- Tables: `B1_tree_depth.csv`, `B1_logreg_C.csv`, `B1_logreg_weights.csv`. `score_proba()` now returns
+  PR-AUC as a plain float (display only).
 
 #### B2 · Black box: gradient boosting
 

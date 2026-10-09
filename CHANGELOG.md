@@ -115,3 +115,17 @@ The user asked to implement A4. The `zero_division` change avoids an UndefinedMe
 
 **Verified**
 Both notebooks executed without errors or warnings, and all A4 asserts passed.
+
+## 2026-10-09 14:49 EEST: B1 done: glass boxes (decision tree and logistic regression)
+
+**What**
+- `parts/10_baseline_models.ipynb`: added step B1. Tree depth searched over `[3, 5, 8, 12, None]` and logistic regression `C` over `[0.01, 0.1, 1, 10]`, each candidate trained on the 20% part `TUNE_IDX` and scored on validation. The winners are trained on all training rows. The cells print the tree's first three levels and the 10 largest logistic regression weights, and record convergence. An interpretation cell explains the results. Executed.
+- `results/tables/B1_tree_depth.csv`, `B1_logreg_C.csv`, `B1_logreg_weights.csv`: written.
+- `parts/00_setup.ipynb`: `score_proba()` returns PR-AUC as a plain float (it printed as `np.float64`). Values unchanged. Re-executed.
+- `TASKLIST.md`: B1 ticked, result note added.
+
+**Why**
+The user asked to implement B1.
+
+**Verified**
+Both notebooks ran without errors or warnings. Chosen: tree depth 12 (validation macro-F1 0.9685, recall 0.9844, FAR 0.0282) and logistic regression `C` = 10 (converged; macro-F1 0.9608, recall 0.9965, FAR 0.0414).
