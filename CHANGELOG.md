@@ -50,3 +50,16 @@ The user said the group is one person and chose to use all rows, then chose the 
 
 **Verified**
 The full-data trial (load, clean, split, two models, SHAP, one pseudo-labelling round, six hidden-type models) ran in 107 s and gave the counts in the task list. The temporary environment and trial scripts in `/tmp` were deleted.
+
+## 2026-10-09 09:06 EEST: T2 done: environment created, tests run, assembly script adapted
+
+**What**
+- `.venv/`: created with Python 3.13.7 and `requirements.txt` (not in git).
+- `tools/assemble.py`: output is now `mini_project_unsw_nb15.ipynb`; `STEP_ORDER` is A0–A4, B1–B4, C1–C4, D1–D6, E1–E4, F1–F5, G1–G4, X1–X9; title cell, docstring, the unknown-step message and the `--strict` messages rewritten for this project.
+- `TASKLIST.md`: T2 boxes ticked, result note added, T2 marked done in the overview.
+
+**Why**
+The user asked to do T2. The title cell names Stefanos Ntentopoulos, taken from the Lab 4.2 author list and the git user name; the task list says where to change it.
+
+**Verified**
+`python -m pytest src`: 16 passed. SHA-256 of `Data.csv` and `Label.csv` match the task list. A dummy part notebook (STEP A1, STANDIN A0, STEP G4) assembled correctly, `--strict` exited with an error listing the 30 missing steps, and the built notebook executed; the dummy and the output notebook were deleted.
