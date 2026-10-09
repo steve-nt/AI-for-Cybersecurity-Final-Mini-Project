@@ -1,0 +1,11 @@
+attack_type,test_flows,boosting,tree,logreg,note
+Backdoor,90,0.9778,0.9667,1.0000,few flows: less precise
+Worms,47,0.9787,0.9574,1.0000,few flows: less precise
+Fuzzers,5202,0.9875,0.9750,0.9987,
+Shellcode,333,0.9880,0.9760,1.0000,
+Reconnaissance,2398,0.9912,0.9846,0.9975,
+Generic,875,0.9931,0.9863,0.9840,
+Exploits,6167,0.9963,0.9917,0.9951,
+DoS,863,0.9977,0.9884,0.9965,
+Analysis,77,1.0000,0.9610,0.9870,few flows: less precise
+Benign,44969,0.0276,0.0275,0.0413,share called attack = FAR

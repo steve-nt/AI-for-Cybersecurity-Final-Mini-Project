@@ -1,0 +1,4 @@
+model,recall,far,attacks_per_day,caught_per_day,missed_per_day,false_alarms_per_day,precision_test_set,precision_real_traffic
+boosting,0.9923,0.0276,25304.2095,25108.7372,195.4723,26898.4740,0.9277,0.4828
+tree,0.9849,0.0279,25304.2095,24921.1468,383.0627,27180.2469,0.9275,0.4783
+logreg,0.9962,0.0413,25304.2095,25208.0497,96.1598,40250.1742,0.8960,0.3851

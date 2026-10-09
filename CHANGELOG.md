@@ -155,3 +155,16 @@ The user asked to implement B3. It is the first use of the test set; all setting
 
 **Verified**
 The notebook ran without errors. Test: gradient boosting macro-F1 0.9718, recall 0.9923, PR-AUC 0.9814, FAR 0.0276; tree 0.9690 / 0.9849 / 0.9677 / 0.0279; logistic regression 0.9608 / 0.9962 / 0.9527 / 0.0413. Test minus validation is at most 0.003 for every score.
+
+## 2026-10-09 20:21 EEST: B4 done: where the models go wrong
+
+**What**
+- `parts/10_baseline_models.ipynb`: added step B4 (explanation, three code cells, interpretation): confusion matrices for the three models on the test set, recall per attack type (dot plot), and false alarms per day for a network with 1,000,000 flows a day and 2.53% attacks (the share in the full UNSW-NB15 recording). Defines the project's figure style (`MODEL_COLORS`, `MODEL_MARKERS`, `style_axes`, a blue ramp for heatmaps). Executed.
+- `results/figures/B4_confusion.png`, `results/figures/B4_recall_per_type.png`; `results/tables/B4_confusion.csv`, `B4_recall_per_type.csv`, `B4_alarms_per_day.csv`: written.
+- `TASKLIST.md`: B4 ticked, result note added.
+
+**Why**
+The user asked to implement B4. The model colours come from the dataviz reference palette's first three categorical slots, checked with its validator in all-pairs mode (passes; aqua is below 3:1 contrast, so tables and marker shapes are also provided). After the first render, the recall chart's legend covered two markers, so it was moved above the plot.
+
+**Verified**
+The notebook ran without errors or warnings, and both figures were inspected after the fix. Gradient boosting misses 124 attacks and raises 1,241 false alarms on the test set. About 65 of the misses are Fuzzers. At realistic traffic only 48% of its alerts would be real attacks.

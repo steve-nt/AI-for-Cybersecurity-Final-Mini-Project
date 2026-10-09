@@ -526,7 +526,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 | B1 | Glass boxes | Decision tree and logistic regression, settings chosen on validation | T3 | ☑ |
 | B2 | Black box | Gradient boosting, settings chosen on validation; publishes `BOOST_SETTINGS`, `make_boost`, `boost` | T3 | ☑ |
 | B3 | Test scores | Four metrics on the test set, next to the trivial baseline | B1, B2, A4 | ☑ |
-| B4 | Where the models go wrong | Confusion matrices and recall per attack type | B3 | ☐ |
+| B4 | Where the models go wrong | Confusion matrices and recall per attack type | B3 | ☑ |
 
 ### Part C: learning with fewer labels
 
@@ -960,14 +960,24 @@ PR-AUC / FAR). Test and validation differ by at most 0.003. Saved as `B3_test_sc
 
 **Why:** "Recall 0.99" hides *which* attacks are missed. The per-type view also prepares Part G.
 
-- [ ] Confusion matrix of the boosting model on test (figure `results/figures/B4_confusion_boost.png`).
-- [ ] Recall per attack type for tree and boosting on test (`type_test`); save
+- [x] Confusion matrix of the boosting model on test (figure `results/figures/B4_confusion_boost.png`).
+- [x] Recall per attack type for tree and boosting on test (`type_test`); save
       `results/tables/B4_recall_per_type.csv`. Mark the types with fewer than 100 test rows (Backdoor,
       Analysis, Worms) as "few rows: less precise".
-- [ ] How many false alarms would this FAR mean per day? Example: 1,000,000 benign flows × FAR. Keep the
+- [x] How many false alarms would this FAR mean per day? Example: 1,000,000 benign flows × FAR. Keep the
       number for the Discussion (in reality 97.5% of flows are benign, section 1.2).
 
 **Done when:** the table and the figure exist.
+
+**Result (2026-10-09):** `parts/10_baseline_models.ipynb`, step B4 (explanation, 3 code cells,
+interpretation). Confusion matrices for all three models (`B4_confusion.png`, `B4_confusion.csv`):
+gradient boosting misses 124 attacks and raises 1,241 false alarms; tree 256 / 1,235; logistic
+regression 61 / 1,857. Recall per type (`B4_recall_per_type.png`, `.csv`): every type ≥ 95.7% for every
+model; for boosting the weakest large type is **Fuzzers (98.75%, ≈ 65 of its 124 misses)**. False alarms
+per day (`B4_alarms_per_day.csv`; 1,000,000 flows a day, 2.53% attacks as in the full recording):
+boosting ≈ 26,900 false alarms, **only 48% of its alerts real** (93% on the test set); logistic
+regression 39%. The figures set the project's model colours and markers (`MODEL_COLORS`,
+`MODEL_MARKERS`, `style_axes`), validated as a colour-blind-safe set.
 
 **Goes into the report:** section 3 and section 7 (Discussion).
 
