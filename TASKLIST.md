@@ -261,7 +261,7 @@ results for the report: the report's numbers come from the assembled notebook (H
 | Gradient boosting (default settings), all rows | 9–21 s to train (one unexplained run took 131 s); SHAP on 1,000 rows 1.8 s; predicting 5,000 rows 0.05 s | Fast enough for everything, including LIME |
 | Gradient boosting, validation | macro-F1 0.971, recall 0.992, PR-AUC 0.981, FAR 0.028 | Far above the trivial baseline (accuracy 0.737, recall 0) |
 | Decision tree (depth 8), validation | macro-F1 0.967, recall 0.981, PR-AUC 0.969, FAR 0.029; 8 s to train | The glass box is almost as good |
-| Logistic regression, all rows | 48–101 s **per setting**; macro-F1 0.961 | Too slow to tune within 5 minutes: not used (optional X8) |
+| Logistic regression, all rows | 48–101 s **per setting**; macro-F1 0.961 | Slow, but kept as the second glass box (2026-10-09: correctness first, runtime is optimised at the end) |
 | Settings search on a 20% part of training | 1.3 s per boosting model, 1.7 s per tree | Search settings there, train the final model on all training rows |
 | Global SHAP top 3 (gradient boosting) | `Fwd Seg Size Min`, `FWD Init Win Bytes`, `Bwd Packets/s` | The top 2 are **TCP settings of the machines**, not the attack itself. Likely a *shortcut*: all attacks come from the same few attacker machines. Discuss in D1 and the Discussion (X6 tests it) |
 | BRB levels | `Fwd Seg Size Min` has only 7 distinct values and cannot get three levels; `FWD Init Win Bytes` gives 0 / 5,792 / 26,064; `Bwd Packets/s` gives 5.1 / 296.7 / 5,633.8 | The likely BRB pair is `FWD Init Win Bytes` and `Bwd Packets/s` |
@@ -289,7 +289,7 @@ results for the report: the report's numbers come from the assembled notebook (H
 | Label | `y = 1` for every attack type, `0` for Benign; keep the attack-type name in `type_*` | Binary detector as in the brief; the type is needed in Part G |
 | Cleaning | 1) drop exact duplicate rows, 2) drop rows whose identical features carry different labels, 3) (after the split) drop columns that are constant in training | Section 1.2 |
 | Split | 60/20/20, stratified on the **attack type**: first `test_size=0.20`, then `test_size=0.25` of the rest, `random_state=42` → 183,063 / 61,021 / 61,021 | Same as our Lab 1 and Lab 4.2; every attack type appears in every part |
-| Glass box | Decision tree, depth chosen on validation | The brief asks for at least one; logistic regression is too slow on all rows (optional X8) |
+| Glass boxes | Decision tree (depth chosen on validation) and logistic regression (scaled inside a Pipeline, `C` chosen on validation) | The brief asks for at least one; two glass boxes give a fairer picture against the black box. Logistic regression is slow on all rows (about 90 s per fit); runtime is optimised at the end |
 | Black box | Gradient boosting, `HistGradientBoostingClassifier(random_state=42)`; `learning_rate` and `max_leaf_nodes` chosen on validation | Fast on all rows; SHAP TreeExplainer is exact and fast for it |
 | Settings searches | Each candidate is trained on a stratified **20% part of the training set** and scored on validation; the winner is then trained on **all** training rows | Keeps the notebook under 5 minutes; the choice is still made on validation |
 | Threshold | 0.5 for every model (the BRB's threshold is chosen on validation, F2) | Simple and the same everywhere |
@@ -306,7 +306,7 @@ results for the report: the report's numbers come from the assembled notebook (H
 | Part | Budget | What uses the time |
 |---|---:|---|
 | Setup (A0, A2, A3) | 60 s (measured: 46 s) | Reading the CSVs, removing duplicates |
-| A + B | 45 s | 5 tree depths and 4 boosting settings on 20% (≈ 15 s), 2 final models (≈ 25 s) |
+| A + B | 45 s + logistic regression (not yet measured; runtime is optimised at the end) | 5 tree depths and 4 boosting settings on 20% (≈ 15 s), 2 final models (≈ 25 s); 4 logistic regression settings on 20% and the final one (about 90 s on all rows) |
 | C | 70 s | Lower line (1 s), 3 cutoffs × 2 rounds (≈ 60 s) |
 | D | 30 s | SHAP (2 s), LIME 3 cases + 30 stability runs + D6 experiments (≈ 20 s), deletion test |
 | E | 15 s | Predictions only |
@@ -395,11 +395,11 @@ These names connect the parts. **Do not rename them.**
 
 | Name | Type | Made in | Used by |
 |---|---|---|---|
-| `tree` | the Part B decision tree, trained on all of `X_train` | B1 | B3, D (optional), E |
+| `tree`, `logreg` | the Part B decision tree and logistic regression (Pipeline with `StandardScaler`), trained on all of `X_train` | B1 | B3, D (optional), E |
 | `BOOST_SETTINGS` | dict of the gradient boosting model's chosen settings, incl. `random_state=SEED` | B2 | C, F, G |
 | `make_boost()` | returns a new, untrained gradient boosting model with `BOOST_SETTINGS` | B2 | C, F, G |
 | `boost` | the Part B gradient boosting model, trained on all of `X_train` | B2 | C4, D, E, G |
-| `MODELS` | `{"tree": tree, "boosting": boost}` | B2 | E |
+| `MODELS` | `{"tree": tree, "logreg": logreg, "boosting": boost}` | B2 | E |
 | `boost_few`, `boost_pseudo` | the lower line and the pseudo-labelling model | C1, C2 | C4 |
 | `shap_global` | pandas Series: feature → mean \|SHAP\| on validation rows, sorted | D1 | F1 |
 | `TOP2` | list of the two features for the BRB | F1 (from `shap_global`) | F2–F5 |
@@ -414,6 +414,9 @@ These names connect the parts. **Do not rename them.**
 ```python
 # STANDIN B2
 from sklearn.ensemble import HistGradientBoostingClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
 from sklearn.tree import DecisionTreeClassifier
 
 BOOST_SETTINGS = {"random_state": SEED}          # replace with the settings chosen in B2
@@ -421,8 +424,10 @@ def make_boost():
     return HistGradientBoostingClassifier(**BOOST_SETTINGS)
 
 tree = DecisionTreeClassifier(max_depth=8, random_state=SEED).fit(X_train, y_train)   # depth from B1
+logreg = Pipeline([("scale", StandardScaler()),                                      # C from B1
+                   ("model", LogisticRegression(C=1.0, max_iter=2000, random_state=SEED))]).fit(X_train, y_train)
 boost = make_boost().fit(X_train, y_train)
-MODELS = {"tree": tree, "boosting": boost}
+MODELS = {"tree": tree, "logreg": logreg, "boosting": boost}
 ```
 
 ```python
@@ -501,7 +506,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 | T1 | Kickoff | Read the brief and this file, accept the decisions, check the dataset citation | – | ☐ (citation checked; the rest is yours) |
 | T2 | Environment and assembly script | Install the libraries; `assemble.py` knows this project's steps | T1 | ☑ |
 | T3 | Setup notebook (steps A0, A2, A3) | Load, clean, split; build every shared name of section 2.3 | T2 | ☑ |
-| T4 | Feature glossary | One table: what each of the 67 features means in plain words. Needed to read SHAP results | T2 | ☐ |
+| T4 | Feature glossary | One table: what each of the 67 features means in plain words. Needed to read SHAP results | T2 | ☑ |
 
 ### Part A: the problem and the data
 
@@ -516,7 +521,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 
 | ID | Task | What it is and why | Needs | Done |
 |---|---|---|---|---|
-| B1 | Glass box | Decision tree, depth chosen on validation | T3 | ☐ |
+| B1 | Glass boxes | Decision tree and logistic regression, settings chosen on validation | T3 | ☐ |
 | B2 | Black box | Gradient boosting, settings chosen on validation; publishes `BOOST_SETTINGS`, `make_boost`, `boost` | T3 | ☐ |
 | B3 | Test scores | Four metrics on the test set, next to the trivial baseline | B1, B2, A4 | ☐ |
 | B4 | Where the models go wrong | Confusion matrices and recall per attack type | B3 | ☐ |
@@ -545,8 +550,8 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 
 | ID | Task | What it is and why | Needs | Done |
 |---|---|---|---|---|
-| E1 | Noise | `add_noise`; both models at 6 noise levels | B2 | ☐ |
-| E2 | Missing features | `add_missing`; both models at 5 levels | B2 | ☐ |
+| E1 | Noise | `add_noise`; all three models at 6 noise levels | B2 | ☐ |
+| E2 | Missing features | `add_missing`; all three models at 5 levels | B2 | ☐ |
 | E3 | What broke first? | Figure, and the level at which we stop trusting the model | E1, E2 | ☐ |
 | E4 | What would an attacker change? | Feature-group table (needed for the Discussion); optional X3 runs the attack | T4, D1 | ☐ |
 
@@ -580,7 +585,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 | X5 | Hide each attack type in turn | Which attacks are "new" to the model and which are not | G2 | ☐ |
 | X6 | Shortcut check | Retrain without the TCP-settings features: does the model still work? | D1 | ☐ |
 | X7 | BRB with a missing input; an expert edits a rule | Shows the Unknown part growing and the rules being editable | F4 | ☐ |
-| X8 | Logistic regression as a second glass box | Trained once with default settings (about 90 s, so maybe not in the hand-in notebook) | B3 | ☐ |
+| X8 | Settings searches on all training rows | Repeat B1–B2 without the 20% shortcut: are the same settings chosen? | B3 | ☐ |
 | X9 | Confidence intervals | Bootstrap the test scores: which differences between models are real? | B3 | ☐ |
 
 ### Presentation and hand-in
@@ -792,18 +797,26 @@ the split selects row positions first. `%run 00_setup.ipynb` from another part n
 `FWD Init Win Bytes` means nothing. One table makes every SHAP plot, every BRB rule and the attacker
 discussion readable.
 
-- [ ] Adapt `tools/feature_glossary.py`: read `UNSW-NB15/Data.csv` and make the split exactly like T3;
+- [x] Adapt `tools/feature_glossary.py`: read `UNSW-NB15/Data.csv` and make the split exactly like T3;
       update the `MEANING` dictionary to our 76 CICFlowMeter v4 names (most map one-to-one from the
       CICIDS2017 names already in it: `Total Fwd Packets` → `Total Fwd Packet`, `Init_Win_bytes_forward` →
       `FWD Init Win Bytes`, `min_seg_size_forward` → `Fwd Seg Size Min`, `Avg Fwd Segment Size` →
       `Fwd Segment Size Avg`, …); write `results/tables/T4_feature_glossary.md` and `.csv`.
-- [ ] Columns: name, plain meaning, unit, direction (forward / backward / both), training min / median /
+- [x] Columns: name, plain meaning, unit, direction (forward / backward / both), training min / median /
       max, and the "twin" group (features with |correlation| > 0.95 in training).
-- [ ] Add a short note for the three TCP-settings features (`FWD Init Win Bytes`, `Bwd Init Win Bytes`,
+- [x] Add a short note for the three TCP-settings features (`FWD Init Win Bytes`, `Bwd Init Win Bytes`,
       `Fwd Seg Size Min`): they are set by the operating system of each machine at the start of the
       conversation.
 
 **Done when:** every one of the 67 features has a one-line meaning that a non-expert understands.
+
+**Result (2026-10-09):** `python tools/feature_glossary.py` writes `results/tables/T4_feature_glossary.md`
+(readable) and `.csv`. 67 features: 20 forward, 20 backward, 27 both directions. Proposed attacker
+groups: 27 Free, 5 Costly, 35 Fixed (`Fwd Packets/s` counted as Free: the attacker can send more
+slowly; `FWD Init Win Bytes` and `Fwd Seg Size Min` as Free: settings of the attacker's own machine).
+**18 twin groups cover 42 features**; two are mixed (group 2: `Total Fwd Packet` + `Fwd Header Length`;
+group 6: `Fwd Packet Length Min` + `Packet Length Min`). The cleaning and split inside the script are
+the same as in the setup notebook (it asserts 305,105 clean rows and 183,063 × 67 training rows).
 
 ---
 
@@ -850,10 +863,11 @@ an alarm already scores 0.74 accuracy, so accuracy alone says little.
 
 ### Part B: supervised models (notebook `10_baseline_models.ipynb`)
 
-#### B1 · Glass box: decision tree
+#### B1 · Glass boxes: decision tree and logistic regression
 
 **Why:** A model a person can read is the natural starting point. If it is almost as good as the black
-box, it may be the better choice for a security team.
+box, it may be the better choice for a security team. Two glass boxes of different kinds (questions
+vs. weights) show whether "readable" really costs accuracy.
 
 - [ ] Try `max_depth` in `[3, 5, 8, 12, None]`, `random_state=SEED`. Train each on the 20% part
       (`X_train.iloc[TUNE_IDX]`), score on **validation**; keep the depth with the best macro-F1 (ties →
@@ -861,10 +875,18 @@ box, it may be the better choice for a security team.
 - [ ] Train `tree` with that depth on **all** of `X_train`.
 - [ ] Print the tree's first levels with `sklearn.tree.export_text(tree, feature_names=FEATURES,
       max_depth=3)`. Write in plain English what its first question asks (use T4's glossary).
+- [ ] Logistic regression: `Pipeline([("scale", StandardScaler()), ("model",
+      LogisticRegression(C=C, max_iter=2000, random_state=SEED))])`. Try `C` in `[0.01, 0.1, 1, 10]` on the
+      20% part, score on validation, keep the best macro-F1. Save `results/tables/B1_logreg_C.csv`. Train
+      `logreg` with that `C` on all of `X_train`.
+- [ ] The 10 largest weights (`logreg.named_steps["model"].coef_[0]`, on scaled features, so they are
+      comparable): which features push towards "attack", which towards "benign"? Save
+      `results/tables/B1_logreg_weights.csv`.
 
-**Pitfalls:** never choose with the test set.
+**Pitfalls:** never choose with the test set. Fit the scaler only inside the Pipeline (never on
+validation or test data). If logistic regression warns that it did not converge, raise `max_iter`.
 
-**Done when:** `tree` exists with its validation scores and chosen depth.
+**Done when:** `tree` and `logreg` exist with their validation scores and chosen settings.
 
 #### B2 · Black box: gradient boosting
 
@@ -887,11 +909,11 @@ become the shared `BOOST_SETTINGS`, so every part uses the same model.
 **Why:** The brief's main supervised result: the four metrics on the test set, with the trivial
 baseline on the same rows.
 
-- [ ] One table, rows: always benign, tree, boosting; columns: macro-F1, recall, PR-AUC, FAR
+- [ ] One table, rows: always benign, tree, logreg, boosting; columns: macro-F1, recall, PR-AUC, FAR
       (+ accuracy); on the **test** set. Also the same table on validation (the brief's "results before
       and after validation test" in report section 1). Save `results/tables/B3_test_scores.csv` and
       `B3_val_scores.csv`.
-- [ ] Two sentences: how much better than the baseline is each model? Is the glass box good enough?
+- [ ] Two sentences: how much better than the baseline is each model? Are the glass boxes good enough?
 
 **Done when:** both tables are saved.
 
@@ -968,8 +990,8 @@ explained, scores as well as a positive one."
 **Why:** Report section 3 asks for "one table with all models and all four metrics, against the trivial
 baseline". It gathers Part B and Part C on the same test set.
 
-- [ ] Rows: always benign, tree, boosting (100% labels), boosting (10% labels), boosting +
-      pseudo-labels (+ X1, X8 if done). Columns: macro-F1, recall, PR-AUC, FAR (+ accuracy). **Test set.**
+- [ ] Rows: always benign, tree, logreg, boosting (100% labels), boosting (10% labels), boosting +
+      pseudo-labels (+ X1 if done). Columns: macro-F1, recall, PR-AUC, FAR (+ accuracy). **Test set.**
       Save `results/tables/C4_all_models_test.csv`.
 - [ ] Repeat the C3 verdict with the test numbers: same answer?
 
@@ -1110,13 +1132,13 @@ always safe.
 - [ ] `add_noise(X, level, seed=SEED)`: Gaussian noise of width `level × TRAIN_STD` on every column in
       `CONT_COLS`; `FLAG_COLS` untouched; clip at zero. Tests: level 0 changes nothing; flags unchanged.
 - [ ] Levels `[0, 0.05, 0.10, 0.20, 0.50, 1.00]`; noise only on the **test** set (the models stay as
-      trained); both `MODELS`; four metrics. Save `results/tables/E1_noise.csv`.
+      trained); all three `MODELS`; four metrics. Save `results/tables/E1_noise.csv`.
 
 #### E2 · Missing features
 
 - [ ] `add_missing(X, frac, seed=SEED)`: in each row, `round(frac × 67)` random features set to
       `TRAIN_MEDIAN`.
-- [ ] Levels `[0, 0.10, 0.20, 0.30, 0.50]`; both models; four metrics. Save
+- [ ] Levels `[0, 0.10, 0.20, 0.30, 0.50]`; all three models; four metrics. Save
       `results/tables/E2_missing.csv`.
 
 #### E3 · What broke first, and when do we stop trusting the model?
@@ -1128,7 +1150,7 @@ always safe.
 - [ ] Figure: macro-F1, recall and FAR against the level, one line per model, for noise and for missing
       (`results/figures/E3_robustness.png`; the Lab 4.2 figure code is a good start).
 - [ ] Answer: which model and which metric broke first (recall or FAR?), at which level, and at which
-      level the rule says "stop". Does the glass box or the boosting model hold up better?
+      level the rule says "stop". Do the glass boxes or the boosting model hold up better?
 
 #### E4 · What would an attacker change?
 
@@ -1283,8 +1305,8 @@ results in a separate notebook and say so).
   machines' fingerprint.
 - **X7 · BRB extras.** One flow with one input missing (`np.nan`): the Unknown grows (show the trace).
   Then "the expert" edits one rule by hand on a **copy** of the rule base: what changes?
-- **X8 · Logistic regression.** A second glass box, in a Pipeline with `StandardScaler`, default `C`
-  (about 90 s on all rows, so it may not fit in the 5-minute notebook).
+- **X8 · Settings searches on all training rows.** B1–B2 again, with every candidate trained on all of
+  `X_train` instead of the 20% part. Are the same settings chosen? If yes, the 20% shortcut is safe.
 - **X9 · Confidence intervals.** Bootstrap the test set (200 resamples) for the boosting model's four
   metrics: 95% intervals. Which differences in C4 are smaller than the interval?
 

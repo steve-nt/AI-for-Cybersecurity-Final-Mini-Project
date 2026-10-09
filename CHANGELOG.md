@@ -76,3 +76,16 @@ The user asked to do T3. The first version took 68 s, over the 60 s budget. Thre
 
 **Verified**
 All asserted counts match the task list (447,915 / 306,173 / 305,105 rows; 183,063 / 61,021 / 61,021 split; 67 features; 15,606 / 5,202 / 5,202 Fuzzers; 16,052 test attacks). `%run 00_setup.ipynb` from a test part notebook gave every shared name, and `tools/assemble.py` built and executed the hand-in notebook. The test notebook, the generated hand-in notebook and the build script in `/tmp` were deleted.
+
+## 2026-10-09 11:22 EEST: Logistic regression back in Part B; T4 done: feature glossary
+
+**What**
+- `TASKLIST.md`: logistic regression is a required second glass box again. B1 now trains a tree and a logistic regression (scaled in a Pipeline, `C` from `[0.01, 0.1, 1, 10]` chosen on validation, trained on the 20% part); `logreg` added to the shared names, `MODELS` and the B2 stand-in; B3, C4, E1, E2 and E3 cover all three models. X8 is now "settings searches on all training rows". The decision table, the trial table and the time budget mention it. T4 marked done with a result note.
+- `tools/feature_glossary.py`: rewritten for CIC-UNSW-NB15. Meanings for all 76 CICFlowMeter v4 names, the same cleaning and split as `parts/00_setup.ipynb`, case-insensitive direction check (`FWD Init Win Bytes`), flag counts described as packet counts, a note column for the three TCP-settings ("fingerprint") features, proposed Free/Costly/Fixed groups (`Fwd Packets/s` and the attacker's own TCP settings as Free).
+- `results/tables/T4_feature_glossary.md`, `results/tables/T4_feature_glossary.csv`: written by the script.
+
+**Why**
+The user agreed to correctness first and runtime at the end, asked to add logistic regression back, and asked to do T4.
+
+**Verified**
+The script ran and asserted 305,105 clean rows and a 183,063 × 67 training set. Output: 67 features, proposed groups 27 Free / 5 Costly / 35 Fixed, 18 twin groups covering 42 features.
