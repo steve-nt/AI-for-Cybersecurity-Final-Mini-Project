@@ -533,7 +533,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 | ID | Task | What it is and why | Needs | Done |
 |---|---|---|---|---|
 | C1 | Keep 10% of the labels; lower line | Boosting on 18,306 labelled rows only | B2 | ☑ |
-| C2 | Pseudo-labelling | Cutoff chosen on validation; how many guesses were right | C1 | ☐ |
+| C2 | Pseudo-labelling | Cutoff chosen on validation; how many guesses were right | C1 | ☑ |
 | C3 | Did the unlabelled data help? | Validation comparison and a plain yes/no with the reason | C2 | ☐ |
 | C4 | The results table | All models, four metrics, trivial baseline, test set: the report's main table | C3, B3 | ☐ |
 
@@ -1011,18 +1011,24 @@ PR-AUC 0.9743, FAR 0.0296**, against the upper line 0.9713 / 0.9924 / 0.9807 / 0
 **Why:** The model labels the unlabelled rows it is very sure about and learns from them too. It helps
 only if the confident guesses are right *and* add something new.
 
-- [ ] Write `pseudo_label(cutoff, rounds=2)`: start from `X_lab, y_lab`; each round train
+- [x] Write `pseudo_label(cutoff, rounds=2)`: start from `X_lab, y_lab`; each round train
       `make_boost()`, predict the remaining unlabelled rows, take those with probability ≥ cutoff or
       ≤ 1 − cutoff, add them with the guessed label, remove them from the pool. Train the final model on
       everything. Record per round: added (attack / benign), still unlabelled, and how many guesses were
       right (`y_hidden.loc[...]`, check only).
-- [ ] Try `cutoff` in `[0.90, 0.95, 0.99]`; choose the best validation macro-F1 → `boost_pseudo`.
+- [x] Try `cutoff` in `[0.90, 0.95, 0.99]`; choose the best validation macro-F1 → `boost_pseudo`.
       Save `results/tables/C2_cutoff.csv` and `C2_rounds.csv`.
 
 **Pitfalls:** `y_hidden` must never reach `.fit()`. The guesses are mostly *easy* rows (the trial: 99.5%
 right after one round); check how many attack guesses were added per round. Each round takes about 10 s.
 
 **Done when:** `boost_pseudo` and both tables exist.
+
+**Result (2026-10-09):** `parts/20_few_labels.ipynb`, step C2 (explanation, code, interpretation).
+Cutoff **0.95** chosen on validation (macro-F1 0.9681; 0.99: 0.9677; 0.90: 0.9680). It added 150,327
+guesses (91% of the unlabelled flows), 99.1% right: round 1 143,824 (99.5% right, mostly benign), round
+2 6,503 (90.4% right, mostly attacks). Looser cutoffs raise recall (0.987 → 0.992) and FAR (0.030 →
+0.032). Saved as `C2_cutoff.csv` and `C2_rounds.csv`.
 
 #### C3 · Did the unlabelled data help?
 

@@ -181,3 +181,16 @@ The user asked to implement C1.
 
 **Verified**
 The notebook ran without errors. 18,306 labelled (4,815 attacks) and 164,757 unlabelled flows. Lower line on validation: macro-F1 0.9679, recall 0.9862, PR-AUC 0.9743, FAR 0.0296 (upper line 0.9713 / 0.9924 / 0.9807 / 0.0282).
+
+## 2026-10-09 21:02 EEST: C2 done: pseudo-labelling with the cutoff chosen on validation
+
+**What**
+- `parts/20_few_labels.ipynb`: added step C2 (explanation, code, interpretation). `pseudo_label(cutoff, rounds=2)` starts from the labelled 10%, adds confident guesses each round and trains a final model. Per round it records guesses added (attack / benign), still unlabelled, and guesses right (checked against `y_hidden` only after selection). Cutoffs 0.99, 0.95 and 0.90 were tried; 0.95 was chosen on validation macro-F1 (strictest on a tie) and kept as `boost_pseudo`. Executed.
+- `results/tables/C2_cutoff.csv`, `results/tables/C2_rounds.csv`: written.
+- `TASKLIST.md`: C2 ticked, result note added.
+
+**Why**
+The user asked to implement C2.
+
+**Verified**
+The notebook ran without errors or warnings. Cutoff 0.95: 150,327 guesses added, 99.1% right; validation macro-F1 0.9681 against 0.9679 for the lower line.
