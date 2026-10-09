@@ -246,3 +246,16 @@ The user asked to implement D2. The fingerprint check was added because the chos
 
 **Verified**
 The notebook ran without errors, and no ties occurred in the selection. The mistake is a false alarm at p = 0.9989. 1,197 of the 1,241 test false alarms carry the fingerprint. Attacks without it are caught 99.5% of the time.
+
+## 2026-10-10 02:40 EEST: D3 done: SHAP and LIME for the three flows
+
+**What**
+- `parts/30_explanation.ipynb`: added step D3 (explanation, code, interpretation). For each of the three flows: a SHAP waterfall and a LIME explanation (`xai_tools.lime_explain`, 8 features, 5,000 samples, seed 42), plus a top-3 comparison table with LIME's fit score and local prediction. `predict_fn`, `lime_explainer` and `plot_lime` are defined here. Executed.
+- `results/figures/D3_shap_detection.png`, `D3_shap_negative.png`, `D3_shap_mistake.png`, `D3_lime_detection.png`, `D3_lime_negative.png`, `D3_lime_mistake.png`; `results/tables/D3_top3.csv`: written.
+- `TASKLIST.md`: D3 ticked, result note added.
+
+**Why**
+The user asked to implement D3. LIME's own plot overlapped its title with ours and used red/green, so the LIME bars are drawn with the project's red/blue (validated: all checks pass) and value labels.
+
+**Verified**
+The notebook ran without errors, and all six figures were inspected. SHAP and LIME share 2, 1 and 1 of their top-3 features. LIME's fit scores are 0.24–0.26.

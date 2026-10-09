@@ -544,7 +544,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 |---|---|---|---|---|
 | D1 | Global SHAP | Which features drive the model; do they make sense to a security person? | B2 | ☑ |
 | D2 | Pick the three cases | Confident detection, confident negative, a mistake (test set) | B2 | ☑ |
-| D3 | Local SHAP and LIME | Explain the three cases with both methods | D2 | ☐ |
+| D3 | Local SHAP and LIME | Explain the three cases with both methods | D2 | ☑ |
 | D4 | Fidelity: deletion test | Top-k SHAP features vs k random features, replaced with medians | D1 | ☐ |
 | D5 | Stability of LIME | LIME with 10 seeds: how often is the top 3 the same? | D3 | ☐ |
 | D6 | Do SHAP and LIME agree? Why not? | Investigate every disagreement (grade 5) | D3, D5 | ☐ |
@@ -1147,16 +1147,25 @@ still caught 99.5%; 120 of 124 missed attacks carry it. Saved: `D2_cases.csv`, `
 
 #### D3 · Local explanations with SHAP and LIME
 
-- [ ] For each case: SHAP waterfall (top 10), saved as `results/figures/D3_shap_<case>.png`.
-- [ ] For each case: LIME with `LimeTabularExplainer(X_train.values, feature_names=FEATURES,
+- [x] For each case: SHAP waterfall (top 10), saved as `results/figures/D3_shap_<case>.png`.
+- [x] For each case: LIME with `LimeTabularExplainer(X_train.values, feature_names=FEATURES,
       class_names=["benign", "attack"], discretize_continuous=True, random_state=SEED)`,
       `num_features=8`, `num_samples=5000`; save the figure (`D3_lime_<case>.png`) and print the fit
       score. A fit score below 0.5 means "LIME's straight line does not describe the model well here".
-- [ ] Table `results/tables/D3_top3.csv`: per case, SHAP top 3, LIME top 3, how many shared
+- [x] Table `results/tables/D3_top3.csv`: per case, SHAP top 3, LIME top 3, how many shared
       (`xai_tools.topk_overlap`), LIME fit score.
-- [ ] For the mistake: which features fooled the model? What kind of flow was it (its attack type)?
+- [x] For the mistake: which features fooled the model? What kind of flow was it (its attack type)?
 
 **Done when:** six figures and the table exist.
+
+**Result (2026-10-10):** `parts/30_explanation.ipynb`, step D3 (explanation, code, interpretation).
+SHAP waterfall and LIME (8 features, 5,000 samples, seed 42) for each case; LIME drawn with the
+project's red/blue (validated) instead of LIME's red/green. SHAP vs LIME top 3: detection 2 shared,
+negative 1, mistake 1. **LIME fit scores only 0.24–0.26**; local prediction 0.25 for a flow the model
+scores 0.9996. SHAP shows the false alarm is driven by the fingerprint (`Fwd Seg Size Min` +5.7,
+`FWD Init Win Bytes` +3.5). LIME's quartile ranges put `Fwd Seg Size Min` 8 and 20 in one range.
+Saved: `D3_top3.csv`, `D3_shap_<case>.png`, `D3_lime_<case>.png`. Shared names: `predict_fn`,
+`lime_explainer`, `case_shap`, `case_lime`, `plot_lime`.
 
 #### D4 · Fidelity: the deletion test
 

@@ -1,0 +1,4 @@
+case,attack_type,attack_probability,SHAP_top3,LIME_top3,shared_in_top3,LIME_fit_score,LIME_local_prediction
+detection,Exploits,0.9996,"Fwd Seg Size Min, FWD Init Win Bytes, Bwd Packets/s","RST Flag Count, Fwd Seg Size Min, Bwd Packets/s",2,0.2595,0.2469
+negative,Benign,0.0000,"Bwd Packets/s, Bwd IAT Min, Fwd Seg Size Min","Fwd PSH Flags, Fwd Seg Size Min, Bwd Packet Length Min",1,0.2389,0.1727
+mistake,Benign,0.9989,"Fwd Seg Size Min, FWD Init Win Bytes, Total Length of Bwd Packet","Fwd Seg Size Min, Bwd Packet Length Min, Bwd Packets/s",1,0.2531,0.2369
