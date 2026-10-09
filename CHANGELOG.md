@@ -101,3 +101,17 @@ The user asked to implement A1.
 
 **Verified**
 `tools/assemble.py --no-execute` places A1 between the setup's A0 and A2 cells; the test output was deleted.
+
+## 2026-10-09 12:10 EEST: A4 done: trivial baseline
+
+**What**
+- `parts/10_baseline_models.ipynb`: added step A4 (Markdown explanation and code). An always-benign `DummyClassifier` is scored on validation and test, with asserts that accuracy equals the benign share, recall and FAR are 0, and PR-AUC equals the attack share. Executed.
+- `results/tables/A4_baseline.csv`: accuracy 0.7369, macro-F1 0.4243, recall 0, PR-AUC 0.2631, FAR 0 (same on validation and test).
+- `parts/00_setup.ipynb`: `score_proba()` now calls `f1_score(..., zero_division=0)`, so a model that never predicts "attack" gives no warning. Values are unchanged. Re-executed.
+- `TASKLIST.md`: A4 ticked, result note added.
+
+**Why**
+The user asked to implement A4. The `zero_division` change avoids an UndefinedMetricWarning for the baseline, whose attack-class F1 is 0 either way.
+
+**Verified**
+Both notebooks executed without errors or warnings, and all A4 asserts passed.

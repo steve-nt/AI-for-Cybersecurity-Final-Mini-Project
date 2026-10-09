@@ -515,7 +515,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 | A1 | State the problem | 2–3 sentences: what is detected, who uses it, what a false alarm costs | T1 | ☑ |
 | A2 | Load and clean (in T3) | Counts of records and features, class balance, cleaning steps | T3 | ☑ |
 | A3 | Split 60/20/20 (in T3) | Stratified split, checked | T3 | ☑ |
-| A4 | Trivial baseline | Always-benign accuracy and recall on validation and test: the line every model must beat | T3 | ☐ |
+| A4 | Trivial baseline | Always-benign accuracy and recall on validation and test: the line every model must beat | T3 | ☑ |
 
 ### Part B: supervised models
 
@@ -855,12 +855,18 @@ sizes, and that **no subsample** was taken.
 **Why:** "Every later score is compared against this." With 74% benign flows, a model that never raises
 an alarm already scores 0.74 accuracy, so accuracy alone says little.
 
-- [ ] `DummyClassifier(strategy="most_frequent")` fitted on `X_train, y_train`.
-- [ ] Its scores with `score()` on **validation and test**; save `results/tables/A4_baseline.csv`.
-- [ ] `assert` accuracy == share of benign rows (0.737) and recall == 0. Note: its macro-F1 is about
+- [x] `DummyClassifier(strategy="most_frequent")` fitted on `X_train, y_train`.
+- [x] Its scores with `score()` on **validation and test**; save `results/tables/A4_baseline.csv`.
+- [x] `assert` accuracy == share of benign rows (0.737) and recall == 0. Note: its macro-F1 is about
       0.42 and its PR-AUC equals the attack share (0.263), the score of a model that guesses.
 
 **Done when:** the table exists and the asserts pass.
+
+**Result (2026-10-09):** `parts/10_baseline_models.ipynb`, step A4 (`DummyClassifier(strategy="most_frequent")`).
+Validation and test give the same numbers: **accuracy 0.7369, macro-F1 0.4243, recall 0, PR-AUC 0.2631,
+FAR 0** (test: 44,969 benign of 61,021 flows). Saved as `results/tables/A4_baseline.csv`. To avoid a
+warning when a model never predicts "attack", `score_proba()` in the setup notebook now uses
+`f1_score(..., zero_division=0)` (same value: that class's F1 is 0).
 
 **Goes into the report:** section 1 (the baseline) and every results table (first row).
 
