@@ -434,8 +434,9 @@ MODELS = {"tree": tree, "logreg": logreg, "boosting": boost}
 
 ```python
 # STANDIN D1
+# Same as the real D1 cell: SHAP on 1,000 random validation flows (seed 42).
 import shap
-_sv = shap.TreeExplainer(boost)(X_val.iloc[:1000])
+_sv = shap.TreeExplainer(boost)(X_val.sample(1000, random_state=SEED))
 shap_global = (pd.Series(np.abs(_sv.values).mean(axis=0), index=FEATURES)
                .sort_values(ascending=False))
 ```
@@ -541,7 +542,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 
 | ID | Task | What it is and why | Needs | Done |
 |---|---|---|---|---|
-| D1 | Global SHAP | Which features drive the model; do they make sense to a security person? | B2 | ☐ |
+| D1 | Global SHAP | Which features drive the model; do they make sense to a security person? | B2 | ☑ |
 | D2 | Pick the three cases | Confident detection, confident negative, a mistake (test set) | B2 | ☐ |
 | D3 | Local SHAP and LIME | Explain the three cases with both methods | D2 | ☐ |
 | D4 | Fidelity: deletion test | Top-k SHAP features vs k random features, replaced with medians | D1 | ☐ |
@@ -1102,18 +1103,28 @@ not probability (section 0.6). Say so in figure captions.
 **Why:** "Which features drive it, and do they make sense to a security person?" Part F also picks its
 two features from this ranking, so it is computed on **validation** rows.
 
-- [ ] `explainer = shap.TreeExplainer(boost)`; `sv = explainer(X_val.iloc[:1000])` (about 2 s).
-- [ ] Bar plot and beeswarm (top 10), saved as `results/figures/D1_shap_bar.png` and
+- [x] `explainer = shap.TreeExplainer(boost)`; `sv = explainer(X_val.iloc[:1000])` (about 2 s).
+- [x] Bar plot and beeswarm (top 10), saved as `results/figures/D1_shap_bar.png` and
       `D1_shap_beeswarm.png`.
-- [ ] `shap_global` (section 2.3); save `results/tables/D1_shap_top.csv` with the T4 meaning of each top
+- [x] `shap_global` (section 2.3); save `results/tables/D1_shap_top.csv` with the T4 meaning of each top
       feature.
-- [ ] A Markdown cell answering: do these make sense? Expect `Fwd Seg Size Min` and `FWD Init Win Bytes`
+- [x] A Markdown cell answering: do these make sense? Expect `Fwd Seg Size Min` and `FWD Init Win Bytes`
       at the top (section 1.3). They separate the attacker's machines from the normal ones, **not**
       attack behaviour: a security person would call this a *shortcut*. An attacker on a different
       machine (or with different system settings) would not have them. Which of the top 10 *do* describe
       behaviour (packet rates, sizes, timing)?
 
 **Done when:** both figures, the table and the answer exist.
+
+**Result (2026-10-09):** new notebook `parts/30_explanation.ipynb` (stand-ins A0 and B2, then step D1:
+explanation, SHAP on 1,000 random validation flows with an additivity check, top-10 table, bar plot and
+beeswarm, interpretation). Top 3: **`Fwd Seg Size Min` 42%, `FWD Init Win Bytes` 21%, `Bwd Packets/s`
+13%** of the total SHAP weight (76% together). The top two are TCP settings of the attacker's machines:
+in training, `Fwd Seg Size Min` = 20 → 89% attacks, = 32 → 0%; `FWD Init Win Bytes` = 16,383 → 90%
+attacks, = 5,792 → 0%; 95% of training attacks use window 16,383. Written up as a shortcut; the
+behaviour features below them do make sense to an analyst. Saved: `D1_shap_top.csv`,
+`D1_shap_bar.png`, `D1_shap_beeswarm.png`. Shared names: `shap_global`, `explainer`, `sv`,
+`EXPLAIN_VAL`, `GLOSSARY`.
 
 #### D2 · Pick the three cases
 

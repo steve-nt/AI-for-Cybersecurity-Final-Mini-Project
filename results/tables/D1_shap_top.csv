@@ -1,0 +1,11 @@
+feature,mean_abs_shap,share_of_total,cumulative_share,meaning,direction,group_proposed
+Fwd Seg Size Min,3.6145,0.4202,0.4202,Smallest header size seen in the initiator's packets; depends on the initiator's operating system and TCP options,forward,Free
+FWD Init Win Bytes,1.8415,0.2141,0.6343,TCP window size in the initiator's first packet: how much data it accepts at once. Set by the initiator's operating system (0 = not TCP or not recorded),forward,Free
+Bwd Packets/s,1.1125,0.1293,0.7636,How fast the responder sent packets,backward,Fixed
+Total Length of Bwd Packet,0.2648,0.0308,0.7944,Total payload bytes the responder sent back,backward,Fixed
+Packet Length Max,0.1828,0.0212,0.8157,"Largest packet payload in the conversation, either direction",both,Fixed
+Bwd Packet Length Min,0.1702,0.0198,0.8355,Smallest packet payload the responder sent,backward,Fixed
+Flow Bytes/s,0.1267,0.0147,0.8502,Data rate of the whole conversation (bytes / duration),both,Fixed
+Bwd Packet Length Mean,0.0948,0.0110,0.8612,Average packet payload the responder sent,backward,Fixed
+Packet Length Mean,0.0900,0.0105,0.8717,"Average packet payload, both directions together",both,Fixed
+PSH Flag Count,0.0771,0.0090,0.8806,"Packets with the PSH flag (""deliver this data now"")",both,Fixed

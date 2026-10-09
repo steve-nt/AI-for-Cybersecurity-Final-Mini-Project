@@ -220,3 +220,16 @@ The user asked to implement C4.
 
 **Verified**
 The notebook ran without errors; the Part B rows match B3. On test, pseudo-labelling is 0.0003 macro-F1 below the lower line (0.9685 against 0.9688), so the "did not help" verdict holds.
+
+## 2026-10-09 21:55 EEST: D1 done: global SHAP on the black box
+
+**What**
+- `parts/30_explanation.ipynb`: created, the notebook for Part D. It holds a stand-in for A0 (setup) and B2 (gradient boosting with the chosen settings), then step D1: an explanation of SHAP and log-odds, `TreeExplainer` on 1,000 random validation flows with a check that base value plus contributions equals the model output, a top-10 table joined with the feature glossary, a bar plot, a beeswarm, and an interpretation. Executed.
+- `results/tables/D1_shap_top.csv`, `results/figures/D1_shap_bar.png`, `results/figures/D1_shap_beeswarm.png`: written.
+- `TASKLIST.md`: D1 ticked, result note added; the D1 stand-in now samples the same 1,000 validation flows as the real cell.
+
+**Why**
+The user asked to implement D1. SHAP runs on validation flows because Part F picks its features from this ranking. The first run printed the base value converted to a probability ("0.1% attack"), which was misleading for an average of log-odds, so the print was reworded.
+
+**Verified**
+The notebook ran without errors, and the additivity check passed. Top 3 features: Fwd Seg Size Min 42%, FWD Init Win Bytes 21%, Bwd Packets/s 13% of the SHAP weight. A separate check on the training split found that window 16,383 occurs in 95% of attacks and 0% of the flows with window 5,792; this supports the shortcut written in the notebook.
