@@ -564,7 +564,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 |---|---|---|---|---|
 | F1 | Pick the two features | Top two usable features of the validation SHAP ranking → `TOP2` | D1 | ☑ |
 | F2 | Build the BRB | 3 referential values each, 9 rules from the training data, threshold on validation | F1 | ☑ |
-| F3 | Fair comparison | BRB vs a tree and a forest that see only `TOP2`, test set | F2 | ☐ |
+| F3 | Fair comparison | BRB vs a tree and a forest that see only `TOP2`, test set | F2 | ☑ |
 | F4 | Belief output for one case | Low / Medium / High / **Unknown**, step by step | F2, D2 | ☐ |
 | F5 | What the BRB gives and costs | Written comparison with numbers | F3, F4 | ☐ |
 
@@ -1382,11 +1382,19 @@ PR-AUC 0.895, FAR 0.044. Unknown at most 0.006 (all rules well supported). Saved
 **Why:** A model with 67 features against a BRB with 2 would be unfair. "Compare it with a tree and a
 forest that see only those same two features."
 
-- [ ] `tree2`: decision tree on `X_train[TOP2]`, depth chosen on validation from `[1, 2, 3, 4, 6]`.
+- [x] `tree2`: decision tree on `X_train[TOP2]`, depth chosen on validation from `[1, 2, 3, 4, 6]`.
       `forest2 = RandomForestClassifier(n_estimators=100, min_samples_leaf=20, random_state=SEED,
       n_jobs=-1).fit(X_train[TOP2], y_train)` (two features train in seconds; if it is slow, use 50 trees).
-- [ ] Test scores: BRB (`score_proba(y_test, u_test / 100, tau / 100)`), `tree2`, `forest2`, and for
+- [x] Test scores: BRB (`score_proba(y_test, u_test / 100, tau / 100)`), `tree2`, `forest2`, and for
       reference the full `boost`. Save `results/tables/F3_brb_comparison.csv`.
+
+**Result (2026-10-10):** `parts/50_brb.ipynb`, step F3 (explanation, depth search, comparison on
+validation and test, interpretation). 2-feature tree: depth 4 chosen on validation (13 leaves); forest:
+100 trees, `min_samples_leaf=20`, trained on all training rows. Test macro-F1 / recall / PR-AUC / FAR:
+**BRB 0.953 / 0.982 / 0.895 / 0.044**; tree 0.962 / 0.996 / 0.918 / 0.040; forest 0.962 / 0.996 / 0.921
+/ 0.040; boosting with 67 features 0.972 / 0.992 / 0.981 / 0.028. The tree's first questions cut out the
+window 16,368.5 to 16,406.5, which the BRB's three levels cannot do. Saved: `F3_tree2_depth.csv`,
+`F3_brb_comparison.csv`.
 
 #### F4 · The belief output for one case
 

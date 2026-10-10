@@ -1,0 +1,9 @@
+set,model,macro_f1,recall,pr_auc,far,accuracy
+validation,"BRB, 2 features, 9 rules",0.9540,0.9839,0.8946,0.0443,0.9631
+validation,"decision tree, 2 features (depth 4)",0.9617,0.9951,0.9168,0.0399,0.9693
+validation,"random forest, 2 features (100 trees)",0.9617,0.9950,0.9213,0.0399,0.9693
+validation,"gradient boosting, all 67 features (reference)",0.9713,0.9924,0.9807,0.0282,0.9772
+test,"BRB, 2 features, 9 rules",0.9534,0.9819,0.8954,0.0442,0.9627
+test,"decision tree, 2 features (depth 4)",0.9621,0.9958,0.9179,0.0398,0.9696
+test,"random forest, 2 features (100 trees)",0.9621,0.9958,0.9207,0.0397,0.9696
+test,"gradient boosting, all 67 features (reference)",0.9718,0.9923,0.9814,0.0276,0.9776

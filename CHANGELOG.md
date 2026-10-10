@@ -376,3 +376,16 @@ The user asked to implement F2.
 
 **Verified**
 The notebook ran without errors. Threshold 48.5; validation macro-F1 0.954, recall 0.984, FAR 0.044. Every rule has at least 3,309 supporting flows, and Unknown is at most 0.006. The rule table in the interpretation was checked against `F2_rules.csv`.
+
+## 2026-10-10 12:14 EEST: F3 done: the BRB against a tree and a forest on the same two features
+
+**What**
+- `parts/50_brb.ipynb`: added step F3 (explanation, two code cells, interpretation). A decision tree on `TOP2` (depth from 1, 2, 3, 4, 6 chosen on validation: 4) and a random forest on `TOP2` (100 trees, at least 20 flows per leaf) are trained on all training rows. The BRB, both models and gradient boosting with all features (reference) are scored on validation and test, and the 2-feature tree's first questions are printed. Executed.
+- `results/tables/F3_tree2_depth.csv`, `results/tables/F3_brb_comparison.csv`: written.
+- `TASKLIST.md`: F3 ticked, result note added.
+
+**Why**
+The user asked to implement F3. The tree's splits were printed to check, rather than assume, why the BRB is behind.
+
+**Verified**
+The notebook ran without errors. Test macro-F1: BRB 0.953, tree 0.962, forest 0.962, gradient boosting 0.972. The tree's first two questions isolate FWD Init Win Bytes between 16,368.5 and 16,406.5.
