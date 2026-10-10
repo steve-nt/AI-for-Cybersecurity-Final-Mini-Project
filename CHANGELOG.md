@@ -430,3 +430,16 @@ The user asked to implement G1. G1's output showed 48,154 training attacks, agai
 
 **Verified**
 Both notebooks ran without errors. The new D1 cell reproduces the corrected counts, and value 8 has 9.0% attacks, matching the D3 text. The D3 and D5 tables are unchanged after the re-run.
+
+## 2026-10-10 14:27 EEST: G2 done: what hiding Fuzzers costs
+
+**What**
+- `parts/60_adaptability.ipynb`: added step G2 (explanation, code, interpretation). `hidden_report` compares `boost` and `boost_hidden` on the test set: overall recall, recall on Fuzzers, recall on the other attacks, FAR, macro-F1, the share of Fuzzers flows with probability between 0.1 and 0.9, and Fuzzers recall split by the attacker fingerprint. Executed.
+- `results/tables/G2_hidden.csv`: written.
+- `TASKLIST.md`: G2 ticked, result note added.
+
+**Why**
+The user asked to implement G2. The uncertainty share and the fingerprint split were added to explain the result and to give G4 a measurable signal that needs no labels.
+
+**Verified**
+The notebook ran without errors. Fuzzers recall 0.988 to 0.688, overall recall 0.992 to 0.888, FAR 0.028 to 0.019, and the uncertain share of Fuzzers 43% to 82%.

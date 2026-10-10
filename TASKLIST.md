@@ -573,7 +573,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 | ID | Task | What it is and why | Needs | Done |
 |---|---|---|---|---|
 | G1 | Hide Fuzzers from training | Remove Fuzzers from the training set only, retrain | B2 | ☑ |
-| G2 | Measure the cost | Overall recall and Fuzzers recall on the test set | G1 | ☐ |
+| G2 | Measure the cost | Overall recall and Fuzzers recall on the test set | G1 | ☑ |
 | G3 | Adapt with 50 and 100 labels | Add a few Fuzzers rows back, retrain, measure again | G2 | ☐ |
 | G4 | What we would do | One paragraph: were a few labels enough; how to notice in a real system | G3 | ☐ |
 
@@ -1453,12 +1453,18 @@ trained with `make_boost()` (100 trees). The removed flows are kept as `X_new, y
 
 #### G2 · Measure what it costs
 
-- [ ] On the **test** set, for `boost` (Part B, saw Fuzzers) and `boost_hidden`: overall recall,
+- [x] On the **test** set, for `boost` (Part B, saw Fuzzers) and `boost_hidden`: overall recall,
       recall on Fuzzers rows alone (5,202 rows), recall on the other attacks, FAR. Save
       `results/tables/G2_hidden.csv`.
-- [ ] Expect a clear drop on Fuzzers (trial on validation: 0.989 → 0.696) and on overall recall
+- [x] Expect a clear drop on Fuzzers (trial on validation: 0.989 → 0.696) and on overall recall
       (0.992 → 0.889). Why did the model still catch about 70%? Fuzzers share traits with other attacks
       from the same attacker machines (D1, X6).
+
+**Result (2026-10-10):** `parts/60_adaptability.ipynb`, step G2 (explanation, measurement, interpretation).
+Test set, `boost` vs `boost_hidden`: **Fuzzers recall 0.988 → 0.688**, overall recall 0.992 → 0.888,
+other attacks 0.995 → 0.984, FAR 0.028 → 0.019 (falls), macro-F1 0.972 → 0.943. Fuzzers with probability
+between 0.1 and 0.9: 43% → 82%. 93% of Fuzzers carry the fingerprint; the hidden model catches 67% of
+those. Saved: `G2_hidden.csv`. Shared names: `is_hidden`, `is_attack`, `hidden_report`.
 
 #### G3 · Adapt with 50 and 100 labels
 
