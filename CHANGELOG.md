@@ -468,3 +468,41 @@ The user asked to implement G4. It completes the last required step of Parts A t
 
 **Verified**
 Every number in the paragraph matches G2 and G3 (0.688, 0.706, 0.845, 0.988, FAR 0.028 to 0.019, uncertain share 43% to 82%).
+
+## 2026-10-10 15:07 EEST: Decision: which optional extras to do (X6, X2, X9)
+
+**What**
+- No files changed apart from this entry and the plan in `TASKLIST.md`. This records the decision on the optional extras, as the user asked.
+
+**Why**
+The user asked whether implementing the optional extras would make the project better. The answer given: some of them, yes, but not all. The grading rewards judgement more than extra experiments, and the project is done by one person with about 4.5 days left.
+
+Worth doing (they strengthen what the brief grades for grade 5):
+1. **X6, the shortcut check.** Retrain without the three TCP-settings features and see what is left. This is the most valuable one: the central finding is that the model rests on the attacker machines' fingerprint, and X6 turns that from "SHAP says so" into a measured result. It also answers "would you deploy this?" and "where would it fail outside this dataset?" directly. About one step of work.
+2. **X2, fewer labels in Part C (1% and 5%).** The Part C answer is "no, it did not help, because 10% is already plenty". X2 tests that explanation. If pseudo-labelling helps at 1%, the report gets a much more interesting conclusion.
+3. **X9, confidence intervals.** These give hard evidence for "which numbers do we least trust" (Discussion), for example whether the 0.003 gap between gradient boosting and the tree is real. Cheap.
+
+Probably skip:
+- X3 (evasion attack): E4's what-if already shows two settings defeat every model.
+- X4 (learning curve): G3 already answers the brief's question.
+- X5 (hide each type): the trial did this.
+- X7 (BRB with a missing input): F4 already covers it.
+- X1 (self-supervised) and X8 (settings search on all rows): low value for the effort.
+
+One caution: every extra adds run time, and the hand-in notebook already has to be brought under 5 minutes in H4. The extras go in their own notebook (`parts/70_extras.ipynb`, steps X...), run separately, and the report says they are outside the timed run.
+
+Plan: X6 first, then X2 and X9, then H4 (assemble, final run, speed-up) on Sunday, which leaves Monday to Wednesday for the report, slides and upload. The user agreed to the three extras.
+
+## 2026-10-10 15:20 EEST: X6 done: the shortcut check; extras left out of the hand-in notebook by default
+
+**What**
+- `parts/70_extras.ipynb`: created, the notebook for the optional extras. It holds an intro, stand-ins for A0, B2 and E1, then step X6 (explanation, four code cells, interpretation). Gradient boosting is retrained without `Fwd Seg Size Min`, `FWD Init Win Bytes` and `Bwd Init Win Bytes` (same settings as B2, not re-tuned) and compared with the original: clean validation and test scores, recall under the E1 noise at levels 0.001 to 0.05, the hidden-Fuzzers test of G1/G2, and the new SHAP top 10 on the same 1,000 validation flows as D1. Executed.
+- `results/tables/X6_clean.csv`, `X6_noise.csv`, `X6_hidden.csv`, `X6_shap_top10.csv`: written.
+- `tools/assemble.py`: X steps are left out by default, and a new `--with-extras` option includes them; the docstring says so. Checked with `--no-execute`: 119 cells without the extras, 124 with them, all steps A0 to G4 found.
+- `TASKLIST.md`: X6 ticked, result note added.
+
+**Why**
+The user agreed to do X6, X2 and X9. The extras were to stay outside the timed hand-in run, but the assembly script collected every part notebook, so it now skips X steps unless asked.
+
+**Verified**
+The notebook ran without errors. Without the fingerprint, test macro-F1 is 0.9709 (against 0.9718), recall at noise 0.001 is 0.831 (against 0.513), and recall on hidden Fuzzers is 0.687 (against 0.688).

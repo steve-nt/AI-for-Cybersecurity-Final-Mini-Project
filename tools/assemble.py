@@ -8,13 +8,15 @@ The work is split into one notebook per part in parts/. The first line of every 
 This script reads parts/*.ipynb in name order, drops the STANDIN cells (copies of a step that lives
 in another part notebook) and empty cells, sorts the rest by step (A0 ... A4, B1 ... B4, C1 ... C4,
 D1 ... D6, E1 ... E4, F1 ... F5, G1 ... G4, then the extras X1 ... X9), keeps the notebook order inside
-one step, and writes mini_project_unsw_nb15.ipynb with a title cell. It then executes the notebook from
+one step, and writes mini_project_unsw_nb15.ipynb with a title cell. The optional extras (X steps) run
+outside the timed hand-in notebook, so they are left out unless --with-extras is given. It then executes the notebook from
 the repository root, so that it runs top to bottom exactly as the brief requires.
 
 Usage (from anywhere, with the project environment active):
     python tools/assemble.py                # build and execute
     python tools/assemble.py --no-execute   # build only (quick check of markers and order)
     python tools/assemble.py --strict       # also fail if a step A0-G4 is missing (hand-in)
+    python tools/assemble.py --with-extras  # also include the optional extras X1-X9
 """
 
 import argparse
@@ -71,7 +73,7 @@ def read_marker(cell):
     return match.group(1), match.group(2).strip()
 
 
-def collect(parts_dir):
+def collect(parts_dir, with_extras=False):
     """Read every part notebook and return (sorted cells, problems, steps seen per file)."""
     kept, problems, sources = [], [], {}
     files = sorted(parts_dir.glob("*.ipynb"))
@@ -95,6 +97,8 @@ def collect(parts_dir):
                 problems.append(f"{where}: unknown step {arg!r} (expected one of A0-A4, "
                                 f"B1-B4, C1-C4, D1-D6, E1-E4, F1-F5, G1-G4, X1-X9)")
             else:
+                if arg.startswith("X") and not with_extras:
+                    continue                              # optional extra: not in the timed notebook
                 kept.append((RANK[arg], file_no, cell_no, cell))
                 sources.setdefault(arg, set()).add(path.name)
 
@@ -143,10 +147,12 @@ def main():
     parser.add_argument("--output", type=Path, default=OUTPUT, help="notebook to write")
     parser.add_argument("--no-execute", action="store_true", help="only build, do not run the notebook")
     parser.add_argument("--strict", action="store_true", help="fail if a step A0-G4 is missing")
+    parser.add_argument("--with-extras", action="store_true",
+                        help="also include the optional extras X1-X9 (left out by default)")
     args = parser.parse_args()
 
     try:
-        cells, problems, sources = collect(args.parts)
+        cells, problems, sources = collect(args.parts, args.with_extras)
     except MarkerError as error:
         sys.exit(f"ERROR: {error}")
     if problems:

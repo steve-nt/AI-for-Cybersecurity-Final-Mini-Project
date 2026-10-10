@@ -586,7 +586,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 | X3 | Constrained evasion attack | Third robustness test; the attacker changes only what they control | E4 | ☐ |
 | X4 | Learning curve for Part G | Fuzzers recall after adding 10, 25, 50, 100, 250, 500 labels | G3 | ☐ |
 | X5 | Hide each attack type in turn | Which attacks are "new" to the model and which are not | G2 | ☐ |
-| X6 | Shortcut check | Retrain without the TCP-settings features: does the model still work? | D1 | ☐ |
+| X6 | Shortcut check | Retrain without the TCP-settings features: does the model still work? | D1 | ☑ |
 | X7 | BRB with a missing input; an expert edits a rule | Shows the Unknown part growing and the rules being editable | F4 | ☐ |
 | X8 | Settings searches on all training rows | Repeat B1–B2 without the 20% shortcut: are the same settings chosen? | B3 | ☐ |
 | X9 | Confidence intervals | Bootstrap the test scores: which differences between models are real? | B3 | ☐ |
@@ -1504,6 +1504,11 @@ random sample, route uncertain flows (and undecided BRB flows) to an analyst, re
 
 ### Optional extras (only if time is left)
 
+**Decision (2026-10-10): only X6, X2 and X9 are done**, in that order, in their own notebook
+`parts/70_extras.ipynb`, outside the timed hand-in run (the report says so). The others are skipped:
+X3 (E4's what-if covers it), X4 (G3 answers the question), X5 (the trial did it), X7 (F4 covers the
+missing input), X1 and X8 (low value for the effort). The reasons are in `CHANGELOG.md`.
+
 Each extra goes in its part notebook with marker `# STEP X<n>`. Every extra adds run time: check the
 5-minute budget (section 1.5) in H4, and leave slow extras out of the hand-in notebook (keep their
 results in a separate notebook and say so).
@@ -1525,6 +1530,11 @@ results in a separate notebook and say so).
   `Fwd Seg Size Min`. Validation and test scores, new SHAP top 10, and G2 again. If the scores barely
   drop, the behaviour features carry the information too; if they drop a lot, the model relied on the
   machines' fingerprint.
+  **Done (2026-10-10)** in `parts/70_extras.ipynb`: without the three TCP-settings features, test macro-F1
+  0.971 against 0.972 (practically no loss); recall at noise 0.001 0.831 against 0.513; Fuzzers recall
+  when hidden unchanged (0.687 against 0.688); new SHAP top 3 `Bwd Packets/s` 46%, `PSH Flag Count` 16%,
+  `Bwd Header Length` 6%. Conclusion: deploy without the fingerprint features. Saved: `X6_clean.csv`,
+  `X6_noise.csv`, `X6_hidden.csv`, `X6_shap_top10.csv`.
 - **X7 · BRB extras.** One flow with one input missing (`np.nan`): the Unknown grows (show the trace).
   Then "the expert" edits one rule by hand on a **copy** of the rule base: what changes?
 - **X8 · Settings searches on all training rows.** B1–B2 again, with every candidate trained on all of

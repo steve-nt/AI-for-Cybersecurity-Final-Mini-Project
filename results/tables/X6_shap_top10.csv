@@ -1,0 +1,11 @@
+feature,share_of_shap_weight,meaning,direction
+Bwd Packets/s,0.4606,How fast the responder sent packets,backward
+PSH Flag Count,0.1605,"Packets with the PSH flag (""deliver this data now"")",both
+Bwd Header Length,0.0623,Total header bytes of the responder's packets,backward
+Total Bwd packets,0.0244,Number of packets the responder (server/victim) sent back,backward
+Packet Length Max,0.0232,"Largest packet payload in the conversation, either direction",both
+Bwd Packet Length Max,0.0172,Largest packet payload the responder sent,backward
+Fwd Packets/s,0.0156,How fast the initiator sent packets,forward
+Fwd Packet Length Std,0.0155,How much the initiator's packet sizes vary,forward
+FIN Flag Count,0.0145,"Packets with the FIN flag (""I am finished, close the connection"")",both
+Bwd Packet Length Min,0.0142,Smallest packet payload the responder sent,backward
