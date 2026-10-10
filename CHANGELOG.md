@@ -259,3 +259,16 @@ The user asked to implement D3. LIME's own plot overlapped its title with ours a
 
 **Verified**
 The notebook ran without errors, and all six figures were inspected. SHAP and LIME share 2, 1 and 1 of their top-3 features. LIME's fit scores are 0.24–0.26.
+
+## 2026-10-10 03:02 EEST: D4 done: the deletion test (fidelity)
+
+**What**
+- `parts/30_explanation.ipynb`: added step D4 (explanation, test, figure, interpretation). For 500 random test flows that the model calls attacks, each flow's top-k SHAP features (k = 1, 3, 5, 10) are replaced by their training medians with `xai_tools.deletion_test`, and the drop in attack probability and the share of flipped decisions are compared with k random features. Executed.
+- `results/tables/D4_deletion.csv`, `results/figures/D4_deletion.png`: written.
+- `TASKLIST.md`: D4 ticked, result note added.
+
+**Why**
+The user asked to implement D4. From this entry on, new prose follows the user's punctuation rule (no em or en dashes).
+
+**Verified**
+The notebook ran without errors and the figure was inspected. Replacing only the top SHAP feature (always `Fwd Seg Size Min`, median 32) flips all 500 decisions; 10 random features flip 25.4%.

@@ -545,7 +545,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 | D1 | Global SHAP | Which features drive the model; do they make sense to a security person? | B2 | ☑ |
 | D2 | Pick the three cases | Confident detection, confident negative, a mistake (test set) | B2 | ☑ |
 | D3 | Local SHAP and LIME | Explain the three cases with both methods | D2 | ☑ |
-| D4 | Fidelity: deletion test | Top-k SHAP features vs k random features, replaced with medians | D1 | ☐ |
+| D4 | Fidelity: deletion test | Top-k SHAP features vs k random features, replaced with medians | D1 | ☑ |
 | D5 | Stability of LIME | LIME with 10 seeds: how often is the top 3 the same? | D3 | ☐ |
 | D6 | Do SHAP and LIME agree? Why not? | Investigate every disagreement (grade 5) | D3, D5 | ☐ |
 
@@ -1173,15 +1173,23 @@ Saved: `D3_top3.csv`, `D3_shap_<case>.png`, `D3_lime_<case>.png`. Shared names: 
 Replace them with ordinary values and the prediction should change much more than when you replace
 random features.
 
-- [ ] Rows: 500 test flows the model calls attacks (seed 42). Their SHAP values.
-- [ ] `xai_tools.deletion_test(predict_fn, X_rows, {"SHAP": shap_values}, TRAIN_MEDIAN[FEATURES].values,
+- [x] Rows: 500 test flows the model calls attacks (seed 42). Their SHAP values.
+- [x] `xai_tools.deletion_test(predict_fn, X_rows, {"SHAP": shap_values}, TRAIN_MEDIAN[FEATURES].values,
       ks=(1, 3, 5, 10))`. It also runs the "random" baseline. Save `results/tables/D4_deletion.csv` and a
       figure (mean drop in attack probability vs k, SHAP vs random).
-- [ ] Interpret (grade 5): is the SHAP drop clearly bigger than random? If the drop is small even for
+- [x] Interpret (grade 5): is the SHAP drop clearly bigger than random? If the drop is small even for
       SHAP, why? (Twins: replacing one feature leaves its twin; many medians are 0, so "ordinary" may still
       look like an attack; boosting has many redundant paths.)
 
 **Done when:** the table, the figure and the interpretation exist.
+
+**Result (2026-10-10):** `parts/30_explanation.ipynb`, step D4 (explanation, test, figure,
+interpretation). 500 random test flows called attack (469 true attacks, 31 false alarms). **Replacing
+only the top SHAP feature flips 100% of the decisions** (mean drop 0.919); 10 random features flip 25.4%
+(mean drop 0.224). For all 500 flows the top feature is `Fwd Seg Size Min`, whose training median (32) is
+the benign machines' value, so one TCP setting decides every flow. Limits written out (the median is not
+neutral here, edited flows may be unrealistic, little is learned about the other features). Saved:
+`D4_deletion.csv`, `D4_deletion.png`.
 
 #### D5 · Stability of LIME
 
