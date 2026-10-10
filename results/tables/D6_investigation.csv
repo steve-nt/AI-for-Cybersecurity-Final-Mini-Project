@@ -1,0 +1,25 @@
+experiment,variant,case,LIME_top3,SHAP_top3,shared_with_SHAP,fit_score,LIME_local_prediction,model_probability,samples,same_top3_as_most_common,mean_jaccard_top3,mean_shared_with_SHAP,fit_score_mean,SHAP_only,LIME_only,abs_correlation,same_twin_group
+1 discretisation and 4 local fit,default (quartile ranges),detection,"RST Flag Count, Fwd Seg Size Min, Bwd Packets/s","Fwd Seg Size Min, FWD Init Win Bytes, Bwd Packets/s",2.0000,0.2595,0.2469,0.9996,,,,,,,,,
+1 discretisation and 4 local fit,default (quartile ranges),negative,"Fwd PSH Flags, Fwd Seg Size Min, Bwd Packet Length Min","Bwd Packets/s, Bwd IAT Min, Fwd Seg Size Min",1.0000,0.2389,0.1727,0.0000,,,,,,,,,
+1 discretisation and 4 local fit,default (quartile ranges),mistake,"Fwd Seg Size Min, Bwd Packet Length Min, Bwd Packets/s","Fwd Seg Size Min, FWD Init Win Bytes, Total Length of Bwd Packet",1.0000,0.2531,0.2369,0.9989,,,,,,,,,
+1 discretisation and 4 local fit,"no ranges, copies around the training average",detection,"Fwd Segment Size Avg, Fwd Act Data Pkts, Packet Length Mean","Fwd Seg Size Min, FWD Init Win Bytes, Bwd Packets/s",0.0000,0.0570,0.3523,0.9996,,,,,,,,,
+1 discretisation and 4 local fit,"no ranges, copies around the training average",negative,"Bwd Packets/s, FWD Init Win Bytes, Fwd Seg Size Min","Bwd Packets/s, Bwd IAT Min, Fwd Seg Size Min",2.0000,0.1213,0.1278,0.0000,,,,,,,,,
+1 discretisation and 4 local fit,"no ranges, copies around the training average",mistake,"Bwd Packets/s, Fwd Seg Size Min, FWD Init Win Bytes","Fwd Seg Size Min, FWD Init Win Bytes, Total Length of Bwd Packet",2.0000,0.0999,0.0600,0.9989,,,,,,,,,
+1 discretisation and 4 local fit,"no ranges, copies around the flow",detection,"Bwd Packets/s, Fwd Seg Size Min, FWD Init Win Bytes","Fwd Seg Size Min, FWD Init Win Bytes, Bwd Packets/s",3.0000,0.1401,0.0943,0.9996,,,,,,,,,
+1 discretisation and 4 local fit,"no ranges, copies around the flow",negative,"Bwd Packets/s, Bwd Packet Length Min, Bwd Packet Length Mean","Bwd Packets/s, Bwd IAT Min, Fwd Seg Size Min",1.0000,0.2864,0.2406,0.0000,,,,,,,,,
+1 discretisation and 4 local fit,"no ranges, copies around the flow",mistake,"FWD Init Win Bytes, Bwd Packets/s, Fwd Seg Size Min","Fwd Seg Size Min, FWD Init Win Bytes, Total Length of Bwd Packet",2.0000,0.0702,0.0414,0.9989,,,,,,,,,
+2 number of samples,,detection,,,,,,,"5,000 samples",0.8000,0.8000,2.0000,0.2563,,,,
+2 number of samples,,detection,,,,,,,"20,000 samples",0.6000,0.6500,2.0000,0.2538,,,,
+2 number of samples,,negative,,,,,,,"5,000 samples",0.6000,0.6500,1.6000,0.2292,,,,
+2 number of samples,,negative,,,,,,,"20,000 samples",0.6000,0.6500,1.6000,0.2290,,,,
+2 number of samples,,mistake,,,,,,,"5,000 samples",0.8000,0.8000,1.0000,0.2578,,,,
+2 number of samples,,mistake,,,,,,,"20,000 samples",0.8000,0.8000,1.0000,0.2532,,,,
+3 twins,,detection,,,,,,,,,,,,FWD Init Win Bytes,RST Flag Count,0.0274,False
+3 twins,,negative,,,,,,,,,,,,Bwd IAT Min,Bwd Packet Length Min,0.0007,False
+3 twins,,negative,,,,,,,,,,,,Bwd IAT Min,Fwd PSH Flags,0.0675,False
+3 twins,,negative,,,,,,,,,,,,Bwd Packets/s,Bwd Packet Length Min,0.0170,False
+3 twins,,negative,,,,,,,,,,,,Bwd Packets/s,Fwd PSH Flags,0.0069,False
+3 twins,,mistake,,,,,,,,,,,,FWD Init Win Bytes,Bwd Packet Length Min,0.2979,False
+3 twins,,mistake,,,,,,,,,,,,FWD Init Win Bytes,Bwd Packets/s,0.3002,False
+3 twins,,mistake,,,,,,,,,,,,Total Length of Bwd Packet,Bwd Packet Length Min,0.0527,False
+3 twins,,mistake,,,,,,,,,,,,Total Length of Bwd Packet,Bwd Packets/s,0.0708,False

@@ -285,3 +285,16 @@ The user asked to implement D5. The first execution was cut off by a 590-second 
 
 **Verified**
 The notebook ran without errors. Same top 3 in 8, 5 and 8 of 10 runs (detection, negative, mistake), and SHAP reruns are identical. LIME's most common top 3 is the same for all three flows, which the interpretation discusses.
+
+## 2026-10-10 05:39 EEST: D6 done: why SHAP and LIME disagree
+
+**What**
+- `parts/30_explanation.ipynb`: added step D6 (explanation, three experiment cells, conclusion). Experiment 1: LIME with and without quartile ranges, and with copies drawn around the training average or around the flow. Experiment 2: 20,000 against 5,000 samples, seeds 0 to 4. Experiment 3: correlation between the features only SHAP or only LIME names. Experiment 4: LIME's fit score and local prediction against the model's probability in every variant. Executed.
+- `results/tables/D6_investigation.csv`: written.
+- `TASKLIST.md`: D6 ticked, result note added. Part D is complete.
+
+**Why**
+The user asked to implement D6 (needed for grade 5). The first run reused D3's LIME explainer, whose random generator had moved on, so the default variant did not match D3. It now uses a fresh explainer with seed 42 and reproduces D3 exactly.
+
+**Verified**
+The notebook ran without errors. The default variant matches D3 (2, 1, 1 features shared, fit 0.26, 0.24, 0.25). Every number in the conclusion was checked against the experiment output.

@@ -547,7 +547,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 | D3 | Local SHAP and LIME | Explain the three cases with both methods | D2 | ☑ |
 | D4 | Fidelity: deletion test | Top-k SHAP features vs k random features, replaced with medians | D1 | ☑ |
 | D5 | Stability of LIME | LIME with 10 seeds: how often is the top 3 the same? | D3 | ☑ |
-| D6 | Do SHAP and LIME agree? Why not? | Investigate every disagreement (grade 5) | D3, D5 | ☐ |
+| D6 | Do SHAP and LIME agree? Why not? | Investigate every disagreement (grade 5) | D3, D5 | ☑ |
 
 ### Part E: robustness
 
@@ -1220,17 +1220,26 @@ seed builds a LIME explainer on all training rows); the 5-minute budget is handl
 
 **Why:** The grade-5 criterion: "disagreement between SHAP and LIME is investigated rather than ignored".
 
-- [ ] From D3: where do the top 3 differ?
-- [ ] Test the usual reasons, one experiment each, and record the result in
+- [x] From D3: where do the top 3 differ?
+- [x] Test the usual reasons, one experiment each, and record the result in
       `results/tables/D6_investigation.csv`:
   - **Discretisation:** rerun LIME with `discretize_continuous=False`. Does it now agree more?
   - **Too few samples:** rerun with `num_samples=20000`. More stable / more agreement?
   - **Twins:** for each disagreeing pair (SHAP's feature vs LIME's feature), their |correlation| in
     training. Above 0.9 → they carry the same information; both methods are "right".
   - **Poor local fit:** low fit score → trust SHAP (exact for trees) more than LIME here.
-- [ ] A short conclusion: which method would you show an analyst, and why?
+- [x] A short conclusion: which method would you show an analyst, and why?
 
 **Done when:** each experiment has a number and a one-line conclusion.
+
+**Result (2026-10-10):** `parts/30_explanation.ipynb`, step D6 (explanation, 3 code cells, conclusion).
+(1) Discretisation: part of the reason. Without ranges and with copies around the flow, LIME matches
+SHAP's top 3 for the detection (3 of 3), but its fit gets worse (0.06 to 0.29). (2) 20,000 samples: no
+improvement in stability, agreement or fit. (3) Twins: not the reason, |correlation| at most 0.30, no
+shared twin group. (4) Poor local fit: the main reason; fit at most 0.29 in every variant, LIME's
+prediction for the detection 0.09 to 0.35 where the model says 1.00, because the model switches on
+`Fwd Seg Size Min` 20 vs 32. Conclusion: show the analyst SHAP. The default variant uses a fresh seed-42
+explainer so it reproduces D3. Saved: `D6_investigation.csv`.
 
 **Goes into the report:** section 4 (global picture, three cases, fidelity, stability, "do SHAP and LIME
 agree?").
