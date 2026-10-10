@@ -298,3 +298,16 @@ The user asked to implement D6 (needed for grade 5). The first run reused D3's L
 
 **Verified**
 The notebook ran without errors. The default variant matches D3 (2, 1, 1 features shared, fit 0.26, 0.24, 0.25). Every number in the conclusion was checked against the experiment output.
+
+## 2026-10-10 06:29 EEST: E1 done: robustness to noise
+
+**What**
+- `parts/40_robustness.ipynb`: created, the notebook for Part E. It holds stand-ins for A0 and B2 (the three Part B models), then step E1: an explanation, `add_noise` (Gaussian noise of level times the training std on the continuous columns, flags untouched, clipped at 0) with checks, a table of what each level means for the main features, scores of all three models at levels 0, 0.05, 0.10, 0.20, 0.50 and 1.00 on the test set, a diagnostic with noise on only the TCP-settings features or only the other features, and an interpretation. Executed.
+- `results/tables/E1_noise.csv`, `results/tables/E1_noise_where.csv`: written.
+- `TASKLIST.md`: E1 ticked, result note added.
+
+**Why**
+The user asked to implement E1. The first run failed with "output array is read-only" (pandas 3 returns read-only arrays), fixed with `to_numpy(copy=True)`. The diagnostic was added to test, rather than guess, why the tree models collapsed.
+
+**Verified**
+The notebook ran without errors. At level 0.05, recall is 0.30 for boosting, 0.08 for the tree and 0.85 for logistic regression. Noise on only the three TCP-settings features gives 0.42, 0.08 and 0.996.

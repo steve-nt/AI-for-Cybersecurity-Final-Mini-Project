@@ -1,0 +1,10 @@
+noise at level 0.05 on,model,accuracy,macro_f1,recall,pr_auc,far
+all continuous features,tree,0.6988,0.4727,0.0835,0.2561,0.0816
+all continuous features,logreg,0.9364,0.9164,0.8490,0.9325,0.0324
+all continuous features,boosting,0.8008,0.6618,0.3035,0.8060,0.0217
+only the 3 TCP-settings features,tree,0.7553,0.4984,0.0753,0.3393,0.0020
+only the 3 TCP-settings features,logreg,0.9685,0.9608,0.9956,0.9510,0.0412
+only the 3 TCP-settings features,boosting,0.8422,0.7436,0.4222,0.9559,0.0079
+all except the 3 TCP-settings features,tree,0.8472,0.8033,0.7121,0.5256,0.1045
+all except the 3 TCP-settings features,logreg,0.9364,0.9163,0.8489,0.9328,0.0324
+all except the 3 TCP-settings features,boosting,0.9196,0.8945,0.8208,0.8971,0.0451

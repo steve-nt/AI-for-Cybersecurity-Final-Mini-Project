@@ -553,7 +553,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 
 | ID | Task | What it is and why | Needs | Done |
 |---|---|---|---|---|
-| E1 | Noise | `add_noise`; all three models at 6 noise levels | B2 | ☐ |
+| E1 | Noise | `add_noise`; all three models at 6 noise levels | B2 | ☑ |
 | E2 | Missing features | `add_missing`; all three models at 5 levels | B2 | ☐ |
 | E3 | What broke first? | Figure, and the level at which we stop trusting the model | E1, E2 | ☐ |
 | E4 | What would an attacker change? | Feature-group table (needed for the Discussion); optional X3 runs the attack | T4, D1 | ☐ |
@@ -1256,10 +1256,19 @@ always safe.
 
 **Why:** Real sensors measure slightly wrong. How much measurement error can the model take?
 
-- [ ] `add_noise(X, level, seed=SEED)`: Gaussian noise of width `level × TRAIN_STD` on every column in
+- [x] `add_noise(X, level, seed=SEED)`: Gaussian noise of width `level × TRAIN_STD` on every column in
       `CONT_COLS`; `FLAG_COLS` untouched; clip at zero. Tests: level 0 changes nothing; flags unchanged.
-- [ ] Levels `[0, 0.05, 0.10, 0.20, 0.50, 1.00]`; noise only on the **test** set (the models stay as
+- [x] Levels `[0, 0.05, 0.10, 0.20, 0.50, 1.00]`; noise only on the **test** set (the models stay as
       trained); all three `MODELS`; four metrics. Save `results/tables/E1_noise.csv`.
+
+**Result (2026-10-10):** new notebook `parts/40_robustness.ipynb` (stand-ins A0 and B2, then step E1:
+explanation, `add_noise` with checks, noise sizes, scores at 6 levels, a diagnostic, interpretation).
+**At level 0.05, recall falls to 0.30 (boosting) and 0.08 (tree); logistic regression 0.85**, and it keeps
+the best macro-F1 at every level. Diagnostic: noise on only the 3 TCP-settings features gives recall
+0.42 / 0.08 / 0.996 (boosting / tree / logreg), on all others 0.82 / 0.71 / 0.85. Cause: the trees match
+exact fingerprint values (window 16,383 in a narrow interval) and exact zeros (35% of values). FAR of
+boosting stays 0.02 to 0.05. Saved: `E1_noise.csv`, `E1_noise_where.csv`. Note: `to_numpy(copy=True)` is
+needed because pandas 3 returns read-only arrays.
 
 #### E2 · Missing features
 
