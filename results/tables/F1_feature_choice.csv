@@ -1,4 +1,4 @@
 rank,feature,shap_share,distinct_values,percentiles_5_50_95,status,reason,levels
-1,Fwd Seg Size Min,0.42020283247542944,7,"[8.0, 32.0, 32.0]",skipped,"two of the three levels coincide, even among the values above Low",
-2,FWD Init Win Bytes,0.21408815857405342,534,"[0.0, 5792.0, 26064.0]",chosen,three distinct levels,"[0.0, 5792.0, 26064.0]"
-3,Bwd Packets/s,0.12933589024943892,132000,"[5.13, 296.67, 5633.8]",chosen,three distinct levels,"[5.13, 296.67, 5633.8]"
+1,Fwd Seg Size Min,0.4202,7,"[8.0, 32.0, 32.0]",skipped,"two of the three levels coincide, even among the values above Low",
+2,FWD Init Win Bytes,0.2141,534,"[0.0, 5792.0, 26064.0]",chosen,three distinct levels,"[0.0, 5792.0, 26064.0]"
+3,Bwd Packets/s,0.1293,132000,"[5.13, 296.67, 5633.8]",chosen,three distinct levels,"[5.13, 296.67, 5633.8]"

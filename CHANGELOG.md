@@ -532,3 +532,20 @@ The user agreed to do X9, the last of the three extras. The X2 text said its gai
 
 **Verified**
 The notebook ran without errors. Macro-F1 differences: boosting minus tree +0.0028 (interval +0.0020 to +0.0035), pseudo-labelling minus lower line at 10% -0.0003 (-0.0009 to +0.0004, within the noise), at 1% +0.0027 (+0.0019 to +0.0036).
+
+## 2026-10-10 17:33 EEST: H4 done: hand-in notebook assembled; model cache brings the run under 5 minutes
+
+**What**
+- `parts/00_setup.ipynb`: new step A3 cells (explanation and `cached(name, compute)`). Results are saved with joblib in `models/<fingerprint>/<name>.joblib` and loaded on later runs; the fingerprint covers the features, split sizes, seed and scikit-learn version. `cached` is added to the shared-name check.
+- `parts/10_baseline_models.ipynb` to `parts/70_extras.ipynb`: every model fit (B1 trees and logistic regressions, B2 boosting, C1, C2, F3, G1, G3, X2, X6), every stand-in (same cache names as the real steps) and the LIME results of D3, D5 and D6 go through `cached()`. The D5 and D6 seed loops reuse one LIME explainer reset to each seed. The slow result tables of E1, E2, E3, F5 and G3, and F2's threshold curve and threshold, are cached too. `BOOST_TAG` and `MODELS_TAG` put the model settings into the cache names. F1 now writes its table rounded to 4 decimals, and E3 keeps its original column order. All part notebooks re-executed.
+- `mini_project_unsw_nb15.ipynb`: the hand-in notebook, built and executed with `python tools/assemble.py --strict` (121 cells, A0 to G4, extras left out).
+- `models/`: the cache, 74 files, 13 MB.
+- `TASKLIST.md`: H4 ticked with a result note; the "models on disk" decision now describes the cache.
+
+**Why**
+The user asked for H4, and chose to cache models after the measured run time was about 30 minutes (B1 logistic regression 549 s, D5 339 s, G3 305 s, D6 221 s). A faster logistic regression solver was tested and rejected, because it changed 20 test decisions. Reusing a LIME explainer with its seed reset was tested and gives identical results, saving about 40 s per explainer. With all models cached the run still took 471 s, mostly scoring in Parts E and G, so those result tables were cached as well.
+
+**Verified**
+- The cached hand-in run takes 107 s and has no errors.
+- All 58 result tables were compared with a copy taken before caching. They are identical, except the F1 SHAP shares, which now round to 4 decimals (difference at most 0.00004).
+- A fresh copy of the project (no `.venv`, no generated tables or figures) rebuilt all 50 hand-in tables and 13 figures in 107 s, identical to the project.

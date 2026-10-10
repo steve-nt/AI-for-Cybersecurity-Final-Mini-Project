@@ -298,7 +298,7 @@ results for the report: the report's numbers come from the assembled notebook (H
 | Part E | Noise **and** missing features (required); evasion is the optional extra X3 | The brief asks for at least one, at several levels |
 | Part F | Lab 3's tested engine `src/brbes.py`; referential values = training 5th percentile / median / 95th percentile; rule beliefs from the training data; compared with a tree and a random forest on the same two features | Already tested; the brief asks for 3 levels × 2 features = 9 rules |
 | Part G | Hide **Fuzzers**; adapt with 50 and with 100 labelled Fuzzers rows taken from the removed **training** rows; 3 seeds each | Largest drop in the trial (section 1.3) |
-| Models on disk | None. Every model is retrained when the notebook runs | Training takes seconds |
+| Models on disk | **Cached** (H4, 2026-10-10): every trained model, LIME result and slow result table is saved in `models/<fingerprint>/` by `cached()` (setup, step A3) and loaded on later runs, with identical numbers. Delete `models/` to retrain everything | Training everything takes about 25 minutes; the brief allows 5 |
 | Python | 3.13 with `requirements.txt` | Same as Labs 3, 4.1 and 4.2 |
 
 **Time budget** (the whole notebook must run in under 5 minutes; estimates from section 1.3):
@@ -601,7 +601,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 | H1 | README | Dataset, where to get it, libraries, how to run (required) | T2, T3 | ☐ |
 | H2 | Report, 6–8 pages | The eight headings of the brief, captioned figures, AI-use statement | all parts | ☐ |
 | H3 | Number check | Every number in the report matches the notebook | H2, H4 | ☐ |
-| H4 | Final run | Fresh run of the assembled notebook, under 5 minutes | all parts | ☐ |
+| H4 | Final run | Fresh run of the assembled notebook, under 5 minutes | all parts | ☑ |
 | H5 | Upload | Notebook + README + code as zip or repository link, report as PDF, before 15 Oct 08:00 | H1–H4 | ☐ |
 
 ---
@@ -1638,12 +1638,22 @@ to run".
 
 #### H4 · Final run
 
-- [ ] Restart and run from scratch: `python tools/assemble.py --strict`. It must run without errors.
-- [ ] Time it: **under 5 minutes** (the brief). If slower, use the cuts in section 1.5 (C cutoffs, G
+- [x] Restart and run from scratch: `python tools/assemble.py --strict`. It must run without errors.
+- [x] Time it: **under 5 minutes** (the brief). If slower, use the cuts in section 1.5 (C cutoffs, G
       seeds), then the LIME background (D5 pitfall), and say so in the report.
-- [ ] Best also on a fresh copy of the project (new folder, new `.venv`, data copied in), to catch files
+- [x] Best also on a fresh copy of the project (new folder, new `.venv`, data copied in), to catch files
       that only exist on your machine.
-- [ ] Re-run H3 if any number changed.
+- [x] Re-run H3 if any number changed.
+
+**Result (2026-10-10):** the hand-in notebook `mini_project_unsw_nb15.ipynb` (121 cells, steps A0 to G4,
+extras left out) runs top to bottom without errors in **107 s with the model cache**, about 25 minutes
+without it (sum of the part-notebook runs). The cache: `cached(name, compute)` in the setup (step A3),
+used for every model fit, the LIME results (the explainers cannot be saved; one explainer reset to each
+seed gives identical results, checked) and the slow result tables of Parts E, F and G. Files in
+`models/<fingerprint>/`, 74 files, 13 MB, shipped with the code. Checks: all result tables are identical to
+before the cache (only `F1_feature_choice.csv` now rounds its SHAP shares to 4 decimals); a fresh copy of
+the project (no `.venv`, no generated tables or figures) rebuilt all 50 hand-in tables and 13 figures,
+identical, in 107 s.
 
 #### H5 · Upload
 
