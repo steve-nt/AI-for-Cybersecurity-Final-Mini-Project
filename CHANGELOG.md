@@ -389,3 +389,16 @@ The user asked to implement F3. The tree's splits were printed to check, rather 
 
 **Verified**
 The notebook ran without errors. Test macro-F1: BRB 0.953, tree 0.962, forest 0.962, gradient boosting 0.972. The tree's first two questions isolate FWD Init Win Bytes between 16,368.5 and 16,406.5.
+
+## 2026-10-10 12:37 EEST: F4 done: the BRB's belief output for one flow
+
+**What**
+- `parts/50_brb.ipynb`: added a `# STANDIN D2` cell (the three explained test flows) and step F4 (explanation, trace, interpretation). `brbes.trace` runs on the D2 false alarm (test flow 10,048) with all inputs, and again with `Bwd Packets/s` missing, followed by a table of beliefs, Unknown, utility and decision. Executed.
+- `results/tables/F4_trace.txt`, `results/tables/F4_beliefs.csv`: written.
+- `TASKLIST.md`: F4 ticked, result note added.
+
+**Why**
+The user asked to implement F4. The missing-input trace was added because with all inputs present Unknown is almost 0 on this data, and the brief asks for the Unknown part to be shown and discussed.
+
+**Verified**
+The notebook ran without errors. All inputs: Low 0.092, Medium 0.540, High 0.367, Unknown 0.0006, utility 63.8 (attack, wrong). With Bwd Packets/s missing: Unknown 0.427, utility range 16.9 to 59.6 around the threshold 48.5.

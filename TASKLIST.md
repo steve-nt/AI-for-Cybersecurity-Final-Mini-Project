@@ -565,7 +565,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 | F1 | Pick the two features | Top two usable features of the validation SHAP ranking → `TOP2` | D1 | ☑ |
 | F2 | Build the BRB | 3 referential values each, 9 rules from the training data, threshold on validation | F1 | ☑ |
 | F3 | Fair comparison | BRB vs a tree and a forest that see only `TOP2`, test set | F2 | ☑ |
-| F4 | Belief output for one case | Low / Medium / High / **Unknown**, step by step | F2, D2 | ☐ |
+| F4 | Belief output for one case | Low / Medium / High / **Unknown**, step by step | F2, D2 | ☑ |
 | F5 | What the BRB gives and costs | Written comparison with numbers | F3, F4 | ☐ |
 
 ### Part G: adaptability
@@ -1398,10 +1398,17 @@ window 16,368.5 to 16,406.5, which the BRB's three levels cannot do. Saved: `F3_
 
 #### F4 · The belief output for one case
 
-- [ ] `print(brbes.trace(rb, X_test[TOP2].iloc[CASES["mistake"]], threshold=tau))`: matching degrees,
+- [x] `print(brbes.trace(rb, X_test[TOP2].iloc[CASES["mistake"]], threshold=tau))`: matching degrees,
       firing rules, belief in Low / Medium / High, **Unknown**, utility, decision. Save the text to
       `results/tables/F4_trace.txt`.
-- [ ] Explain in plain words where the Unknown comes from for this flow.
+- [x] Explain in plain words where the Unknown comes from for this flow.
+
+**Result (2026-10-10):** `parts/50_brb.ipynb`, stand-in D2 added, step F4 (explanation, trace,
+interpretation). Flow 10,048 (the D2 false alarm, benign): rules 7 (w 0.49) and 4 (w 0.45) dominate;
+belief **Low 0.092, Medium 0.540, High 0.367, Unknown 0.0006**; utility 63.8, so the BRB repeats the false
+alarm but with far less certainty than boosting (0.999). With `Bwd Packets/s` missing: **Unknown 0.427**,
+utility range 16.9 to 59.6 spanning the threshold 48.5 ("cannot decide"). The missing-input part of X7 is
+therefore already covered. Saved: `F4_trace.txt`, `F4_beliefs.csv`.
 
 #### F5 · What the BRB gives you, and what it costs
 
