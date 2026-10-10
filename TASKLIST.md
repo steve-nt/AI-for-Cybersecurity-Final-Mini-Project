@@ -598,7 +598,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 | P1 | Slides | 13 minutes covering Parts A–G | all parts | ☐ |
 | P2 | Live demo | Run the notebook during the talk (required); recording as a backup | H4 | ☐ |
 | P3 | Rehearsal | Full run-through with a timer | P1, P2 | ☐ |
-| H1 | README | Dataset, where to get it, libraries, how to run (required) | T2, T3 | ☐ |
+| H1 | README | Dataset, where to get it, libraries, how to run (required) | T2, T3 | ☑ |
 | H2 | Report, 6–8 pages | The eight headings of the brief, captioned figures, AI-use statement | all parts | ☐ |
 | H3 | Number check | Every number in the report matches the notebook | H2, H4 | ☐ |
 | H4 | Final run | Fresh run of the assembled notebook, under 5 minutes | all parts | ☑ |
@@ -1590,12 +1590,14 @@ obtained earlier is not enough."
 **Why:** The brief requires "a short README naming the dataset, where to get it, the libraries, and how
 to run".
 
-- [ ] `README.md` in the project root (`reference/lab4_2_robustness/README.md` is a good model; copy its
+- [x] `README.md` in the project root (`reference/lab4_2_robustness/README.md` is a good model; copy its
       structure): title, your name; one-paragraph summary; dataset (CIC-UNSW-NB15, link and citation
       from section 5, the files needed, SHA-256 hashes from T2, the cleaning, all rows used); setup (`uv`
       commands, Python 3.13, pinned versions); how to run (Run All, or `python tools/assemble.py
       --strict`); run time; folder layout; how the part notebooks are assembled.
-- [ ] Say that `src/` must stay next to the notebook (Parts D and F import from it).
+- [x] Say that `src/` must stay next to the notebook (Parts D and F import from it).
+
+**Result (2026-10-10):** `README.md` written: summary, dataset (link, files, SHA-256, cleaning, citations), setup, how to run, run time and the `models/` cache, Colab, folder layout. Numbers checked against the run output and `results/tables/`. `tools/check_report_numbers.py` is still the Lab 4.2 version, so the README leaves it out; add it back after H3.
 
 #### H2 · Report, 6–8 pages
 

@@ -549,3 +549,15 @@ The user asked for H4, and chose to cache models after the measured run time was
 - The cached hand-in run takes 107 s and has no errors.
 - All 58 result tables were compared with a copy taken before caching. They are identical, except the F1 SHAP shares, which now round to 4 decimals (difference at most 0.00004).
 - A fresh copy of the project (no `.venv`, no generated tables or figures) rebuilt all 50 hand-in tables and 13 figures in 107 s, identical to the project.
+
+## 2026-10-10 18:46 EEST: H1 done: README written
+
+**What**
+- `README.md`: created. Covers the project summary, the dataset (CIC-UNSW-NB15, download link, the three files needed with SHA-256 hashes, why `CICFlowMeter_out.csv` is not used, cleaning and split counts, both citations), setup (uv, pinned versions), how to run (Run All, `tools/assemble.py --strict`, `--with-extras`), the three things the notebook needs next to it (`src/`, `results/tables/T4_feature_glossary.csv`, `models/`), run time (107 s cached, about 25 min without) and how the cache works, Google Colab, and the folder layout.
+- `TASKLIST.md`: H1 ticked, with a result note.
+
+**Why**
+The brief requires a README naming the dataset, where to get it, the libraries and how to run. The structure follows the Lab 4.2 README. `tools/check_report_numbers.py` is left out for now because it is still the Lab 4.2 version.
+
+**Verified**
+Cleaning counts (141,742 duplicates, 1,068 conflicts, 305,105 rows), split sizes and the 26.3% attack share match the notebook output and `results/tables/A2_class_balance.csv`, `A3_split.csv`. The `--with-extras --output` command builds (135 cells). No em or en dashes in `README.md`.
