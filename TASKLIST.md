@@ -554,7 +554,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 | ID | Task | What it is and why | Needs | Done |
 |---|---|---|---|---|
 | E1 | Noise | `add_noise`; all three models at 6 noise levels | B2 | ☑ |
-| E2 | Missing features | `add_missing`; all three models at 5 levels | B2 | ☐ |
+| E2 | Missing features | `add_missing`; all three models at 5 levels | B2 | ☑ |
 | E3 | What broke first? | Figure, and the level at which we stop trusting the model | E1, E2 | ☐ |
 | E4 | What would an attacker change? | Feature-group table (needed for the Discussion); optional X3 runs the attack | T4, D1 | ☐ |
 
@@ -1272,10 +1272,18 @@ needed because pandas 3 returns read-only arrays.
 
 #### E2 · Missing features
 
-- [ ] `add_missing(X, frac, seed=SEED)`: in each row, `round(frac × 67)` random features set to
+- [x] `add_missing(X, frac, seed=SEED)`: in each row, `round(frac × 67)` random features set to
       `TRAIN_MEDIAN`.
-- [ ] Levels `[0, 0.10, 0.20, 0.30, 0.50]`; all three models; four metrics. Save
+- [x] Levels `[0, 0.10, 0.20, 0.30, 0.50]`; all three models; four metrics. Save
       `results/tables/E2_missing.csv`.
+
+**Result (2026-10-10):** `parts/40_robustness.ipynb`, step E2 (explanation, `add_missing` with checks,
+scores at 5 levels, split by `Fwd Seg Size Min`, interpretation). Recall at levels 0.10 / 0.30 / 0.50:
+boosting 0.809 / 0.520 / 0.283, tree 0.816 / 0.577 / 0.400, logistic regression 0.824 / 0.585 / 0.393.
+Steady decline, no collapse. **When `Fwd Seg Size Min` is missing (filled with the benign median 32),
+boosting recall is 0.000 at every level** (logreg 0.16, tree 0.80 because its first split is
+`FWD Init Win Bytes`). Boosting FAR falls to 0.014, logistic regression FAR rises to 0.116. Saved:
+`E2_missing.csv`, `E2_missing_split.csv`.
 
 #### E3 · What broke first, and when do we stop trusting the model?
 

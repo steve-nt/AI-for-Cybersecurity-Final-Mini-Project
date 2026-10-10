@@ -311,3 +311,16 @@ The user asked to implement E1. The first run failed with "output array is read-
 
 **Verified**
 The notebook ran without errors. At level 0.05, recall is 0.30 for boosting, 0.08 for the tree and 0.85 for logistic regression. Noise on only the three TCP-settings features gives 0.42, 0.08 and 0.996.
+
+## 2026-10-10 10:36 EEST: E2 done: robustness to missing features
+
+**What**
+- `parts/40_robustness.ipynb`: added step E2 (explanation, code, split table, interpretation). `missing_mask` and `add_missing` replace round(level x 67) random features per test flow with the training median (seed 42, same choice for all models). All three models are scored at levels 0, 0.10, 0.20, 0.30 and 0.50, and the test attacks are split by whether `Fwd Seg Size Min` was among the missing features. Executed.
+- `results/tables/E2_missing.csv`, `results/tables/E2_missing_split.csv`: written.
+- `TASKLIST.md`: E2 ticked, result note added.
+
+**Why**
+The user asked to implement E2. The split was added because the median of `Fwd Seg Size Min` (32) is the benign machines' value (D4).
+
+**Verified**
+The notebook ran without errors, and the checks passed (level 0 changes nothing, exactly 7 features per row at level 0.10). With `Fwd Seg Size Min` missing, gradient boosting recall is 0.000 at every level.
