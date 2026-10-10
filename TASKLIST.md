@@ -574,7 +574,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 |---|---|---|---|---|
 | G1 | Hide Fuzzers from training | Remove Fuzzers from the training set only, retrain | B2 | ☑ |
 | G2 | Measure the cost | Overall recall and Fuzzers recall on the test set | G1 | ☑ |
-| G3 | Adapt with 50 and 100 labels | Add a few Fuzzers rows back, retrain, measure again | G2 | ☐ |
+| G3 | Adapt with 50 and 100 labels | Add a few Fuzzers rows back, retrain, measure again | G2 | ☑ |
 | G4 | What we would do | One paragraph: were a few labels enough; how to notice in a real system | G3 | ☐ |
 
 ### Optional extras (only if time is left; watch the 5-minute budget)
@@ -1468,12 +1468,18 @@ those. Saved: `G2_hidden.csv`. Shared names: `is_hidden`, `is_attack`, `hidden_r
 
 #### G3 · Adapt with 50 and 100 labels
 
-- [ ] For `n` in `[50, 100]` and seeds `[0, 1, 2]`: draw `n` rows from `X_new` (`random_state=seed`),
+- [x] For `n` in `[50, 100]` and seeds `[0, 1, 2]`: draw `n` rows from `X_new` (`random_state=seed`),
       add them to the reduced training set, train `make_boost()`, measure the G2 numbers again.
-- [ ] Report mean, min and max over the seeds for each `n`. Save `results/tables/G3_adapt.csv` and a small
+- [x] Report mean, min and max over the seeds for each `n`. Save `results/tables/G3_adapt.csv` and a small
       figure (Fuzzers recall: seen / hidden / +50 / +100).
-- [ ] Note: 50 rows among 167,000 training rows is a tiny share. If recall barely moves, try giving the
+- [x] Note: 50 rows among 167,000 training rows is a tiny share. If recall barely moves, try giving the
       new rows more weight (`sample_weight`) as a variant, and say so.
+
+**Result (2026-10-10):** `parts/60_adaptability.ipynb`, step G3 (explanation, 6 plain runs, a weighted
+variant with weights 10 and 100 reported side by side without picking one, figure, interpretation).
+Fuzzers recall (test, mean of 3 draws): plain +50 0.694, +100 0.706; weight 10: 0.729, 0.776; **weight
+100: 0.814, 0.845** (overall recall 0.940, FAR 0.022). Seen with all labels: 0.988. Saved:
+`G3_adapt_runs.csv`, `G3_adapt_weighted_runs.csv`, `G3_adapt.csv`, `G3_adapt_summary.csv`, `G3_adapt.png`.
 
 #### G4 · What we would do
 

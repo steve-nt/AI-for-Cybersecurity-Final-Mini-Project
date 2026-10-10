@@ -1,0 +1,5 @@
+model (test set),fuzzers_recall,overall_recall,other_attacks_recall,far,macro_f1,fuzzers_uncertain_share
+"seen (boost, all 15,606 Fuzzers)",0.9875,0.9923,0.9946,0.0276,0.9718,0.4314
+"hidden (boost_hidden, 0 labels)",0.6876,0.8880,0.9841,0.0189,0.9429,0.8239
+"adapted, +50 labels (mean of 3)",0.6938,0.8892,0.9829,0.0189,0.9433,0.8268
+"adapted, +100 labels (mean of 3)",0.7056,0.8931,0.9830,0.0192,0.9446,0.8324

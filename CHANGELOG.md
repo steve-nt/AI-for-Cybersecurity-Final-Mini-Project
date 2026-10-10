@@ -443,3 +443,16 @@ The user asked to implement G2. The uncertainty share and the fingerprint split 
 
 **Verified**
 The notebook ran without errors. Fuzzers recall 0.988 to 0.688, overall recall 0.992 to 0.888, FAR 0.028 to 0.019, and the uncertain share of Fuzzers 43% to 82%.
+
+## 2026-10-10 14:49 EEST: G3 done: adapting with 50 and 100 labels
+
+**What**
+- `parts/60_adaptability.ipynb`: added step G3 (two explanations, three code cells, a figure, an interpretation). For 50 and 100 labelled Fuzzers flows drawn from the removed training pool (seeds 0, 1, 2), the black box is retrained and measured on the test set. A variant gives the new flows a training weight of 10 or 100, with the same draws. The summary reports mean, min and max over the draws. Executed.
+- `results/tables/G3_adapt_runs.csv`, `G3_adapt_weighted_runs.csv`, `G3_adapt.csv`, `G3_adapt_summary.csv`, `results/figures/G3_adapt.png`: written.
+- `TASKLIST.md`: G3 ticked, result note added.
+
+**Why**
+The user asked to implement G3. The plain runs barely moved recall, so the task list's weighted variant was added. The weights are reported side by side and not tuned, because tuning would need Fuzzers labels the analyst does not have, or the test set. The figure cell imports matplotlib itself, since this part notebook does not get it from the setup.
+
+**Verified**
+The notebook ran without errors and the figure was inspected. Fuzzers recall: 0.688 with no labels, 0.706 with +100 plain, 0.845 with +100 at weight 100, against 0.988 with all labels.
