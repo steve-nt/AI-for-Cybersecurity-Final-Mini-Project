@@ -506,3 +506,16 @@ The user agreed to do X6, X2 and X9. The extras were to stay outside the timed h
 
 **Verified**
 The notebook ran without errors. Without the fingerprint, test macro-F1 is 0.9709 (against 0.9718), recall at noise 0.001 is 0.831 (against 0.513), and recall on hidden Fuzzers is 0.687 (against 0.688).
+
+## 2026-10-10 15:43 EEST: X2 done: pseudo-labelling with 1% and 5% of the labels
+
+**What**
+- `parts/70_extras.ipynb`: added step X2 before X6 (explanation, two code cells, interpretation). `pseudo_label_from` runs Part C's method for any label budget. For 1%, 5% and 10% of the training labels (seed 42): the lower line, pseudo-labelling with the cutoff chosen on validation (0.99, 0.95, 0.90), and the upper line, on validation and test, plus a gain table. Executed; X6 re-ran with identical numbers.
+- `results/tables/X2_label_budgets.csv`, `results/tables/X2_did_it_help.csv`: written.
+- `TASKLIST.md`: X2 ticked, result note added.
+
+**Why**
+The user agreed to do X2, to test Part C's explanation that 10% of the labels was already plenty. The explanation first said 1% is 1,831 flows; the split gives 1,830, so the text was corrected.
+
+**Verified**
+The notebook ran without errors. Test macro-F1 gain from pseudo-labelling: +0.0027 at 1%, +0.0009 at 5%, -0.0003 at 10%. The shares of the gap closed (23%, 17%, none) were computed from the table.

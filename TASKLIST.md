@@ -582,7 +582,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 | ID | Task | What it is and why | Needs | Done |
 |---|---|---|---|---|
 | X1 | Self-supervised alternative for Part C | Fill-in-the-blanks network on unlabelled rows + classifier on the labels | C1 | ☐ |
-| X2 | Part C with 1% and 5% labels | Does pseudo-labelling help when labels are really scarce? | C3 | ☐ |
+| X2 | Part C with 1% and 5% labels | Does pseudo-labelling help when labels are really scarce? | C3 | ☑ |
 | X3 | Constrained evasion attack | Third robustness test; the attacker changes only what they control | E4 | ☐ |
 | X4 | Learning curve for Part G | Fuzzers recall after adding 10, 25, 50, 100, 250, 500 labels | G3 | ☐ |
 | X5 | Hide each attack type in turn | Which attacks are "new" to the model and which are not | G2 | ☐ |
@@ -1519,6 +1519,11 @@ results in a separate notebook and say so).
   `reference/lab4_1_phishing/20_label_scarce.ipynb`, step A9.
 - **X2 · Fewer labels.** C1–C3 with 1% (1,831) and 5% labels. Does pseudo-labelling help when labels are
   really scarce?
+  **Done (2026-10-10)** in `parts/70_extras.ipynb`: test macro-F1 lower line / pseudo-labelling: 1%
+  (1,830 labels) 0.960 / 0.963 (closes 23% of the gap to all labels, recall +0.012, FAR +0.002); 5% 0.967 /
+  0.968 (17%); 10% 0.969 / 0.969 (none). The fewer the labels, the more it helps, but the gain stays small.
+  Saved: `X2_label_budgets.csv`, `X2_did_it_help.csv`.
+
 - **X3 · Constrained evasion attack.** Greedy attack on 50 detected test attacks, changing only
   Free/Costly features upwards, at most 5 features, steps of half a training std. Constrained vs
   unconstrained success rate. Code: `reference/lab4_2_robustness/20_attack.ipynb`, steps C1–C3.
