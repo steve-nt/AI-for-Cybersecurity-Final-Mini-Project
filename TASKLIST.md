@@ -566,7 +566,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 | F2 | Build the BRB | 3 referential values each, 9 rules from the training data, threshold on validation | F1 | ☑ |
 | F3 | Fair comparison | BRB vs a tree and a forest that see only `TOP2`, test set | F2 | ☑ |
 | F4 | Belief output for one case | Low / Medium / High / **Unknown**, step by step | F2, D2 | ☑ |
-| F5 | What the BRB gives and costs | Written comparison with numbers | F3, F4 | ☐ |
+| F5 | What the BRB gives and costs | Written comparison with numbers | F3, F4 | ☑ |
 
 ### Part G: adaptability
 
@@ -1412,7 +1412,7 @@ therefore already covered. Saved: `F4_trace.txt`, `F4_beliefs.csv`.
 
 #### F5 · What the BRB gives you, and what it costs
 
-- [ ] A Markdown cell with numbers from F3 and F4. **Gives:** 9 rules a person can read and an expert can
+- [x] A Markdown cell with numbers from F3 and F4. **Gives:** 9 rules a person can read and an expert can
       edit; an explicit Unknown (it can say "not sure", the forest cannot); every decision can be traced
       step by step. **Costs:** only two features, so lower scores; levels and rules need choosing; the
       utility threshold must be tuned. Is the gap to `forest2` (same two features) small or large?
@@ -1423,6 +1423,14 @@ therefore already covered. Saved: `F4_trace.txt`, `F4_beliefs.csv`.
 (Part F paragraph), with the Unknown shown.
 
 ---
+
+**Result (2026-10-10):** `parts/50_brb.ipynb`, step F5 (explanation, checks, written comparison). Two
+checks on the test set with the 2-feature models: **noise** (macro-F1 at level 0.05: BRB 0.897, tree
+0.472, forest 0.536; recall 0.821 / 0.050 / 0.122) and **`Bwd Packets/s` missing** (BRB undecided for 100%
+of flows, recall 0; tree and forest with the median filled 0.949). Gives: readable editable rules,
+traceable decisions, honest Unknown, graded confidence, robustness to noise. Costs: 0.009 macro-F1 behind
+on clean data, only two features (rules grow as 3^n), coarse levels, hand-made choices, Unknown needs an
+analyst to be useful. Saved: `F5_brb_vs_forest_checks.csv`. Part F is complete.
 
 ### Part G: adaptability (notebook `60_adaptability.ipynb`)
 

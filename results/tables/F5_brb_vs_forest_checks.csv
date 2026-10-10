@@ -1,0 +1,16 @@
+test,model,macro_f1,recall,far,pr_auc
+noise 0,BRB,0.9534,0.9819,0.0442,0.8954
+noise 0,"tree, 2 features",0.9621,0.9958,0.0398,0.9179
+noise 0,"forest, 2 features",0.9621,0.9958,0.0397,0.9207
+noise 0.001,BRB,0.9534,0.9821,0.0443,0.8835
+noise 0.001,"tree, 2 features",0.9312,0.8992,0.0365,0.8698
+noise 0.001,"forest, 2 features",0.9366,0.9157,0.0370,0.9130
+noise 0.05,BRB,0.8972,0.8210,0.0421,0.8489
+noise 0.05,"tree, 2 features",0.4721,0.0495,0.0068,0.3914
+noise 0.05,"forest, 2 features",0.5362,0.1222,0.0097,0.8397
+noise 0.2,BRB,0.8006,0.5737,0.0331,0.7567
+noise 0.2,"tree, 2 features",0.4443,0.0213,0.0073,0.3803
+noise 0.2,"forest, 2 features",0.4529,0.0300,0.0074,0.7212
+Bwd Packets/s missing,"BRB (Unknown, average utility)",0.4243,0.0000,0.0000,0.7166
+Bwd Packets/s missing,"tree, 2 features (median filled)",0.9488,0.9539,0.0385,0.8699
+Bwd Packets/s missing,"forest, 2 features (median filled)",0.9487,0.9539,0.0386,0.8691

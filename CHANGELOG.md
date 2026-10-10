@@ -402,3 +402,16 @@ The user asked to implement F4. The missing-input trace was added because with a
 
 **Verified**
 The notebook ran without errors. All inputs: Low 0.092, Medium 0.540, High 0.367, Unknown 0.0006, utility 63.8 (attack, wrong). With Bwd Packets/s missing: Unknown 0.427, utility range 16.9 to 59.6 around the threshold 48.5.
+
+## 2026-10-10 12:49 EEST: F5 done: what the BRB gives and what it costs
+
+**What**
+- `parts/50_brb.ipynb`: added step F5 (explanation, one code cell, written comparison). The code compares the BRB, the 2-feature tree and the 2-feature forest on the test set under Gaussian noise on the two inputs (levels 0, 0.001, 0.05, 0.20), and with `Bwd Packets/s` missing (BRB with Unknown; tree and forest with the median filled), counting the flows the BRB cannot decide. The written comparison lists five gives and five costs with numbers, and a verdict. Executed.
+- `results/tables/F5_brb_vs_forest_checks.csv`: written.
+- `TASKLIST.md`: F5 ticked, result note added. Part F is complete.
+
+**Why**
+The user asked to implement F5. The two checks back the written claims with measurements: robustness to noise as a gain, and refusal to decide with a missing input as a cost.
+
+**Verified**
+The notebook ran without errors. At noise 0.05, BRB macro-F1 is 0.897 against 0.472 (tree) and 0.536 (forest). With Bwd Packets/s missing, the BRB leaves 100% of flows undecided (recall 0), while the median-filled tree and forest reach 0.949.
