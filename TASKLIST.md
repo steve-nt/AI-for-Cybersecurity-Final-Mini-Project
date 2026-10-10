@@ -575,7 +575,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 | G1 | Hide Fuzzers from training | Remove Fuzzers from the training set only, retrain | B2 | ☑ |
 | G2 | Measure the cost | Overall recall and Fuzzers recall on the test set | G1 | ☑ |
 | G3 | Adapt with 50 and 100 labels | Add a few Fuzzers rows back, retrain, measure again | G2 | ☑ |
-| G4 | What we would do | One paragraph: were a few labels enough; how to notice in a real system | G3 | ☐ |
+| G4 | What we would do | One paragraph: were a few labels enough; how to notice in a real system | G3 | ☑ |
 
 ### Optional extras (only if time is left; watch the 5-minute budget)
 
@@ -1483,7 +1483,7 @@ Fuzzers recall (test, mean of 3 draws): plain +50 0.694, +100 0.706; weight 10: 
 
 #### G4 · What we would do
 
-- [ ] One short paragraph (brief, step 4): were 50–100 labels enough to get back to the "seen" recall?
+- [x] One short paragraph (brief, step 4): were 50–100 labels enough to get back to the "seen" recall?
       How would we notice a new attack in a real system, where nobody tells us? Ideas: watch the alert
       rate and the share of flows with probability near 0.5; compare today's feature distributions with
       the training data (drift); the BRB's Unknown rising; analysts label a small random sample every
@@ -1494,6 +1494,13 @@ Fuzzers recall (test, mean of 3 draws): plain +50 0.694, +100 0.706; weight 10: 
 **Goes into the report:** section 6 (Adaptability).
 
 ---
+
+**Result (2026-10-10):** `parts/60_adaptability.ipynb`, step G4: one paragraph. A few labels were not
+enough (0.706 plain, 0.845 weighted, against 0.988), but weighted they are a useful first fix. A new attack
+would not show in the alert count (FAR fell 0.028 to 0.019) but in the model's uncertainty (Fuzzers with
+probability between 0.1 and 0.9: 43% to 82%). Proposed: watch uncertainty and feature drift, label a weekly
+random sample, route uncertain flows (and undecided BRB flows) to an analyst, retrain on a schedule.
+**Parts A to G are complete.**
 
 ### Optional extras (only if time is left)
 

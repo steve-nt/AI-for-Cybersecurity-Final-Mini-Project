@@ -456,3 +456,15 @@ The user asked to implement G3. The plain runs barely moved recall, so the task 
 
 **Verified**
 The notebook ran without errors and the figure was inspected. Fuzzers recall: 0.688 with no labels, 0.706 with +100 plain, 0.845 with +100 at weight 100, against 0.988 with all labels.
+
+## 2026-10-10 14:52 EEST: G4 done: what we would do (Parts A to G complete)
+
+**What**
+- `parts/60_adaptability.ipynb`: added step G4, one Markdown paragraph. A few labels were not enough on their own, but weighted they are a useful first fix. A new attack shows in the model's uncertainty, not in the alert count. The paragraph lists the monitoring and labelling steps we would take. The notebook was not re-run because only Markdown was added.
+- `TASKLIST.md`: G4 ticked, result note added.
+
+**Why**
+The user asked to implement G4. It completes the last required step of Parts A to G.
+
+**Verified**
+Every number in the paragraph matches G2 and G3 (0.688, 0.706, 0.845, 0.988, FAR 0.028 to 0.019, uncertain share 43% to 82%).
