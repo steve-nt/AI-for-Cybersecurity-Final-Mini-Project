@@ -546,7 +546,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 | D2 | Pick the three cases | Confident detection, confident negative, a mistake (test set) | B2 | ☑ |
 | D3 | Local SHAP and LIME | Explain the three cases with both methods | D2 | ☑ |
 | D4 | Fidelity: deletion test | Top-k SHAP features vs k random features, replaced with medians | D1 | ☑ |
-| D5 | Stability of LIME | LIME with 10 seeds: how often is the top 3 the same? | D3 | ☐ |
+| D5 | Stability of LIME | LIME with 10 seeds: how often is the top 3 the same? | D3 | ☑ |
 | D6 | Do SHAP and LIME agree? Why not? | Investigate every disagreement (grade 5) | D3, D5 | ☐ |
 
 ### Part E: robustness
@@ -1195,18 +1195,26 @@ neutral here, edited flows may be unrealistic, little is learned about the other
 
 **Why:** LIME is random. If two runs give different top features, an analyst cannot trust either one.
 
-- [ ] For each of the three cases: LIME with seeds 0–9 (10 runs). Per case: the share of runs whose top-3
+- [x] For each of the three cases: LIME with seeds 0–9 (10 runs). Per case: the share of runs whose top-3
       set equals the most common top-3 set; and the mean pairwise Jaccard overlap of the top 3
       (`xai_tools.lime_stability(predict_fn, X_train.values, x, seeds=range(10), k=3,
       feature_names=FEATURES)`). Save `results/tables/D5_lime_stability.csv`.
-- [ ] SHAP for comparison: TreeExplainer run twice on the same flow gives identical values (show it).
-- [ ] Interpret: which case is least stable, and does it have a low LIME fit score?
+- [x] SHAP for comparison: TreeExplainer run twice on the same flow gives identical values (show it).
+- [x] Interpret: which case is least stable, and does it have a low LIME fit score?
 
 **Pitfalls:** LIME's background is `X_train.values` (183,063 rows); building the explainer takes a few
 seconds each time. If D5 is slow, use a 10,000-row random part of `X_train` as the background (seed 42)
 everywhere in Part D, and say so.
 
 **Done when:** the table and the interpretation exist.
+
+**Result (2026-10-10):** `parts/30_explanation.ipynb`, step D5 (explanation, 30 LIME runs, interpretation).
+Same top 3 as the most common: detection 8 of 10, negative 5 of 10, mistake 8 of 10 (mean Jaccard 0.80,
+0.62, 0.80); only `Fwd Seg Size Min` is in every run's top 3. SHAP: identical on reruns. The most common
+LIME top 3 is the same for all three flows, and detection and mistake get identical LIME results per seed
+(same quartile ranges), so LIME describes the model in general, not the flow. Fit scores 0.22 to 0.27 in
+every run. Saved: `D5_lime_stability.csv`, `D5_lime_runs.csv`. Note: the run takes several minutes (each
+seed builds a LIME explainer on all training rows); the 5-minute budget is handled at the end.
 
 #### D6 · Do SHAP and LIME agree? Investigate (needed for grade 5)
 

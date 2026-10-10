@@ -272,3 +272,16 @@ The user asked to implement D4. From this entry on, new prose follows the user's
 
 **Verified**
 The notebook ran without errors and the figure was inspected. Replacing only the top SHAP feature (always `Fwd Seg Size Min`, median 32) flips all 500 decisions; 10 random features flip 25.4%.
+
+## 2026-10-10 03:24 EEST: D5 done: stability of LIME
+
+**What**
+- `parts/30_explanation.ipynb`: added step D5 (explanation, code, interpretation). LIME is run with seeds 0 to 9 on each of the three flows (8 features, 5,000 samples). Per flow: the share of runs with the most common top 3, the number of different top-3 sets, the mean pairwise Jaccard overlap, the features in every run's top 3, and the fit score range. SHAP is run twice on each flow for comparison. Executed.
+- `results/tables/D5_lime_stability.csv`, `results/tables/D5_lime_runs.csv`: written.
+- `TASKLIST.md`: D5 ticked, result note added.
+
+**Why**
+The user asked to implement D5. The first execution was cut off by a 590-second limit on the command, so the notebook was run again without a limit.
+
+**Verified**
+The notebook ran without errors. Same top 3 in 8, 5 and 8 of 10 runs (detection, negative, mistake), and SHAP reruns are identical. LIME's most common top 3 is the same for all three flows, which the interpretation discusses.
