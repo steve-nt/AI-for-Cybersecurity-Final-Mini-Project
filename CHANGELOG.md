@@ -561,3 +561,18 @@ The brief requires a README naming the dataset, where to get it, the libraries a
 
 **Verified**
 Cleaning counts (141,742 duplicates, 1,068 conflicts, 305,105 rows), split sizes and the 26.3% attack share match the notebook output and `results/tables/A2_class_balance.csv`, `A3_split.csv`. The `--with-extras --output` command builds (135 cells). No em or en dashes in `README.md`.
+
+## 2026-10-10 20:00 EEST: Hand-in notebook text: logistic regression in the title, task-list IDs removed
+
+**What**
+- `tools/assemble.py`: the notebook title paragraph now names all three Part B models (decision tree, logistic regression, gradient boosting); paragraph rewrapped.
+- `parts/30_explanation.ipynb`: the D1 Markdown says the glossary is written by `tools/feature_glossary.py` instead of "step T4"; "(H4)" removed from a cache comment; "checked in H4" in the `lime_reseeded` docstring became "checked: identical results".
+- `parts/40_robustness.ipynb`: "(H4)" removed from two cache comments; the E4 Markdown points to `tools/feature_glossary.py` instead of "(T4)".
+- `parts/00_setup.ipynb`, `parts/50_brb.ipynb`, `parts/60_adaptability.ipynb`: the reference to TASKLIST.md and "(H4)" removed from code comments.
+- `mini_project_unsw_nb15.ipynb`: rebuilt and run with `tools/assemble.py --strict`.
+
+**Why**
+The user asked for the two fixes found while writing the README. A scan of the notebook for task-list IDs found seven more of the same kind in comments and Markdown, which a grader would not understand, so they were fixed in the same pass. Text only; no code behaviour changed.
+
+**Verified**
+The notebook ran top to bottom with no errors in 157 s (the machine had other load; earlier cached runs took 107 s). All tables in `results/tables/` are identical to before, the cache still has 74 files (nothing retrained), and a rescan finds no task-list IDs left. No em or en dashes added.
