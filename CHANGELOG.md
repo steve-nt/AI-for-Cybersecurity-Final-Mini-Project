@@ -519,3 +519,16 @@ The user agreed to do X2, to test Part C's explanation that 10% of the labels wa
 
 **Verified**
 The notebook ran without errors. Test macro-F1 gain from pseudo-labelling: +0.0027 at 1%, +0.0009 at 5%, -0.0003 at 10%. The shares of the gap closed (23%, 17%, none) were computed from the table.
+
+## 2026-10-10 16:01 EEST: X9 done: bootstrap confidence intervals (all agreed extras done)
+
+**What**
+- `parts/70_extras.ipynb`: added step X9 (explanation, two code cells, interpretation). 200 paired bootstrap resamples of the test set (seed 42) give 95% intervals for macro-F1, recall, PR-AUC and FAR of eight models, and paired intervals for five differences the report relies on. A check confirms the fast scoring equals `score_proba()` on the full test set. The X2 cell now keeps its models (`x2_models`) for X9, and the last sentence of the X2 interpretation was corrected to match X9. Executed.
+- `results/tables/X9_confidence_intervals.csv`, `results/tables/X9_differences.csv`: written.
+- `TASKLIST.md`: X9 ticked, result note added.
+
+**Why**
+The user agreed to do X9, the last of the three extras. The X2 text said its gains were near the precision of a single test number; X9 shows the 1% gain is beyond test-set noise, so the sentence now says that, and that one label draw remains a limitation.
+
+**Verified**
+The notebook ran without errors. Macro-F1 differences: boosting minus tree +0.0028 (interval +0.0020 to +0.0035), pseudo-labelling minus lower line at 10% -0.0003 (-0.0009 to +0.0004, within the noise), at 1% +0.0027 (+0.0019 to +0.0036).

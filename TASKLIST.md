@@ -589,7 +589,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 | X6 | Shortcut check | Retrain without the TCP-settings features: does the model still work? | D1 | ☑ |
 | X7 | BRB with a missing input; an expert edits a rule | Shows the Unknown part growing and the rules being editable | F4 | ☐ |
 | X8 | Settings searches on all training rows | Repeat B1–B2 without the 20% shortcut: are the same settings chosen? | B3 | ☐ |
-| X9 | Confidence intervals | Bootstrap the test scores: which differences between models are real? | B3 | ☐ |
+| X9 | Confidence intervals | Bootstrap the test scores: which differences between models are real? | B3 | ☑ |
 
 ### Presentation and hand-in
 
@@ -1546,6 +1546,12 @@ results in a separate notebook and say so).
   `X_train` instead of the 20% part. Are the same settings chosen? If yes, the 20% shortcut is safe.
 - **X9 · Confidence intervals.** Bootstrap the test set (200 resamples) for the boosting model's four
   metrics: 95% intervals. Which differences in C4 are smaller than the interval?
+  **Done (2026-10-10)** in `parts/70_extras.ipynb` (200 paired bootstrap resamples of the test set, seed 42).
+  Single-score intervals about ±0.002. Real: boosting over the tree (+0.0028 macro-F1, interval +0.0020 to
+  +0.0035), over logistic regression, over the no-fingerprint model (+0.0009, tiny), and pseudo-labelling at
+  1% (+0.0027). Within the noise: pseudo-labelling at 10% (−0.0003), and the FAR of boosting vs the tree.
+  Saved: `X9_confidence_intervals.csv`, `X9_differences.csv`. All three agreed extras are done.
+
 
 ---
 

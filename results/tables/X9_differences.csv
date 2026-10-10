@@ -1,0 +1,21 @@
+comparison,metric,difference,ci_low,ci_high,real?
+gradient boosting minus decision tree,macro_f1,0.0028,0.0020,0.0035,yes
+gradient boosting minus decision tree,recall,0.0074,0.0057,0.0090,yes
+gradient boosting minus decision tree,pr_auc,0.0137,0.0114,0.0164,yes
+gradient boosting minus decision tree,far,-0.0003,-0.0007,0.0002,"no, within the noise"
+gradient boosting minus logistic regression,macro_f1,0.0109,0.0099,0.0121,yes
+gradient boosting minus logistic regression,recall,-0.0039,-0.0055,-0.0022,yes
+gradient boosting minus logistic regression,pr_auc,0.0288,0.0258,0.0319,yes
+gradient boosting minus logistic regression,far,-0.0137,-0.0147,-0.0126,yes
+gradient boosting minus boosting without fingerprint (X6),macro_f1,0.0009,0.0004,0.0014,yes
+gradient boosting minus boosting without fingerprint (X6),recall,0.0012,0.0002,0.0022,yes
+gradient boosting minus boosting without fingerprint (X6),pr_auc,-0.0002,-0.0008,0.0003,"no, within the noise"
+gradient boosting minus boosting without fingerprint (X6),far,-0.0005,-0.0008,-0.0002,yes
+"pseudo-labelling, 10% labels (C2) minus lower line, 10% labels (C1)",macro_f1,-0.0003,-0.0009,0.0004,"no, within the noise"
+"pseudo-labelling, 10% labels (C2) minus lower line, 10% labels (C1)",recall,0.0022,0.0007,0.0037,yes
+"pseudo-labelling, 10% labels (C2) minus lower line, 10% labels (C1)",pr_auc,-0.0020,-0.0030,-0.0008,yes
+"pseudo-labelling, 10% labels (C2) minus lower line, 10% labels (C1)",far,0.0011,0.0006,0.0016,yes
+"pseudo-labelling, 1% labels (X2) minus lower line, 1% labels (X2)",macro_f1,0.0027,0.0019,0.0036,yes
+"pseudo-labelling, 1% labels (X2) minus lower line, 1% labels (X2)",recall,0.0123,0.0107,0.0143,yes
+"pseudo-labelling, 1% labels (X2) minus lower line, 1% labels (X2)",pr_auc,0.0049,0.0026,0.0076,yes
+"pseudo-labelling, 1% labels (X2) minus lower line, 1% labels (X2)",far,0.0017,0.0011,0.0022,yes

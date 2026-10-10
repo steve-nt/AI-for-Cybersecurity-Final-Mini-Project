@@ -1,0 +1,33 @@
+model,metric,test_score,ci_low,ci_high,ci_width
+gradient boosting,macro_f1,0.9718,0.9702,0.9734,0.0032
+gradient boosting,recall,0.9923,0.9910,0.9935,0.0025
+gradient boosting,pr_auc,0.9814,0.9791,0.9833,0.0042
+gradient boosting,far,0.0276,0.0262,0.0291,0.0029
+decision tree,macro_f1,0.9690,0.9676,0.9707,0.0030
+decision tree,recall,0.9849,0.9832,0.9867,0.0034
+decision tree,pr_auc,0.9677,0.9642,0.9706,0.0064
+decision tree,far,0.0279,0.0263,0.0293,0.0029
+logistic regression,macro_f1,0.9608,0.9592,0.9625,0.0033
+logistic regression,recall,0.9962,0.9953,0.9970,0.0017
+logistic regression,pr_auc,0.9527,0.9490,0.9562,0.0072
+logistic regression,far,0.0413,0.0397,0.0431,0.0034
+boosting without fingerprint (X6),macro_f1,0.9709,0.9693,0.9727,0.0033
+boosting without fingerprint (X6),recall,0.9910,0.9896,0.9924,0.0028
+boosting without fingerprint (X6),pr_auc,0.9817,0.9795,0.9833,0.0038
+boosting without fingerprint (X6),far,0.0281,0.0267,0.0296,0.0029
+"lower line, 10% labels (C1)",macro_f1,0.9688,0.9670,0.9702,0.0032
+"lower line, 10% labels (C1)",recall,0.9872,0.9856,0.9888,0.0032
+"lower line, 10% labels (C1)",pr_auc,0.9755,0.9730,0.9776,0.0046
+"lower line, 10% labels (C1)",far,0.0290,0.0275,0.0306,0.0031
+"pseudo-labelling, 10% labels (C2)",macro_f1,0.9685,0.9668,0.9698,0.0030
+"pseudo-labelling, 10% labels (C2)",recall,0.9894,0.9879,0.9911,0.0032
+"pseudo-labelling, 10% labels (C2)",pr_auc,0.9735,0.9707,0.9758,0.0051
+"pseudo-labelling, 10% labels (C2)",far,0.0301,0.0287,0.0318,0.0030
+"lower line, 1% labels (X2)",macro_f1,0.9603,0.9586,0.9622,0.0037
+"lower line, 1% labels (X2)",recall,0.9758,0.9738,0.9777,0.0039
+"lower line, 1% labels (X2)",pr_auc,0.9550,0.9509,0.9588,0.0080
+"lower line, 1% labels (X2)",far,0.0341,0.0324,0.0356,0.0032
+"pseudo-labelling, 1% labels (X2)",macro_f1,0.9630,0.9615,0.9647,0.0032
+"pseudo-labelling, 1% labels (X2)",recall,0.9881,0.9867,0.9898,0.0031
+"pseudo-labelling, 1% labels (X2)",pr_auc,0.9599,0.9564,0.9635,0.0071
+"pseudo-labelling, 1% labels (X2)",far,0.0358,0.0339,0.0374,0.0035
