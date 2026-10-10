@@ -562,7 +562,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 
 | ID | Task | What it is and why | Needs | Done |
 |---|---|---|---|---|
-| F1 | Pick the two features | Top two usable features of the validation SHAP ranking → `TOP2` | D1 | ☐ |
+| F1 | Pick the two features | Top two usable features of the validation SHAP ranking → `TOP2` | D1 | ☑ |
 | F2 | Build the BRB | 3 referential values each, 9 rules from the training data, threshold on validation | F1 | ☐ |
 | F3 | Fair comparison | BRB vs a tree and a forest that see only `TOP2`, test set | F2 | ☐ |
 | F4 | Belief output for one case | Low / Medium / High / **Unknown**, step by step | F2, D2 | ☐ |
@@ -1344,10 +1344,17 @@ version of the same engine written out in plain Python is in `reference/lab4_1_p
 **Why:** "Take the two most important features from Part D." Each needs three distinct referential
 values (Low < Medium < High).
 
-- [ ] Go down `shap_global`: skip 0/1 features and features where `brbes.make_levels(X_train[f])`
+- [x] Go down `shap_global`: skip 0/1 features and features where `brbes.make_levels(X_train[f])`
       fails (two levels equal). The first two that work are `TOP2`. Print which were skipped and why.
-- [ ] Expect `FWD Init Win Bytes` and `Bwd Packets/s` (section 1.3: `Fwd Seg Size Min` has only 7
+- [x] Expect `FWD Init Win Bytes` and `Bwd Packets/s` (section 1.3: `Fwd Seg Size Min` has only 7
       distinct values). One sentence per feature from T4's glossary.
+
+**Result (2026-10-10):** new notebook `parts/50_brb.ipynb` (stand-ins A0, B2, D1; then step F1:
+explanation, selection, interpretation). `Fwd Seg Size Min` skipped (8 / 32 / 32, 7 distinct values).
+**`TOP2 = ["FWD Init Win Bytes", "Bwd Packets/s"]`**, levels 0 / 5,792 / 26,064 and 5.1 / 296.7 /
+5,633.8. One fingerprint feature (Free) and one behaviour feature (Fixed). The attacker window 16,383
+falls between Medium and High (about 48% / 52%), so the BRB cannot single it out. Saved:
+`F1_feature_choice.csv`.
 
 #### F2 · Build the BRB
 

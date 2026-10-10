@@ -350,3 +350,16 @@ The user asked to implement E4, to prepare "what would an attacker fake?" for th
 
 **Verified**
 The notebook ran without errors, and the stand-in reproduces the D1 ranking exactly. Free features carry 69.1% of the SHAP weight. With benign TCP settings, recall is 0.000, 0.011 and 0.066 (boosting, tree, logistic regression).
+
+## 2026-10-10 11:36 EEST: F1 done: the two features for the belief rule base
+
+**What**
+- `parts/50_brb.ipynb`: created, the notebook for Part F. It holds stand-ins for A0, B2 (gradient boosting) and D1 (global SHAP ranking), then step F1 (explanation, selection, interpretation). The step walks down the SHAP ranking, skips 0/1 flags and features where `brbes.make_levels` cannot place three distinct levels, and keeps the first two as `TOP2`. Executed.
+- `results/tables/F1_feature_choice.csv`: written.
+- `TASKLIST.md`: F1 ticked, result note added.
+
+**Why**
+The user asked to implement F1.
+
+**Verified**
+The notebook ran without errors. `Fwd Seg Size Min` was skipped (8 / 32 / 32). TOP2 is FWD Init Win Bytes (0 / 5,792 / 26,064) and Bwd Packets/s (5.1 / 296.7 / 5,633.8), as the task list predicted.
