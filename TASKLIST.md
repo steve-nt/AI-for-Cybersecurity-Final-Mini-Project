@@ -599,7 +599,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 | P2 | Live demo | Run the notebook during the talk (required); recording as a backup | H4 | ☐ |
 | P3 | Rehearsal | Full run-through with a timer | P1, P2 | ☐ |
 | H1 | README | Dataset, where to get it, libraries, how to run (required) | T2, T3 | ☑ |
-| H2 | Report, 6–8 pages | The eight headings of the brief, captioned figures, AI-use statement | all parts | ☐ |
+| H2 | Report, 6–8 pages | The eight headings of the brief, captioned figures, AI-use statement | all parts | ☑ |
 | H3 | Number check | Every number in the report matches the notebook | H2, H4 | ☐ |
 | H4 | Final run | Fresh run of the assembled notebook, under 5 minutes | all parts | ☑ |
 | H5 | Upload | Notebook + README + code as zip or repository link, report as PDF, before 15 Oct 08:00 | H1–H4 | ☐ |
@@ -1603,11 +1603,11 @@ to run".
 
 **Why:** Graded directly; headings are fixed by the brief.
 
-- [ ] Write it in Markdown, `report/Mini_Project_Report.md`; build the PDF with `report/build_report.py`
+- [x] Write it in Markdown, `report/Mini_Project_Report.md`; build the PDF with `report/build_report.py`
       after editing its file names (`SOURCE`, `OUTPUT`, `NOTEBOOK`, `CODE_FIGURES`, the PDF title) and,
       for Word, `report/build_docx.py` (`MARKDOWN`, `DOCX`, `TITLE`, `TEMPLATE_TITLE`). Open
       `report/title_page_template.docx` in Word and put in your name and the title.
-- [ ] The eight headings, in this order, with what the brief asks under each:
+- [x] The eight headings, in this order, with what the brief asks under each:
   1. **Problem and data**: problem, users, cost of a false alarm; dataset, size, class balance, baseline;
      the results on validation and on test (A1, A2, A3, A4, B3).
   2. **Method**: models (and why boosting, not a forest), splits, how settings were chosen (on
@@ -1624,13 +1624,15 @@ to run".
      (candidates: the 26% attack share vs about 2.5% in real traffic; the shortcut features; recall on
      the small attack types; LIME on low-fit cases)? Where would the method fail outside this dataset?
   8. **Who did what**: one line: all work by you (a one-person group).
-- [ ] After section 8: **Use of AI** (required, or F): which AI assistant was used and what for (for
+- [x] After section 8: **Use of AI** (required, or F): which AI assistant was used and what for (for
       example: choosing the dataset, planning the work, explaining concepts, drafting and reviewing code,
       checking the text). Then **References**: the two dataset papers (section 5), scikit-learn, SHAP,
       LIME, the BRB/RIMER papers (the list in `reference/lab4_2_robustness/References.md` and the top of
       `src/brbes.py` can be reused).
-- [ ] Every figure and table has a caption and is mentioned in the text.
-- [ ] The report must not mention this file, task IDs or checkboxes; describe the work itself.
+- [x] Every figure and table has a caption and is mentioned in the text.
+- [x] The report must not mention this file, task IDs or checkboxes; describe the work itself.
+
+**Result (2026-10-10):** `report/Mini_Project_Report.md` written (about 4,150 words, the eight headings, Use of AI, 12 references, 4 tables and 4 figures, all captioned and referred to) and built as `report/Mini_Project_Report.docx` with `report/build_docx.py` (title page: one author, "One-person group"). On request only Markdown and Word; no PDF built. A throwaway PDF render came to about 5.5 pages at 9.5 pt, so the Word version should be about 6 to 7 pages plus the title page: check in Word. The figures are copies without their plot titles (`report/report_figures.py`), because the titles carry step labels. The brief asks for the report as a PDF on Canvas: export it from Word (or run `report/build_report.py`). Numbers were checked by hand against `results/tables/`; H3 should still do the systematic check. The additional checks (1% labels, the model without the TCP-settings features, bootstrap intervals) are quoted as coming from the separate extras notebook.
 
 #### H3 · Number check
 

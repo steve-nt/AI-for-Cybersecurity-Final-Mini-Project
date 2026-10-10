@@ -1,4 +1,4 @@
-"""Build the lab report PDF from report/Lab4_2_Report.md.
+"""Build the report PDF from report/Mini_Project_Report.md (build_docx.py also uses its helpers).
 
 The Markdown file is the report itself, readable in any Markdown viewer: ordinary headings, paragraphs,
 lists, pipe tables, **bold**, *italic* and `code`, plus standard images. A figure is a line holding one
@@ -8,8 +8,8 @@ or more images, followed by its caption on the next line, which starts with "*Fi
     *Figure 2. Left: ... Right: ...*
 
 Image paths are relative to report/. A line "<!-- pagebreak -->" starts a new page (invisible in a
-Markdown viewer). The code "screenshot" (report/figures/code_greedy_attack.png) is rendered from the
-hand-in notebook by make_code_images(), so it always shows the code that produced the numbers.
+Markdown viewer). Code "screenshots" listed in CODE_FIGURES are rendered from the hand-in notebook by
+make_code_images(), so they always show the code that produced the numbers (the mini project report has none).
 The fonts are bundled in report/fonts/, so the PDF looks the same on every machine.
 
 Run from the repository root (after the hand-in notebook has been run):
@@ -29,15 +29,15 @@ from pygments.lexers import PythonLexer
 from pygments.styles import get_style_by_name
 
 ROOT = Path(__file__).resolve().parent.parent
-SOURCE = ROOT / "report" / "Lab4_2_Report.md"
-OUTPUT = ROOT / "report" / "Lab4_2_Report.pdf"
+SOURCE = ROOT / "report" / "Mini_Project_Report.md"
+OUTPUT = ROOT / "report" / "Mini_Project_Report.pdf"
 TABLES = ROOT / "results" / "tables"
-NOTEBOOK = ROOT / "lab4_2_robustness_attacks.ipynb"
+NOTEBOOK = ROOT / "mini_project_unsw_nb15.ipynb"
 FONTS = ROOT / "report" / "fonts"
 CODE_IMAGES = ROOT / "report" / "figures"
 REPORT_DIR = ROOT / "report"
 # Code screenshots used by the report: image file -> (lab step, text that identifies the cell).
-CODE_FIGURES = {"code_greedy_attack.png": ("C2", "def greedy_attack")}
+CODE_FIGURES = {}
 
 BODY_PT, TABLE_PT, CAPTION_PT = 9.5, 8, 8.5
 MARGIN = 15                                   # mm
@@ -209,7 +209,7 @@ def render_table(pdf, lines):
         widths[i] = min(natural[i], share)
         left -= widths[i]
     pdf.set_font("Sans", "", TABLE_PT)
-    table_width = sum(widths)
+    table_width = min(sum(widths), pdf.epw)          # float rounding can exceed the page width
     with pdf.table(col_widths=widths, width=table_width, align="LEFT", markdown=True,
                    line_height=TABLE_PT * 0.45, padding=(0.6, 1.2),
                    borders_layout="HORIZONTAL_LINES", first_row_as_headings=True,
@@ -295,7 +295,7 @@ def main():
     pdf.add_font("Sans", "BI", str(FONTS / "LiberationSans-BoldItalic.ttf"))
     for style in ("", "B", "I", "BI"):                 # code inside bold/italic text: same mono font
         pdf.add_font("Mono", style, str(FONTS / "DejaVuSansMono.ttf"))
-    pdf.set_title("Lab 4.2: Robustness, Attacks and Honest Explanations")
+    pdf.set_title("Mini Project: An Explainable and Robust Cyber-Defence Model")
     pdf.add_page()
 
     pending, table = [], []

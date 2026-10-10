@@ -576,3 +576,20 @@ The user asked for the two fixes found while writing the README. A scan of the n
 
 **Verified**
 The notebook ran top to bottom with no errors in 157 s (the machine had other load; earlier cached runs took 107 s). All tables in `results/tables/` are identical to before, the cache still has 74 files (nothing retrained), and a rescan finds no task-list IDs left. No em or en dashes added.
+
+## 2026-10-10 20:16 EEST: H2 done: report written in Markdown and Word
+
+**What**
+- `report/Mini_Project_Report.md`: created. The brief's eight headings (problem and data, method, results, explanation, robustness, adaptability, discussion, who did what), then Use of AI and 12 references. 4 tables (validation vs test, all models on test, the three explained cases, robustness levels) and 4 figures, all captioned and referred to in the text.
+- `report/Mini_Project_Report.docx`: built from the Markdown by `report/build_docx.py`.
+- `report/report_figures.py`: created. Copies the SHAP beeswarm, the SHAP waterfall of the mistake, the robustness curves and the adaptation plot into `report/figures/` with their plot titles painted out, because those titles carry the notebook's step labels; the captions describe the figures instead.
+- `report/figures/`: the four title-free figure copies.
+- `report/build_docx.py`: file names and title set for this report; new `one_author()` removes the second Lab 3 author from the title page template and sets "One-person group" and "Author:".
+- `report/build_report.py`: file names, notebook name and PDF title set for this project, no code screenshots; table width capped at the page width (a float rounding error made fpdf2 reject a full-width table).
+- `TASKLIST.md`: H2 ticked with a result note.
+
+**Why**
+The user asked for the report in Markdown and Word only, so no PDF was built. The brief still asks for a PDF on Canvas, to be exported from Word or built with `report/build_report.py` later. Numbers in the additional checks (1% labels, the model without the TCP-settings features, bootstrap intervals) are marked as coming from the separate extras notebook, because they are not in the timed hand-in notebook.
+
+**Verified**
+Numbers checked by hand against `results/tables/` (Table 1 uses 4 decimals where 3 would round ambiguously). No task-list references, task IDs or checkboxes in the report, the docx text or the build scripts; no em or en dashes. The docx XML is well formed and its title page lists one author. A throwaway PDF render (deleted) came to about 5.5 pages at 9.5 pt, so the Word version should be roughly 6 to 7 pages plus the title page; not measured in Word, because no Word or LibreOffice is installed here.

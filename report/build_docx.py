@@ -1,7 +1,7 @@
 """Build the Word version of the report from the Markdown one.
 
 Both copies of the report must say the same thing, so the .docx is generated from
-report/Lab4_2_Report.md, the same file as the PDF (report/build_report.py). Figures are the Markdown
+report/Mini_Project_Report.md, the same file as the PDF (report/build_report.py). Figures are the Markdown
 images, each followed by its "*Figure ...*" caption line; the code screenshot is rendered from the
 hand-in notebook exactly as for the PDF. report/title_page_template.docx supplies the title
 page (course, group, authors, university logo); its assignment title is set to this lab, and the report
@@ -22,11 +22,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import build_report                              # noqa: E402  same tokens, tables and code images
 
 ROOT = Path(__file__).resolve().parent.parent
-MARKDOWN = ROOT / "report" / "Lab4_2_Report.md"
-DOCX = ROOT / "report" / "Lab4_2_Report.docx"
+MARKDOWN = ROOT / "report" / "Mini_Project_Report.md"
+DOCX = ROOT / "report" / "Mini_Project_Report.docx"
 TEMPLATE = ROOT / "report" / "title_page_template.docx"
 TEMPLATE_TITLE = "Lab3: Explainability and BRBES-2"
-TITLE = "Lab 4.2: Robustness, Attacks and Honest Explanations"
+TITLE = "Mini Project: An Explainable and Robust Cyber-Defence Model"
 
 PAGE_WIDTH_DXA = 12240 - 540 - 450        # page width minus the template's margins
 EMU_PER_INCH = 914400
@@ -212,6 +212,21 @@ def convert(markdown, images):
     return "".join(body)
 
 
+def one_author(document):
+    """The template lists the Lab 3 group; this is a one-person project, so keep only its author."""
+    run = r'<w:r\b[^>]*>(?:(?!</w:r>).)*?'
+    first = re.search(run + r'<w:t>Kirill Silchenko</w:t></w:r>', document, re.S)
+    second = re.search(run + r'<w:t>Stefanos Ntentopoulos -</w:t>', document, re.S)
+    if not first or not second:
+        sys.exit("ERROR: the author lines were not found in the template")
+    document = document[:first.start()] + document[second.start():]
+    for old, new in ((">Group 6<", ">One-person group<"), (">Authors:<", ">Author:<")):
+        if old not in document:
+            sys.exit(f"ERROR: {old!r} was not found in the template")
+        document = document.replace(old, new)
+    return document
+
+
 def main():
     if not TEMPLATE.is_file():
         sys.exit(f"ERROR: {TEMPLATE.relative_to(ROOT)} is missing (the title page template).")
@@ -255,6 +270,7 @@ def main():
     if TEMPLATE_TITLE not in document:
         sys.exit(f"ERROR: the title {TEMPLATE_TITLE!r} was not found in the template")
     document = document.replace(TEMPLATE_TITLE, TITLE)
+    document = one_author(document)
     page_break = '<w:p><w:r><w:br w:type="page"/></w:r></w:p>'
     body = page_break + convert(markdown, images)
     section = re.search(r"<w:sectPr\b.*?</w:sectPr>", document, re.S).group()
