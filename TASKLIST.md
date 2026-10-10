@@ -563,7 +563,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 | ID | Task | What it is and why | Needs | Done |
 |---|---|---|---|---|
 | F1 | Pick the two features | Top two usable features of the validation SHAP ranking → `TOP2` | D1 | ☑ |
-| F2 | Build the BRB | 3 referential values each, 9 rules from the training data, threshold on validation | F1 | ☐ |
+| F2 | Build the BRB | 3 referential values each, 9 rules from the training data, threshold on validation | F1 | ☑ |
 | F3 | Fair comparison | BRB vs a tree and a forest that see only `TOP2`, test set | F2 | ☐ |
 | F4 | Belief output for one case | Low / Medium / High / **Unknown**, step by step | F2, D2 | ☐ |
 | F5 | What the BRB gives and costs | Written comparison with numbers | F3, F4 | ☐ |
@@ -1358,17 +1358,24 @@ falls between Medium and High (about 48% / 52%), so the BRB cannot single it out
 
 #### F2 · Build the BRB
 
-- [ ] `levels = [brbes.make_levels(X_train[f]) for f in TOP2]`;
+- [x] `levels = [brbes.make_levels(X_train[f]) for f in TOP2]`;
       `rb = brbes.build_rule_base(X_train[TOP2], y_train, levels)`. The rules' beliefs come from the
       training data: for each rule, the share of attacks among the training flows that activate it. Rules
       with little data keep a visible Unknown.
-- [ ] `brbes.rules_table(rb)` → `results/tables/F2_rules.csv` (9 rules: IF part, beliefs Low / Medium /
+- [x] `brbes.rules_table(rb)` → `results/tables/F2_rules.csv` (9 rules: IF part, beliefs Low / Medium /
       High, Unknown, support). Do the rules make sense?
-- [ ] Threshold on **validation**: `u = brbes.utility(rb, brbes.infer(rb, X_val[TOP2]))[2]`;
+- [x] Threshold on **validation**: `u = brbes.utility(rb, brbes.infer(rb, X_val[TOP2]))[2]`;
       `tau = brbes.choose_threshold(u, y_val)`.
 
 **Pitfalls:** with 183,063 training rows every rule has plenty of support, so the Unknown in the rules
 will be small. That is honest; F4 and X7 show where Unknown still appears.
+
+**Result (2026-10-10):** `parts/50_brb.ipynb`, step F2 (explanation, rule base, threshold, interpretation).
+9 rules from the training data (support 3,309 to 50,227 flows each). Only rule 7 (window High, reply
+rate Low, 89% attacks) believes High (0.77); fast replies mean Low risk; slow replies alone are mostly
+Medium. **Threshold 48.5 chosen on validation** (best macro-F1); validation macro-F1 0.954, recall 0.984,
+PR-AUC 0.895, FAR 0.044. Unknown at most 0.006 (all rules well supported). Saved: `F2_rules.csv`,
+`F2_threshold_val.csv`. Shared names: `rb`, `levels`, `BRB_THRESHOLD`.
 
 #### F3 · Fair comparison
 

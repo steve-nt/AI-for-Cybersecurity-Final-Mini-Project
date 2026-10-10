@@ -363,3 +363,16 @@ The user asked to implement F1.
 
 **Verified**
 The notebook ran without errors. `Fwd Seg Size Min` was skipped (8 / 32 / 32). TOP2 is FWD Init Win Bytes (0 / 5,792 / 26,064) and Bwd Packets/s (5.1 / 296.7 / 5,633.8), as the task list predicted.
+
+## 2026-10-10 11:46 EEST: F2 done: the belief rule base
+
+**What**
+- `parts/50_brb.ipynb`: added step F2 (explanation, two code cells, interpretation). `brbes.build_rule_base` builds 9 rules on `TOP2` with beliefs from the training data (attack share per rule, scaled by support / (support + 20)), and `brbes.rules_table` gives the readable rule table. The utility threshold is chosen on validation with `brbes.choose_threshold` (best macro-F1, grid 0 to 100 in steps of 0.5). Executed.
+- `results/tables/F2_rules.csv`, `results/tables/F2_threshold_val.csv`: written.
+- `TASKLIST.md`: F2 ticked, result note added.
+
+**Why**
+The user asked to implement F2.
+
+**Verified**
+The notebook ran without errors. Threshold 48.5; validation macro-F1 0.954, recall 0.984, FAR 0.044. Every rule has at least 3,309 supporting flows, and Unknown is at most 0.006. The rule table in the interpretation was checked against `F2_rules.csv`.
