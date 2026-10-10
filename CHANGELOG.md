@@ -324,3 +324,16 @@ The user asked to implement E2. The split was added because the median of `Fwd S
 
 **Verified**
 The notebook ran without errors, and the checks passed (level 0 changes nothing, exactly 7 features per row at level 0.10). With `Fwd Seg Size Min` missing, gradient boosting recall is 0.000 at every level.
+
+## 2026-10-10 11:00 EEST: E3 done: what broke first and where to stop trusting the models
+
+**What**
+- `parts/40_robustness.ipynb`: added a `# STANDIN B4` cell (the project's figure style) and step E3 (rule, finer sweep, rule table, figure, conclusions). The trust rule from the task list (recall more than 0.05 below clean, or FAR more than twice clean) is applied to every model under noise and missing features. A finer sweep (noise 0.001 to 0.02; 1, 2, 3 and 5 missing features) is combined with the E1 and E2 results. Executed.
+- `results/tables/E3_robustness_all_levels.csv`, `results/tables/E3_stop_trusting.csv`, `results/figures/E3_robustness.png`: written.
+- `TASKLIST.md`: E3 ticked, result note added.
+
+**Why**
+The user asked to implement E3. The finer sweep was needed because every model already broke the rule at the first E1 and E2 levels. The figure legend first overlapped the title and was moved below it. The explanation first dated the rule 8 October; the changelog shows the task list was written on 9 October (still before Part E ran), so the date was corrected.
+
+**Verified**
+The notebook ran without errors and the figure was inspected. Gradient boosting and the tree fail at noise 0.001, logistic regression at 0.05. With missing features: boosting and the tree fail at 2, logistic regression at 3. The numbers in the conclusions match `E3_stop_trusting.csv`.

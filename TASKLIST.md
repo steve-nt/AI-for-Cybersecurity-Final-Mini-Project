@@ -555,7 +555,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 |---|---|---|---|---|
 | E1 | Noise | `add_noise`; all three models at 6 noise levels | B2 | ☑ |
 | E2 | Missing features | `add_missing`; all three models at 5 levels | B2 | ☑ |
-| E3 | What broke first? | Figure, and the level at which we stop trusting the model | E1, E2 | ☐ |
+| E3 | What broke first? | Figure, and the level at which we stop trusting the model | E1, E2 | ☑ |
 | E4 | What would an attacker change? | Feature-group table (needed for the Discussion); optional X3 runs the attack | T4, D1 | ☐ |
 
 ### Part F: a knowledge-based layer (BRB, needed for grade 5)
@@ -1289,12 +1289,21 @@ boosting recall is 0.000 at every level** (logreg 0.16, tree 0.80 because its fi
 
 **Why:** The brief: "Say what broke first, and at what level you would stop trusting the model."
 
-- [ ] **Before** looking at the curves, write the rule for "stop trusting" in a Markdown cell, e.g.
+- [x] **Before** looking at the curves, write the rule for "stop trusting" in a Markdown cell, e.g.
       "recall drops more than 0.05 below the clean score, or FAR doubles".
-- [ ] Figure: macro-F1, recall and FAR against the level, one line per model, for noise and for missing
+- [x] Figure: macro-F1, recall and FAR against the level, one line per model, for noise and for missing
       (`results/figures/E3_robustness.png`; the Lab 4.2 figure code is a good start).
-- [ ] Answer: which model and which metric broke first (recall or FAR?), at which level, and at which
+- [x] Answer: which model and which metric broke first (recall or FAR?), at which level, and at which
       level the rule says "stop". Do the glass boxes or the boosting model hold up better?
+
+**Result (2026-10-10):** `parts/40_robustness.ipynb`, step E3 (stand-in B4 for the figure style; rule,
+finer sweep, rule table, 4-panel figure, conclusions). The rule from this plan (recall more than 0.05
+below clean, or FAR doubled) was used unchanged. Finer levels were added because every model already
+failed at the E1/E2 levels: noise 0.001 to 0.02, and 1, 2, 3, 5 missing features. **Boosting and the
+tree fail at the smallest noise level, 0.001** (boosting recall 0.51); logistic regression is trusted up
+to 0.02. With missing features, all tolerate 1; boosting and tree fail at 2, logistic regression at 3.
+Recall broke first in every case. Saved: `E3_robustness_all_levels.csv`, `E3_stop_trusting.csv`,
+`E3_robustness.png`.
 
 #### E4 · What would an attacker change?
 
