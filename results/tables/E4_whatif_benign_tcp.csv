@@ -1,0 +1,4 @@
+model,"recall, attacks as recorded","recall, attacks with benign TCP settings"
+tree,0.9841,0.0108
+logreg,0.9962,0.0661
+boosting,0.9923,0.0000

@@ -1,0 +1,16 @@
+feature,rank,shap_share,direction,group,reason,meaning
+Fwd Seg Size Min,1,0.4202,forward,Free,"header size of the attacker's own packets: set by their operating system's TCP options, one setting",Smallest header size seen in the initiator's packets; depends on the initiator's operating system and TCP options
+FWD Init Win Bytes,2,0.2141,forward,Free,TCP window of the attacker's own machine: one system setting,TCP window size in the initiator's first packet: how much data it accepts at once. Set by the initiator's operating system (0 = not TCP or not recorded)
+Bwd Packets/s,3,0.1293,backward,Fixed,"the victim's replies, flags, or a mix of both sides",How fast the responder sent packets
+Total Length of Bwd Packet,4,0.0308,backward,Fixed,"the victim's replies, flags, or a mix of both sides",Total payload bytes the responder sent back
+Packet Length Max,5,0.0212,both,Costly,"both directions: the attacker can raise it by padding one own packet, but cannot lower the victim's packets","Largest packet payload in the conversation, either direction"
+Bwd Packet Length Min,6,0.0198,backward,Fixed,"the victim's replies, flags, or a mix of both sides",Smallest packet payload the responder sent
+Flow Bytes/s,7,0.0147,both,Costly,"both directions: sending slower lowers it, but slows the attack",Data rate of the whole conversation (bytes / duration)
+Bwd Packet Length Mean,8,0.0110,backward,Fixed,"the victim's replies, flags, or a mix of both sides",Average packet payload the responder sent
+Packet Length Mean,9,0.0105,both,Costly,"both directions: the attacker can shift it with padding, the victim's half stays","Average packet payload, both directions together"
+PSH Flag Count,10,0.0090,both,Fixed,"the victim's replies, flags, or a mix of both sides","Packets with the PSH flag (""deliver this data now"")"
+Bwd IAT Total,11,0.0077,backward,Fixed,"the victim's replies, flags, or a mix of both sides",Sum of the gaps between the responder's packets
+Bwd Header Length,12,0.0071,backward,Fixed,"the victim's replies, flags, or a mix of both sides",Total header bytes of the responder's packets
+Fwd Packet Length Mean,13,0.0063,forward,Free,timing or the attacker's own packet sizes,Average packet payload the initiator sent
+Total Bwd packets,14,0.0060,backward,Fixed,"the victim's replies, flags, or a mix of both sides",Number of packets the responder (server/victim) sent back
+Bwd Packet Length Max,15,0.0058,backward,Fixed,"the victim's replies, flags, or a mix of both sides",Largest packet payload the responder sent

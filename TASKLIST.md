@@ -556,7 +556,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 | E1 | Noise | `add_noise`; all three models at 6 noise levels | B2 | ☑ |
 | E2 | Missing features | `add_missing`; all three models at 5 levels | B2 | ☑ |
 | E3 | What broke first? | Figure, and the level at which we stop trusting the model | E1, E2 | ☑ |
-| E4 | What would an attacker change? | Feature-group table (needed for the Discussion); optional X3 runs the attack | T4, D1 | ☐ |
+| E4 | What would an attacker change? | Feature-group table (needed for the Discussion); optional X3 runs the attack | T4, D1 | ☑ |
 
 ### Part F: a knowledge-based layer (BRB, needed for grade 5)
 
@@ -1310,15 +1310,22 @@ Recall broke first in every case. Saved: `E3_robustness_all_levels.csv`, `E3_sto
 **Why:** Report section 7 asks "What would an attacker fake?". This step prepares the answer, and the
 optional X3 turns it into an experiment.
 
-- [ ] Using T4's glossary, sort the top 15 SHAP features into **Free** (the attacker controls it cheaply:
+- [x] Using T4's glossary, sort the top 15 SHAP features into **Free** (the attacker controls it cheaply:
       timing, forward packet sizes), **Costly** (possible but makes the attack louder: more forward
       packets) and **Fixed** (the attacker cannot change it: anything backward, i.e. the victim's replies).
       Name the TCP-settings features: an attacker *can* change their own machine's initial window size;
       write how that changes the D1 picture. Example rules: `reference/lab4_2_robustness/20_attack.ipynb`,
       step C1.
-- [ ] Save `results/tables/E4_feature_groups.csv`.
+- [x] Save `results/tables/E4_feature_groups.csv`.
 
 **Done when:** the table exists with one reason per feature.
+
+**Result (2026-10-10):** `parts/40_robustness.ipynb`, step E4 (stand-in D1; explanation, groups with
+reasons, weight per group, what-if, interpretation). Top 15: 3 Free, 3 Costly, 9 Fixed. **Free features
+carry 69.1% of the SHAP weight** (all 67 features), almost all in the attacker's own TCP settings.
+What-if, test attacks given the benign machines' most common TCP settings (32 and 5,792): **recall 0.000
+(boosting), 0.011 (tree), 0.066 (logistic regression)**. Saved: `E4_feature_groups.csv`,
+`E4_whatif_benign_tcp.csv`. Part E is complete.
 
 **Goes into the report:** section 5 (what, which levels, what broke first) and section 7 (attacker).
 

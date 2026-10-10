@@ -337,3 +337,16 @@ The user asked to implement E3. The finer sweep was needed because every model a
 
 **Verified**
 The notebook ran without errors and the figure was inspected. Gradient boosting and the tree fail at noise 0.001, logistic regression at 0.05. With missing features: boosting and the tree fail at 2, logistic regression at 3. The numbers in the conclusions match `E3_stop_trusting.csv`.
+
+## 2026-10-10 11:19 EEST: E4 done: what an attacker would fake
+
+**What**
+- `parts/40_robustness.ipynb`: added a `# STANDIN D1` cell (the global SHAP ranking, same 1,000 validation flows as D1) and step E4 (explanation, groups, what-if, interpretation). Every feature gets an attacker group (Free, Costly, Fixed) with a reason: the glossary's proposal plus seven hand-judged overrides. The step reports the 15 most important features and the share of SHAP weight per group, then a what-if that gives every test attack the benign machines' most common TCP settings. Executed.
+- `results/tables/E4_feature_groups.csv`, `results/tables/E4_whatif_benign_tcp.csv`: written.
+- `TASKLIST.md`: E4 ticked, result note added. Part E is complete.
+
+**Why**
+The user asked to implement E4, to prepare "what would an attacker fake?" for the Discussion. The groups are assigned by rule plus overrides rather than by a hard-coded top-15 list, so the table follows the notebook's own SHAP ranking.
+
+**Verified**
+The notebook ran without errors, and the stand-in reproduces the D1 ranking exactly. Free features carry 69.1% of the SHAP weight. With benign TCP settings, recall is 0.000, 0.011 and 0.066 (boosting, tree, logistic regression).
