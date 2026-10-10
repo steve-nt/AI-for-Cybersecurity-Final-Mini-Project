@@ -572,7 +572,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 
 | ID | Task | What it is and why | Needs | Done |
 |---|---|---|---|---|
-| G1 | Hide Fuzzers from training | Remove Fuzzers from the training set only, retrain | B2 | ☐ |
+| G1 | Hide Fuzzers from training | Remove Fuzzers from the training set only, retrain | B2 | ☑ |
 | G2 | Measure the cost | Overall recall and Fuzzers recall on the test set | G1 | ☐ |
 | G3 | Adapt with 50 and 100 labels | Add a few Fuzzers rows back, retrain, measure again | G2 | ☐ |
 | G4 | What we would do | One paragraph: were a few labels enough; how to notice in a real system | G3 | ☐ |
@@ -1439,11 +1439,17 @@ analyst to be useful. Saved: `F5_brb_vs_forest_checks.csv`. Part F is complete.
 **Why:** Attacks change. Hiding one type from training imitates a brand-new attack and measures what that
 costs.
 
-- [ ] `HIDDEN = "Fuzzers"`. `keep = (type_train != HIDDEN).to_numpy()`;
+- [x] `HIDDEN = "Fuzzers"`. `keep = (type_train != HIDDEN).to_numpy()`;
       `boost_hidden = make_boost().fit(X_train[keep], y_train[keep])`. Print how many rows were removed
       (15,606).
-- [ ] Keep the removed rows as `X_new, y_new` (the pool an analyst could label in G3). Test-set Fuzzers rows
+- [x] Keep the removed rows as `X_new, y_new` (the pool an analyst could label in G3). Test-set Fuzzers rows
       stay in the test set and are never trained on.
+
+**Result (2026-10-10):** new notebook `parts/60_adaptability.ipynb` (stand-ins A0 and B2, then step G1:
+explanation, removal with checks, retraining, summary). 15,606 Fuzzers flows removed from training only
+(167,457 training flows left, 32,548 attacks, 8 types); validation and test keep 5,202 each. `boost_hidden`
+trained with `make_boost()` (100 trees). The removed flows are kept as `X_new, y_new` for G3. Saved:
+`G1_hidden_training.csv`.
 
 #### G2 · Measure what it costs
 

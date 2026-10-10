@@ -1,0 +1,7 @@
+feature,value,training_flows,attack_share
+Fwd Seg Size Min,8,25518,0.0901
+Fwd Seg Size Min,20,51290,0.8935
+Fwd Seg Size Min,32,106079,0.0000
+FWD Init Win Bytes,0,25518,0.0901
+FWD Init Win Bytes,16383,50962,0.8997
+FWD Init Win Bytes,5792,87387,0.0000

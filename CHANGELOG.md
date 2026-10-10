@@ -415,3 +415,18 @@ The user asked to implement F5. The two checks back the written claims with meas
 
 **Verified**
 The notebook ran without errors. At noise 0.05, BRB macro-F1 is 0.897 against 0.472 (tree) and 0.536 (forest). With Bwd Packets/s missing, the BRB leaves 100% of flows undecided (recall 0), while the median-filled tree and forest reach 0.949.
+
+## 2026-10-10 13:19 EEST: G1 done (Fuzzers hidden from training); D1 fingerprint counts corrected
+
+**What**
+- `parts/60_adaptability.ipynb`: created, the notebook for Part G. It holds stand-ins for A0 and B2, then step G1 (explanation, code, summary). Every Fuzzers flow (15,606) is removed from the training set only, with checks that validation and test keep their 5,202 Fuzzers flows each and that no removed flow is in them. `boost_hidden` is trained with `make_boost()`, and the removed flows are kept as `X_new, y_new` for G3. Executed.
+- `results/tables/G1_hidden_training.csv`: written.
+- `parts/30_explanation.ipynb`: D1 now computes its fingerprint table in a new code cell (`D1_fingerprint_values.csv`), and the D1 text was corrected to the counts on the notebook's training split: `Fwd Seg Size Min` = 20 has 51,290 flows (was 51,301), 32 has 106,079 (was 106,150); window 16,383 has 50,962 (was 50,987), 5,792 has 87,387 (was 87,434); 45,850 of 48,154 attacks use window 16,383 (was 45,841 of 48,155). The percentages were right and are unchanged. Re-executed.
+- `results/tables/D1_fingerprint_values.csv`: written.
+- `TASKLIST.md`: G1 ticked, result note added.
+
+**Why**
+The user asked to implement G1. G1's output showed 48,154 training attacks, against the 48,155 quoted in D1. The D1 counts came from a separate script that stratified the split on label codes instead of names, which gives a slightly different split. The table is now computed inside the notebook, so the text and the data come from the same run.
+
+**Verified**
+Both notebooks ran without errors. The new D1 cell reproduces the corrected counts, and value 8 has 9.0% attacks, matching the D3 text. The D3 and D5 tables are unchanged after the re-run.
