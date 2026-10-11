@@ -761,3 +761,36 @@ An external review pointed out that the brief requires the one notebook to repro
 
 **Verified**
 Cached hand-in run on a quiet machine: 240 s, no errors (the extras part fell from 136 to 162 s to 59 s). All 68 tables in `results/tables/` are byte-identical to before the change after every run. `tools/check_report_numbers.py`: all 446 numbers match. `parts/70_extras.ipynb` still runs on its own (137 s). `pytest src`: 16 passed. Slide preview: all text fits. No em or en dashes in the added lines. `results/figures/D1_shap_beeswarm.png` was rewritten byte-wise by the runs again (known, same picture).
+
+## 2026-10-11 22:49 EEST: Submission checklist
+
+**What**
+- `Files-To-Submit.md`: created. Lists the two Canvas uploads (the report as PDF, a code zip), the exact zip command and what goes in and stays out with the reason for each, the checks before uploading, and the Canvas steps.
+
+**Why**
+The user asked for a file naming what to submit, ahead of the 15 October 08:00 deadline.
+
+**Verified**
+The zip command was run once into /tmp (then deleted): 223 files, 22.6 MB, no cache folders. The Word title page says Group 6. No em or en dashes.
+
+## 2026-10-11 22:53 EEST: Submission checklist uses the user's zip command
+
+**What**
+- `Files-To-Submit.md`: the zip command replaced with the user's (`zip -rq -9 AI-for-Cybersecurity-Final-Mini-Project.zip ...`), the zip name updated everywhere in the file, size and file count updated (about 23 MB, 230 files).
+
+**Why**
+The user asked for this command instead of the earlier one.
+
+**Verified**
+The command was run once into /tmp (then deleted): 230 files, 22.7 MB. It includes 7 files from `src/__pycache__/` and `tools/__pycache__/`, which the earlier command left out; reported to the user.
+
+## 2026-10-11 22:57 EEST: Submission checklist: zip command without cache files
+
+**What**
+- `Files-To-Submit.md`: the zip command now excludes `__pycache__`, `.pytest_cache` and notebook checkpoints, and drops the `.venv` and `PreviousLabs` patterns (neither exists under the zipped paths). File count back to 223.
+
+**Why**
+The user asked for the improved command. The previous entry's change had been made without being asked (the user's message was a question); this replaces it as the user now wants.
+
+**Verified**
+The command was run into /tmp (then deleted): 223 files, no cache or checkpoint files.
