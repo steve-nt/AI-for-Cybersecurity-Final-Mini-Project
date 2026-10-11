@@ -593,3 +593,36 @@ The user asked for the report in Markdown and Word only, so no PDF was built. Th
 
 **Verified**
 Numbers checked by hand against `results/tables/` (Table 1 uses 4 decimals where 3 would round ambiguously). No task-list references, task IDs or checkboxes in the report, the docx text or the build scripts; no em or en dashes. The docx XML is well formed and its title page lists one author. A throwaway PDF render (deleted) came to about 5.5 pages at 9.5 pt, so the Word version should be roughly 6 to 7 pages plus the title page; not measured in Word, because no Word or LibreOffice is installed here.
+
+## 2026-10-10 22:15 EEST: optional extras X3, X4 and X7
+
+**What**
+- `parts/70_extras.ipynb`: the intro now lists all six extras and is tagged `STEP X2`, so it comes first when the extras are assembled (it was tagged X6 and landed after X2). New stand-ins for E4, G1/G2, D1, D2 and F1/F2. Three new steps:
+  - X3, a constrained evasion attack: a greedy search on 50 test attacks caught by both B2 boosting and the X6 model. It runs unconstrained, constrained (E4 groups; timing and sizes up, rates down, TCP settings set to a common value, Fixed never, within the training range) and constrained with the TCP settings locked. It has tests for the rules and an audit that `X_test` is unchanged.
+  - X4, a learning curve: 10 to 500 labelled Fuzzers flows, 3 draws each, weight 1 and 100. It reuses G3's cached models for 50 and 100 labels, and makes the figure `X4_learning_curve.png`.
+  - X7, the BRB on the whole test set with each input missing and both missing, compared with boosting given the training median. It also shows an expert halving rule 7's belief in High on a copy of the rule base, with traces for the D2 false alarm.
+
+  Each step has an explanation and an interpretation cell. Executed without errors.
+- `parts/40_robustness.ipynb`, `parts/50_brb.ipynb`, `parts/60_adaptability.ipynb`: the sentences that referred to X3, X7 and X4 as future work now give their results and say they are in a separate notebook.
+- `mini_project_unsw_nb15.ipynb`: rebuilt and run with `tools/assemble.py --strict` for those text changes.
+- `results/tables/X3_*.csv`, `X4_*.csv`, `X7_*.csv`, `X7_traces.txt`, `results/figures/X4_learning_curve.png`: new.
+- `models/d8137a9708/`: 26 new cached results; now 100 files, 17 MB.
+- `README.md`: the extras row and the cache size are updated.
+- `TASKLIST.md`: X3, X4 and X7 are ticked, with results, and the earlier decision to skip them has an update note.
+
+**Why**
+The user asked for these three extras because time was left.
+
+Main findings:
+- **X3:** one TCP setting evades the B2 model for all 50 flows. The model without the fingerprint is still evaded in 34 of 50 by cheap timing and padding changes, so the deployment advice in the report needs that qualification.
+- **X4:** 500 labels with weight 100 reach a Fuzzers recall of 0.956, against 0.988 when all Fuzzers labels are seen.
+- **X7:** with an input missing, the BRB flags 65 to 100% of flows as undecided, while boosting fails silently (recall 0.21 with the window missing).
+
+**Verified**
+- `parts/70_extras.ipynb` ran without errors (6.5 min with the cache).
+- The full extras assembly (`--with-extras`, written to /tmp) also ran without errors.
+- The hand-in notebook ran in 239 s. That is slower than the earlier 107 s because the machine was under load at the time (load average about 4 to 5). It is still under the 5-minute limit.
+- No existing table in `results/tables/` changed. Only `D1_shap_beeswarm.png` differs at the byte level after the rerun; the report uses its own copy in `report/figures/`.
+- The X4 figure was checked by eye after two label and legend fixes.
+- The figure colours passed the dataviz palette validator. Its contrast warning is covered by the legend and the different marker shapes.
+- The new text has no em or en dashes.

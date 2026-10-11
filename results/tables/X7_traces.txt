@@ -1,0 +1,31 @@
+Test flow 10048 (the D2 false alarm)
+
+FWD Init Win Bytes missing:
+Step 2  matching degrees
+  FWD Init Win Bytes = missing  ->  Low 0.000, Medium 0.000, High 0.000
+  Bwd Packets/s = 23.2142  ->  Low 0.938, Medium 0.062, High 0.000
+Step 3  firing rules (activation weight)
+  rule 1: IF FWD Init Win Bytes is Low AND Bwd Packets/s is Low  w = 0.313
+  rule 2: IF FWD Init Win Bytes is Low AND Bwd Packets/s is Medium  w = 0.021
+  rule 4: IF FWD Init Win Bytes is Medium AND Bwd Packets/s is Low  w = 0.313
+  rule 5: IF FWD Init Win Bytes is Medium AND Bwd Packets/s is Medium  w = 0.021
+  rule 7: IF FWD Init Win Bytes is High AND Bwd Packets/s is Low  w = 0.313
+  rule 8: IF FWD Init Win Bytes is High AND Bwd Packets/s is Medium  w = 0.021
+Step 4  belief update factor 0.50  (missing input -> ignorance)
+Step 5  ER belief  Low 0.0554, Medium 0.3864, High 0.1289, ignorance 0.4293
+Utility  min 32.21, max 75.14, avg 53.67
+Decision  ATTACK (threshold 48.5)
+
+Rule 7 edited by the expert (belief in High halved):
+Step 2  matching degrees
+  FWD Init Win Bytes = 16383  ->  Low 0.000, Medium 0.478, High 0.522
+  Bwd Packets/s = 23.2142  ->  Low 0.938, Medium 0.062, High 0.000
+Step 3  firing rules (activation weight)
+  rule 4: IF FWD Init Win Bytes is Medium AND Bwd Packets/s is Low  w = 0.448
+  rule 5: IF FWD Init Win Bytes is Medium AND Bwd Packets/s is Medium  w = 0.030
+  rule 7: IF FWD Init Win Bytes is High AND Bwd Packets/s is Low  w = 0.490
+  rule 8: IF FWD Init Win Bytes is High AND Bwd Packets/s is Medium  w = 0.032
+Step 4  belief update factor 1.00
+Step 5  ER belief  Low 0.1079, Medium 0.5764, High 0.1576, ignorance 0.1581
+Utility  min 44.58, max 60.39, avg 52.49
+Decision  ATTACK (threshold 48.5)

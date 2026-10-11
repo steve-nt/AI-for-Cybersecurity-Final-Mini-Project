@@ -91,7 +91,7 @@ in `models/`, and in **about 25 minutes** without them. The brief's limit is 5 m
 shipped with the code.
 
 `models/` holds every trained model and the slow results (the LIME runs, the noise and missing-feature
-sweeps, the retrained models of Parts F and G): 74 files, 13 MB. The first run creates them and later
+sweeps, the retrained models of Parts F and G, and the optional extras): 100 files, 17 MB. The first run creates them and later
 runs load them. They sit in a sub-folder named after a fingerprint of the feature list, the split sizes,
 the seed and the scikit-learn version, so a different setup never loads old results; it retrains
 instead. Delete `models/` to force a full retraining. `random_state=42` is used everywhere, so a run
@@ -120,7 +120,7 @@ extras, and writes and runs the hand-in notebook.
 | `parts/40_robustness.ipynb` | Part E: noise, missing features, what an attacker could fake |
 | `parts/50_brb.ipynb` | Part F: the belief rule base and its comparison with small trees |
 | `parts/60_adaptability.ipynb` | Part G: Fuzzers hidden from training, then adapted to |
-| `parts/70_extras.ipynb` | Optional extras: fewer labels (1%, 5%), a model without the shortcut features, bootstrap confidence intervals |
+| `parts/70_extras.ipynb` | Optional extras: fewer labels (1%, 5%), a constrained evasion attack, a learning curve for the hidden attack, a model without the shortcut features, the BRB with missing inputs and an edited rule, bootstrap confidence intervals |
 | `src/` | `xai_tools.py` and `brbes.py` (from the course labs) and their tests |
 | `tools/` | `assemble.py`, `feature_glossary.py` |
 | `results/tables/`, `results/figures/` | Every table and figure, named after the step that made it |

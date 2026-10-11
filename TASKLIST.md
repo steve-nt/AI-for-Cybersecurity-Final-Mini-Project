@@ -583,11 +583,11 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 |---|---|---|---|---|
 | X1 | Self-supervised alternative for Part C | Fill-in-the-blanks network on unlabelled rows + classifier on the labels | C1 | ☐ |
 | X2 | Part C with 1% and 5% labels | Does pseudo-labelling help when labels are really scarce? | C3 | ☑ |
-| X3 | Constrained evasion attack | Third robustness test; the attacker changes only what they control | E4 | ☐ |
-| X4 | Learning curve for Part G | Fuzzers recall after adding 10, 25, 50, 100, 250, 500 labels | G3 | ☐ |
+| X3 | Constrained evasion attack | Third robustness test; the attacker changes only what they control | E4 | ☑ |
+| X4 | Learning curve for Part G | Fuzzers recall after adding 10, 25, 50, 100, 250, 500 labels | G3 | ☑ |
 | X5 | Hide each attack type in turn | Which attacks are "new" to the model and which are not | G2 | ☐ |
 | X6 | Shortcut check | Retrain without the TCP-settings features: does the model still work? | D1 | ☑ |
-| X7 | BRB with a missing input; an expert edits a rule | Shows the Unknown part growing and the rules being editable | F4 | ☐ |
+| X7 | BRB with a missing input; an expert edits a rule | Shows the Unknown part growing and the rules being editable | F4 | ☑ |
 | X8 | Settings searches on all training rows | Repeat B1–B2 without the 20% shortcut: are the same settings chosen? | B3 | ☐ |
 | X9 | Confidence intervals | Bootstrap the test scores: which differences between models are real? | B3 | ☑ |
 
@@ -1508,6 +1508,8 @@ random sample, route uncertain flows (and undecided BRB flows) to an analyst, re
 `parts/70_extras.ipynb`, outside the timed hand-in run (the report says so). The others are skipped:
 X3 (E4's what-if covers it), X4 (G3 answers the question), X5 (the trial did it), X7 (F4 covers the
 missing input), X1 and X8 (low value for the effort). The reasons are in `CHANGELOG.md`.
+**Update (2026-10-10, evening): X3, X4 and X7 were added after all**, in the same notebook, because time
+was left. X1, X5 and X8 stay skipped.
 
 Each extra goes in its part notebook with marker `# STEP X<n>`. Every extra adds run time: check the
 5-minute budget (section 1.5) in H4, and leave slow extras out of the hand-in notebook (keep their
@@ -1527,8 +1529,18 @@ results in a separate notebook and say so).
 - **X3 · Constrained evasion attack.** Greedy attack on 50 detected test attacks, changing only
   Free/Costly features upwards, at most 5 features, steps of half a training std. Constrained vs
   unconstrained success rate. Code: `reference/lab4_2_robustness/20_attack.ipynb`, steps C1–C3.
+  **Done (2026-10-10)** in `parts/70_extras.ipynb`: 50 test attacks caught by both B2 boosting and the X6
+  model (seed 42); timing and sizes only up, rates only down, TCP settings set to one of the 10 most common
+  training values, Fixed never, all within the training range, at most 5 steps. B2: constrained 50/50
+  evaded with one change (`Fwd Seg Size Min`), 31/50 with the TCP settings locked. X6 model: 34/50 evaded
+  with 3 to 4 cheap changes (forward timing, padding); unconstrained 50/50 for both. Saved:
+  `X3_attack_per_flow.csv`, `X3_attack_summary.csv`, `X3_attack_per_type.csv`.
 - **X4 · Learning curve for Part G.** Fuzzers recall after adding 10, 25, 50, 100, 250, 500 labelled
   rows: how many are needed to get back to the "seen" recall?
+  **Done (2026-10-10)**: 3 draws each, weight 1 and 100 (G3's models reused for 50 and 100). Weight 1:
+  0.686, 0.695, 0.694, 0.706, 0.757, 0.804; weight 100: 0.712, 0.777, 0.814, 0.845, 0.903, **0.956**
+  (FAR 0.027, as the seen model's 0.028). None reaches 0.988; 500 weighted labels close 89% of the gap.
+  Saved: `X4_learning_curve.csv`, `X4_learning_curve_runs.csv`, figure `X4_learning_curve.png`.
 - **X5 · Every type hidden.** G1–G2 for each attack type with at least 500 training rows; one table.
   Which attacks look "new" to the model?
 - **X6 · Shortcut check.** Retrain without `FWD Init Win Bytes`, `Bwd Init Win Bytes` and
@@ -1542,6 +1554,12 @@ results in a separate notebook and say so).
   `X6_noise.csv`, `X6_hidden.csv`, `X6_shap_top10.csv`.
 - **X7 · BRB extras.** One flow with one input missing (`np.nan`): the Unknown grows (show the trace).
   Then "the expert" edits one rule by hand on a **copy** of the rule base: what changes?
+  **Done (2026-10-10)**: on the whole test set, `FWD Init Win Bytes` missing: BRB cannot decide 65% of
+  flows (Unknown 0.42), while boosting with the median filled in misses 79% of attacks, still sure of 80%
+  of flows; `Bwd Packets/s` missing: BRB cannot decide 100%, boosting barely affected (macro-F1 0.968).
+  Rule 7's High belief halved on a copy: recall 0.982 to 0.934, FAR 0.044 to 0.043, cannot decide 1.7% to
+  29% (97% of the flows rule 7 touches), 763 attacks missed and 59 false alarms removed at the old
+  threshold. Saved: `X7_missing_inputs.csv`, `X7_expert_edit.csv`, `X7_traces.txt`.
 - **X8 · Settings searches on all training rows.** B1–B2 again, with every candidate trained on all of
   `X_train` instead of the 20% part. Are the same settings chosen? If yes, the 20% shortcut is safe.
 - **X9 · Confidence intervals.** Bootstrap the test set (200 resamples) for the boosting model's four

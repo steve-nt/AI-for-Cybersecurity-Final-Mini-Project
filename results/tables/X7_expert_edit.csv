@@ -1,0 +1,5 @@
+rules,set,accuracy,macro_f1,recall,pr_auc,far,mean_unknown,cannot_decide
+original rules,validation,0.9631,0.9540,0.9839,0.8946,0.0443,0.0008,0.0184
+original rules,test,0.9627,0.9534,0.9819,0.8954,0.0442,0.0008,0.0174
+rule 7 edited,validation,0.9522,0.9395,0.9388,0.8922,0.0430,0.0448,0.2923
+rule 7 edited,test,0.9511,0.9381,0.9344,0.8929,0.0429,0.0448,0.2916

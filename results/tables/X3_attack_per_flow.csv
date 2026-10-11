@@ -1,0 +1,301 @@
+model,run,test_position,attack_type,p_before,p_after,evaded,n_features_changed,changed
+gradient boosting (B2),unconstrained,4024,Exploits,0.9872,0.0735,True,1,Bwd Packets/s
+gradient boosting (B2),unconstrained,4245,Fuzzers,0.9688,0.1495,True,1,Bwd Packets/s
+gradient boosting (B2),unconstrained,5430,Fuzzers,0.9230,0.0964,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,5635,Fuzzers,0.7660,0.0310,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,5807,Reconnaissance,0.9299,0.0620,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,5915,Exploits,0.9970,0.0054,True,2,Bwd Packets/s;FWD Init Win Bytes
+gradient boosting (B2),unconstrained,7868,Fuzzers,0.7947,0.0339,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,10333,Reconnaissance,0.9629,0.0733,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,11397,Exploits,0.9985,0.1367,True,1,Bwd Packets/s
+gradient boosting (B2),unconstrained,12522,Exploits,0.9410,0.0690,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,14202,Fuzzers,0.9626,0.1046,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,17226,Fuzzers,0.9397,0.0538,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,21781,Exploits,0.9982,0.1127,True,1,Bwd Packets/s
+gradient boosting (B2),unconstrained,22680,Fuzzers,0.8781,0.0551,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,24748,Reconnaissance,0.6344,0.0241,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,26675,Fuzzers,0.9648,0.0858,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,26999,Exploits,0.7780,0.0347,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,27363,Exploits,0.9983,0.1227,True,1,Bwd Packets/s
+gradient boosting (B2),unconstrained,27526,Reconnaissance,0.9149,0.0603,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,27789,Exploits,0.8976,0.0518,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,27806,Fuzzers,0.8568,0.0355,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,30834,Fuzzers,0.9488,0.1356,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,31614,Shellcode,0.8268,0.0308,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,32426,Fuzzers,0.8771,0.0413,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,33630,Fuzzers,0.9813,0.1441,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,34265,Fuzzers,0.9722,0.1891,True,1,Bwd Packets/s
+gradient boosting (B2),unconstrained,38830,Reconnaissance,0.9909,0.1963,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,39611,Exploits,0.9382,0.0552,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,40158,Analysis,0.7977,0.0327,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,41769,Reconnaissance,0.9071,0.0483,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,42876,Generic,0.8984,0.0462,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,43150,Fuzzers,0.9649,0.0774,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,44030,Shellcode,0.9731,0.1077,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,45098,Fuzzers,0.7626,0.0151,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,46448,Generic,0.9480,0.0841,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,46537,Exploits,0.9789,0.1213,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,47356,Fuzzers,0.8713,0.0339,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,47723,Exploits,0.9967,0.0114,True,2,FWD Init Win Bytes;Bwd Packets/s
+gradient boosting (B2),unconstrained,47837,Fuzzers,0.9623,0.0822,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,48085,Fuzzers,0.9817,0.1169,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,50234,Exploits,0.9985,0.1024,True,1,Bwd Packets/s
+gradient boosting (B2),unconstrained,50531,Generic,0.9179,0.0525,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,51159,Exploits,0.9978,0.0138,True,2,FWD Init Win Bytes;Bwd Packets/s
+gradient boosting (B2),unconstrained,52187,Reconnaissance,0.9828,0.1375,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,52274,DoS,0.9932,0.2835,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,54063,Fuzzers,0.8847,0.0515,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,54351,Fuzzers,0.9499,0.0954,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,56304,Exploits,0.9799,0.1432,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,59162,Fuzzers,0.8586,0.0363,True,1,FWD Init Win Bytes
+gradient boosting (B2),unconstrained,59345,Exploits,0.9985,0.1340,True,1,Bwd Packets/s
+gradient boosting (B2),constrained,4024,Exploits,0.9872,0.0027,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,4245,Fuzzers,0.9688,0.0021,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,5430,Fuzzers,0.9230,0.0020,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,5635,Fuzzers,0.7660,0.0009,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,5807,Reconnaissance,0.9299,0.0017,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,5915,Exploits,0.9970,0.0020,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,7868,Fuzzers,0.7947,0.0010,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,10333,Reconnaissance,0.9629,0.0021,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,11397,Exploits,0.9985,0.0034,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,12522,Exploits,0.9410,0.0017,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,14202,Fuzzers,0.9626,0.0020,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,17226,Fuzzers,0.9397,0.0024,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,21781,Exploits,0.9982,0.0029,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,22680,Fuzzers,0.8781,0.0011,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,24748,Reconnaissance,0.6344,0.0006,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,26675,Fuzzers,0.9648,0.0025,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,26999,Exploits,0.7780,0.0009,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,27363,Exploits,0.9983,0.0026,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,27526,Reconnaissance,0.9149,0.0014,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,27789,Exploits,0.8976,0.0014,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,27806,Fuzzers,0.8568,0.0014,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,30834,Fuzzers,0.9488,0.0021,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,31614,Shellcode,0.8268,0.0014,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,32426,Fuzzers,0.8771,0.0014,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,33630,Fuzzers,0.9813,0.0025,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,34265,Fuzzers,0.9722,0.0021,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,38830,Reconnaissance,0.9909,0.0027,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,39611,Exploits,0.9382,0.0022,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,40158,Analysis,0.7977,0.0010,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,41769,Reconnaissance,0.9071,0.0016,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,42876,Generic,0.8984,0.0016,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,43150,Fuzzers,0.9649,0.0021,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,44030,Shellcode,0.9731,0.0022,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,45098,Fuzzers,0.7626,0.0018,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,46448,Generic,0.9480,0.0018,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,46537,Exploits,0.9789,0.0025,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,47356,Fuzzers,0.8713,0.0018,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,47723,Exploits,0.9967,0.0027,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,47837,Fuzzers,0.9623,0.0025,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,48085,Fuzzers,0.9817,0.0026,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,50234,Exploits,0.9985,0.0029,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,50531,Generic,0.9179,0.0018,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,51159,Exploits,0.9978,0.0029,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,52187,Reconnaissance,0.9828,0.0027,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,52274,DoS,0.9932,0.0029,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,54063,Fuzzers,0.8847,0.0013,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,54351,Fuzzers,0.9499,0.0017,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,56304,Exploits,0.9799,0.0025,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,59162,Fuzzers,0.8586,0.0014,True,1,Fwd Seg Size Min
+gradient boosting (B2),constrained,59345,Exploits,0.9985,0.0026,True,1,Fwd Seg Size Min
+gradient boosting (B2),"constrained, TCP locked",4024,Exploits,0.9872,0.7242,False,5,Flow IAT Min;Fwd Header Length;Fwd IAT Total;Fwd IAT Max;Flow IAT Mean
+gradient boosting (B2),"constrained, TCP locked",4245,Fuzzers,0.9688,0.4528,True,3,Fwd Packet Length Std;Flow IAT Min;Flow Duration
+gradient boosting (B2),"constrained, TCP locked",5430,Fuzzers,0.9230,0.4537,True,5,Fwd IAT Min;Total Length of Fwd Packet;Flow IAT Min;Total Fwd Packet;Fwd Act Data Pkts
+gradient boosting (B2),"constrained, TCP locked",5635,Fuzzers,0.7660,0.4314,True,1,Fwd IAT Mean
+gradient boosting (B2),"constrained, TCP locked",5807,Reconnaissance,0.9299,0.2669,True,3,Fwd IAT Mean;Fwd Packet Length Mean;Flow IAT Std
+gradient boosting (B2),"constrained, TCP locked",5915,Exploits,0.9970,0.9675,False,5,Fwd IAT Min;Fwd IAT Mean;Total Length of Fwd Packet;Subflow Fwd Packets;Flow IAT Mean
+gradient boosting (B2),"constrained, TCP locked",7868,Fuzzers,0.7947,0.3995,True,2,Flow IAT Min;Fwd Packet Length Mean
+gradient boosting (B2),"constrained, TCP locked",10333,Reconnaissance,0.9629,0.4735,True,5,Flow IAT Min;Total Length of Fwd Packet;Fwd IAT Min;Packet Length Mean;Packet Length Max
+gradient boosting (B2),"constrained, TCP locked",11397,Exploits,0.9985,0.3716,True,3,Flow Packets/s;Fwd IAT Min;Fwd IAT Mean;Fwd IAT Mean
+gradient boosting (B2),"constrained, TCP locked",12522,Exploits,0.9410,0.2072,True,2,Fwd IAT Mean;Flow IAT Std
+gradient boosting (B2),"constrained, TCP locked",14202,Fuzzers,0.9626,0.4211,True,3,Fwd Packets/s;Fwd Packet Length Mean;Fwd IAT Mean
+gradient boosting (B2),"constrained, TCP locked",17226,Fuzzers,0.9397,0.4946,True,3,Flow IAT Min;Packet Length Max;Fwd IAT Min
+gradient boosting (B2),"constrained, TCP locked",21781,Exploits,0.9982,0.3459,True,4,Fwd IAT Mean;Fwd IAT Min;Flow Packets/s;Flow IAT Max
+gradient boosting (B2),"constrained, TCP locked",22680,Fuzzers,0.8781,0.3584,True,3,Fwd IAT Min;Total Length of Fwd Packet;Fwd Packet Length Mean
+gradient boosting (B2),"constrained, TCP locked",24748,Reconnaissance,0.6344,0.2534,True,1,Fwd IAT Mean
+gradient boosting (B2),"constrained, TCP locked",26675,Fuzzers,0.9648,0.5483,False,5,Flow IAT Min;Packet Length Max;Fwd Packet Length Std;Fwd IAT Min;Packet Length Mean
+gradient boosting (B2),"constrained, TCP locked",26999,Exploits,0.7780,0.3422,True,2,Fwd Packet Length Mean;Fwd IAT Mean
+gradient boosting (B2),"constrained, TCP locked",27363,Exploits,0.9983,0.8696,False,5,Fwd IAT Min;Flow IAT Std;Fwd IAT Std;Flow IAT Min;Flow Packets/s
+gradient boosting (B2),"constrained, TCP locked",27526,Reconnaissance,0.9149,0.3783,True,3,Fwd Packet Length Mean;Flow IAT Min;Fwd IAT Mean
+gradient boosting (B2),"constrained, TCP locked",27789,Exploits,0.8976,0.4240,True,2,Fwd Packet Length Mean;Fwd IAT Mean
+gradient boosting (B2),"constrained, TCP locked",27806,Fuzzers,0.8568,0.3918,True,2,Fwd Packets/s;Fwd Packet Length Mean
+gradient boosting (B2),"constrained, TCP locked",30834,Fuzzers,0.9488,0.4491,True,4,Fwd Packet Length Std;Flow IAT Max;Total Length of Fwd Packet;Flow IAT Min
+gradient boosting (B2),"constrained, TCP locked",31614,Shellcode,0.8268,0.3710,True,2,Fwd IAT Min;Fwd IAT Mean
+gradient boosting (B2),"constrained, TCP locked",32426,Fuzzers,0.8771,0.4216,True,3,Flow IAT Min;Fwd Packet Length Std;Packet Length Mean
+gradient boosting (B2),"constrained, TCP locked",33630,Fuzzers,0.9813,0.7317,False,5,Flow IAT Min;Fwd IAT Min;Total Length of Fwd Packet;Flow IAT Std;Flow IAT Mean
+gradient boosting (B2),"constrained, TCP locked",34265,Fuzzers,0.9722,0.3471,True,5,Fwd Packet Length Std;Flow IAT Max;Flow IAT Min;Fwd IAT Min;Flow Duration
+gradient boosting (B2),"constrained, TCP locked",38830,Reconnaissance,0.9909,0.7261,False,5,Flow IAT Min;Total Length of Fwd Packet;Fwd IAT Total;Packet Length Mean;Fwd IAT Std
+gradient boosting (B2),"constrained, TCP locked",39611,Exploits,0.9382,0.5091,False,5,Fwd IAT Min;Total Length of Fwd Packet;Flow IAT Min;Packet Length Max;Fwd Packet Length Mean
+gradient boosting (B2),"constrained, TCP locked",40158,Analysis,0.7977,0.4341,True,2,Flow IAT Min;Fwd Act Data Pkts
+gradient boosting (B2),"constrained, TCP locked",41769,Reconnaissance,0.9071,0.4127,True,2,Fwd IAT Mean;Fwd Packet Length Mean
+gradient boosting (B2),"constrained, TCP locked",42876,Generic,0.8984,0.3118,True,2,Fwd IAT Mean;Fwd IAT Std
+gradient boosting (B2),"constrained, TCP locked",43150,Fuzzers,0.9649,0.5722,False,5,Flow IAT Min;Total Length of Fwd Packet;Packet Length Mean;Fwd IAT Min;Flow Duration
+gradient boosting (B2),"constrained, TCP locked",44030,Shellcode,0.9731,0.5474,False,5,Fwd IAT Min;Total Length of Fwd Packet;Packet Length Mean;Flow IAT Min;Fwd IAT Total
+gradient boosting (B2),"constrained, TCP locked",45098,Fuzzers,0.7626,0.6350,False,3,Flow IAT Min;Fwd IAT Min;Fwd IAT Mean
+gradient boosting (B2),"constrained, TCP locked",46448,Generic,0.9480,0.2059,True,2,Fwd IAT Mean;Flow IAT Std
+gradient boosting (B2),"constrained, TCP locked",46537,Exploits,0.9789,0.5945,False,5,Flow IAT Min;Total Length of Fwd Packet;Packet Length Mean;Fwd IAT Std;Fwd IAT Min
+gradient boosting (B2),"constrained, TCP locked",47356,Fuzzers,0.8713,0.4842,True,5,Fwd IAT Min;Flow IAT Min;Flow IAT Mean;Packet Length Mean;Fwd IAT Std
+gradient boosting (B2),"constrained, TCP locked",47723,Exploits,0.9967,0.8417,False,4,Fwd IAT Min;Fwd IAT Std;Flow IAT Min;Fwd Header Length;Fwd Header Length
+gradient boosting (B2),"constrained, TCP locked",47837,Fuzzers,0.9623,0.5338,False,5,Flow IAT Min;Packet Length Max;Fwd Packet Length Std;Fwd IAT Min;Flow IAT Mean
+gradient boosting (B2),"constrained, TCP locked",48085,Fuzzers,0.9817,0.7208,False,5,Flow IAT Min;Total Length of Fwd Packet;Packet Length Mean;Fwd IAT Max;Flow IAT Mean
+gradient boosting (B2),"constrained, TCP locked",50234,Exploits,0.9985,0.4951,True,2,Fwd IAT Mean;Fwd IAT Min;Fwd IAT Mean
+gradient boosting (B2),"constrained, TCP locked",50531,Generic,0.9179,0.3487,True,3,Fwd Packets/s;Fwd Packet Length Mean;Flow Duration
+gradient boosting (B2),"constrained, TCP locked",51159,Exploits,0.9978,0.7995,False,5,Fwd IAT Mean;Fwd IAT Min;Fwd Header Length;Flow IAT Min;Flow Packets/s
+gradient boosting (B2),"constrained, TCP locked",52187,Reconnaissance,0.9828,0.6139,False,5,Fwd Packet Length Mean;Total Length of Fwd Packet;Flow IAT Min;Packet Length Mean;Fwd Packet Length Max
+gradient boosting (B2),"constrained, TCP locked",52274,DoS,0.9932,0.7666,False,5,Flow IAT Mean;Flow IAT Min;Total Length of Fwd Packet;Packet Length Max;Fwd IAT Max
+gradient boosting (B2),"constrained, TCP locked",54063,Fuzzers,0.8847,0.3939,True,2,Fwd Packet Length Mean;Fwd Packets/s
+gradient boosting (B2),"constrained, TCP locked",54351,Fuzzers,0.9499,0.3625,True,2,Fwd IAT Mean;Fwd IAT Min
+gradient boosting (B2),"constrained, TCP locked",56304,Exploits,0.9799,0.6052,False,5,Fwd IAT Min;Fwd IAT Mean;Total Length of Fwd Packet;Flow Bytes/s;Fwd IAT Total
+gradient boosting (B2),"constrained, TCP locked",59162,Fuzzers,0.8586,0.4401,True,3,Flow IAT Min;Fwd Packet Length Std;Fwd IAT Min
+gradient boosting (B2),"constrained, TCP locked",59345,Exploits,0.9985,0.7273,False,5,Fwd IAT Min;Flow IAT Std;Flow IAT Min;Fwd IAT Std;Flow IAT Mean
+without fingerprint (X6),unconstrained,4024,Exploits,0.9846,0.0000,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,4245,Fuzzers,0.9556,0.0393,True,1,PSH Flag Count
+without fingerprint (X6),unconstrained,5430,Fuzzers,0.9323,0.0008,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,5635,Fuzzers,0.7948,0.0001,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,5807,Reconnaissance,0.9266,0.0000,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,5915,Exploits,0.9948,0.0001,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,7868,Fuzzers,0.8155,0.0001,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,10333,Reconnaissance,0.9638,0.0001,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,11397,Exploits,0.9976,0.0081,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,12522,Exploits,0.9408,0.0000,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,14202,Fuzzers,0.9484,0.0000,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,17226,Fuzzers,0.9600,0.0001,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,21781,Exploits,0.9978,0.0081,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,22680,Fuzzers,0.8709,0.0001,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,24748,Reconnaissance,0.6596,0.0000,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,26675,Fuzzers,0.9727,0.0001,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,26999,Exploits,0.8180,0.0001,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,27363,Exploits,0.9972,0.0001,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,27526,Reconnaissance,0.9155,0.0001,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,27789,Exploits,0.8995,0.0001,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,27806,Fuzzers,0.8670,0.0001,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,30834,Fuzzers,0.9516,0.0439,True,1,PSH Flag Count
+without fingerprint (X6),unconstrained,31614,Shellcode,0.8549,0.0001,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,32426,Fuzzers,0.8821,0.0001,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,33630,Fuzzers,0.9834,0.0001,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,34265,Fuzzers,0.9655,0.0585,True,1,PSH Flag Count
+without fingerprint (X6),unconstrained,38830,Reconnaissance,0.9892,0.0001,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,39611,Exploits,0.9292,0.0001,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,40158,Analysis,0.7900,0.0001,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,41769,Reconnaissance,0.9052,0.0000,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,42876,Generic,0.8923,0.0001,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,43150,Fuzzers,0.9561,0.0001,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,44030,Shellcode,0.9680,0.0001,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,45098,Fuzzers,0.7526,0.0001,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,46448,Generic,0.9308,0.0000,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,46537,Exploits,0.9789,0.0001,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,47356,Fuzzers,0.8668,0.0001,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,47723,Exploits,0.9959,0.0001,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,47837,Fuzzers,0.9618,0.0001,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,48085,Fuzzers,0.9684,0.0001,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,50234,Exploits,0.9984,0.0089,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,50531,Generic,0.9509,0.0001,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,51159,Exploits,0.9975,0.0077,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,52187,Reconnaissance,0.9776,0.0001,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,52274,DoS,0.9919,0.0001,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,54063,Fuzzers,0.8871,0.0001,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,54351,Fuzzers,0.9445,0.0000,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,56304,Exploits,0.9694,0.0001,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,59162,Fuzzers,0.8463,0.0001,True,1,Bwd Packets/s
+without fingerprint (X6),unconstrained,59345,Exploits,0.9967,0.0001,True,1,Bwd Packets/s
+without fingerprint (X6),constrained,4024,Exploits,0.9846,0.6083,False,5,Fwd IAT Min;Fwd IAT Std;Packet Length Mean;Flow IAT Min;Fwd IAT Max
+without fingerprint (X6),constrained,4245,Fuzzers,0.9556,0.3305,True,3,Fwd Header Length;Fwd IAT Total;Fwd Packet Length Mean
+without fingerprint (X6),constrained,5430,Fuzzers,0.9323,0.4957,True,2,Fwd IAT Min;Fwd Header Length
+without fingerprint (X6),constrained,5635,Fuzzers,0.7948,0.3964,True,1,Fwd IAT Std
+without fingerprint (X6),constrained,5807,Reconnaissance,0.9266,0.4945,True,2,Fwd Header Length;Fwd Packet Length Mean
+without fingerprint (X6),constrained,5915,Exploits,0.9948,0.9341,False,5,Fwd Header Length;Fwd IAT Min;Fwd IAT Total;Flow IAT Max;Fwd Packets/s
+without fingerprint (X6),constrained,7868,Fuzzers,0.8155,0.4613,True,2,Fwd Packet Length Mean;Fwd Header Length
+without fingerprint (X6),constrained,10333,Reconnaissance,0.9638,0.4917,True,4,Fwd Header Length;Fwd IAT Min;Total Length of Fwd Packet;Fwd IAT Total
+without fingerprint (X6),constrained,11397,Exploits,0.9976,0.9279,False,5,Flow Bytes/s;Fwd Packets/s;Total Length of Fwd Packet;Flow IAT Min;Fwd IAT Min
+without fingerprint (X6),constrained,12522,Exploits,0.9408,0.3935,True,2,Fwd Header Length;Fwd IAT Total
+without fingerprint (X6),constrained,14202,Fuzzers,0.9484,0.2929,True,3,Fwd Header Length;Fwd Packet Length Mean;Fwd IAT Std
+without fingerprint (X6),constrained,17226,Fuzzers,0.9600,0.6466,False,5,Fwd IAT Min;Fwd Packet Length Std;Fwd Header Length;Fwd IAT Total;Packet Length Max
+without fingerprint (X6),constrained,21781,Exploits,0.9978,0.9128,False,5,Fwd IAT Mean;Fwd IAT Min;Flow Bytes/s;Fwd Packets/s;Fwd Header Length
+without fingerprint (X6),constrained,22680,Fuzzers,0.8709,0.4044,True,3,Fwd Packet Length Mean;Fwd IAT Min;Fwd Header Length
+without fingerprint (X6),constrained,24748,Reconnaissance,0.6596,0.2418,True,1,Fwd IAT Total
+without fingerprint (X6),constrained,26675,Fuzzers,0.9727,0.7760,False,5,Fwd IAT Min;Fwd Packet Length Std;Packet Length Mean;Flow Duration;Packet Length Max
+without fingerprint (X6),constrained,26999,Exploits,0.8180,0.4294,True,2,Fwd Packet Length Mean;Fwd IAT Std
+without fingerprint (X6),constrained,27363,Exploits,0.9972,0.9384,False,4,Fwd IAT Min;Total Fwd Packet;Packet Length Mean;Fwd IAT Mean
+without fingerprint (X6),constrained,27526,Reconnaissance,0.9155,0.4302,True,3,Fwd Packet Length Mean;Fwd IAT Min;Fwd Header Length
+without fingerprint (X6),constrained,27789,Exploits,0.8995,0.3583,True,2,Fwd IAT Std;Fwd Packet Length Mean
+without fingerprint (X6),constrained,27806,Fuzzers,0.8670,0.4695,True,2,Fwd IAT Std;Fwd IAT Mean
+without fingerprint (X6),constrained,30834,Fuzzers,0.9516,0.4903,True,2,Fwd Header Length;Fwd IAT Std
+without fingerprint (X6),constrained,31614,Shellcode,0.8549,0.3879,True,3,Fwd Header Length;Fwd IAT Total;Fwd Packet Length Mean
+without fingerprint (X6),constrained,32426,Fuzzers,0.8821,0.4907,True,2,Fwd Packet Length Mean;Fwd IAT Min
+without fingerprint (X6),constrained,33630,Fuzzers,0.9834,0.8759,False,5,Fwd IAT Min;Flow IAT Min;Fwd IAT Total;Flow Bytes/s;Fwd Header Length
+without fingerprint (X6),constrained,34265,Fuzzers,0.9655,0.3219,True,3,Fwd Header Length;Fwd IAT Std;Fwd IAT Total
+without fingerprint (X6),constrained,38830,Reconnaissance,0.9892,0.7030,False,5,Fwd Header Length;Fwd IAT Total;Fwd Packets/s;Total Length of Fwd Packet;Fwd IAT Std
+without fingerprint (X6),constrained,39611,Exploits,0.9292,0.3444,True,3,Fwd Header Length;Fwd IAT Min;Fwd IAT Total
+without fingerprint (X6),constrained,40158,Analysis,0.7900,0.3775,True,2,Fwd IAT Min;Subflow Fwd Bytes
+without fingerprint (X6),constrained,41769,Reconnaissance,0.9052,0.4503,True,2,Fwd Header Length;Fwd IAT Std
+without fingerprint (X6),constrained,42876,Generic,0.8923,0.2876,True,3,Fwd IAT Std;Fwd IAT Mean;Fwd IAT Max
+without fingerprint (X6),constrained,43150,Fuzzers,0.9561,0.4702,True,5,Fwd IAT Min;Fwd Header Length;Total Length of Fwd Packet;Fwd IAT Total;Flow IAT Std
+without fingerprint (X6),constrained,44030,Shellcode,0.9680,0.4231,True,5,Fwd Header Length;Fwd IAT Min;Fwd IAT Total;Total Length of Fwd Packet;Packet Length Mean
+without fingerprint (X6),constrained,45098,Fuzzers,0.7526,0.4912,True,3,Fwd IAT Min;Flow IAT Min;Fwd Header Length
+without fingerprint (X6),constrained,46448,Generic,0.9308,0.1988,True,2,Total Fwd Packet;Fwd IAT Total
+without fingerprint (X6),constrained,46537,Exploits,0.9789,0.5796,False,5,Fwd IAT Min;Fwd Header Length;Fwd IAT Total;Packet Length Mean;Fwd Packet Length Mean
+without fingerprint (X6),constrained,47356,Fuzzers,0.8668,0.4821,True,5,Fwd IAT Min;Flow IAT Std;Fwd IAT Std;Packet Length Mean;Packet Length Max
+without fingerprint (X6),constrained,47723,Exploits,0.9959,0.9167,False,5,Fwd IAT Min;Fwd Header Length;Fwd IAT Std;Flow IAT Std;Fwd IAT Mean
+without fingerprint (X6),constrained,47837,Fuzzers,0.9618,0.4337,True,5,Fwd IAT Min;Fwd Packet Length Max;Subflow Fwd Bytes;Fwd Header Length;Fwd IAT Total
+without fingerprint (X6),constrained,48085,Fuzzers,0.9684,0.4266,True,5,Fwd IAT Min;Fwd Header Length;Fwd IAT Total;Fwd IAT Std;Packet Length Mean
+without fingerprint (X6),constrained,50234,Exploits,0.9984,0.8150,False,4,Fwd IAT Min;Fwd Packets/s;Fwd IAT Mean;Fwd IAT Mean;Fwd Packet Length Mean
+without fingerprint (X6),constrained,50531,Generic,0.9509,0.4972,True,3,Fwd Header Length;Fwd Packet Length Mean;Total Length of Fwd Packet
+without fingerprint (X6),constrained,51159,Exploits,0.9975,0.5275,False,5,Fwd IAT Min;Fwd Header Length;Fwd Packets/s;Fwd IAT Mean;Fwd Packet Length Max
+without fingerprint (X6),constrained,52187,Reconnaissance,0.9776,0.4545,True,5,Fwd Packet Length Mean;Fwd IAT Min;Fwd Header Length;Fwd IAT Total;Total Length of Fwd Packet
+without fingerprint (X6),constrained,52274,DoS,0.9919,0.7806,False,5,Subflow Fwd Bytes;Fwd IAT Min;Fwd Header Length;Fwd IAT Std;Fwd IAT Total
+without fingerprint (X6),constrained,54063,Fuzzers,0.8871,0.4816,True,2,Fwd IAT Std;Fwd Packet Length Mean
+without fingerprint (X6),constrained,54351,Fuzzers,0.9445,0.4680,True,3,Fwd IAT Min;Fwd IAT Std;Fwd IAT Mean
+without fingerprint (X6),constrained,56304,Exploits,0.9694,0.5267,False,5,Fwd Header Length;Subflow Fwd Bytes;Fwd IAT Total;Flow Bytes/s;Fwd Packets/s
+without fingerprint (X6),constrained,59162,Fuzzers,0.8463,0.3315,True,3,Fwd Packet Length Mean;Fwd IAT Min;Fwd Header Length
+without fingerprint (X6),constrained,59345,Exploits,0.9967,0.9614,False,2,Fwd IAT Min;Fwd IAT Mean
+without fingerprint (X6),"constrained, TCP locked",4024,Exploits,0.9846,0.6083,False,5,Fwd IAT Min;Fwd IAT Std;Packet Length Mean;Flow IAT Min;Fwd IAT Max
+without fingerprint (X6),"constrained, TCP locked",4245,Fuzzers,0.9556,0.3305,True,3,Fwd Header Length;Fwd IAT Total;Fwd Packet Length Mean
+without fingerprint (X6),"constrained, TCP locked",5430,Fuzzers,0.9323,0.4957,True,2,Fwd IAT Min;Fwd Header Length
+without fingerprint (X6),"constrained, TCP locked",5635,Fuzzers,0.7948,0.3964,True,1,Fwd IAT Std
+without fingerprint (X6),"constrained, TCP locked",5807,Reconnaissance,0.9266,0.4945,True,2,Fwd Header Length;Fwd Packet Length Mean
+without fingerprint (X6),"constrained, TCP locked",5915,Exploits,0.9948,0.9341,False,5,Fwd Header Length;Fwd IAT Min;Fwd IAT Total;Flow IAT Max;Fwd Packets/s
+without fingerprint (X6),"constrained, TCP locked",7868,Fuzzers,0.8155,0.4613,True,2,Fwd Packet Length Mean;Fwd Header Length
+without fingerprint (X6),"constrained, TCP locked",10333,Reconnaissance,0.9638,0.4917,True,4,Fwd Header Length;Fwd IAT Min;Total Length of Fwd Packet;Fwd IAT Total
+without fingerprint (X6),"constrained, TCP locked",11397,Exploits,0.9976,0.9279,False,5,Flow Bytes/s;Fwd Packets/s;Total Length of Fwd Packet;Flow IAT Min;Fwd IAT Min
+without fingerprint (X6),"constrained, TCP locked",12522,Exploits,0.9408,0.3935,True,2,Fwd Header Length;Fwd IAT Total
+without fingerprint (X6),"constrained, TCP locked",14202,Fuzzers,0.9484,0.2929,True,3,Fwd Header Length;Fwd Packet Length Mean;Fwd IAT Std
+without fingerprint (X6),"constrained, TCP locked",17226,Fuzzers,0.9600,0.6466,False,5,Fwd IAT Min;Fwd Packet Length Std;Fwd Header Length;Fwd IAT Total;Packet Length Max
+without fingerprint (X6),"constrained, TCP locked",21781,Exploits,0.9978,0.9128,False,5,Fwd IAT Mean;Fwd IAT Min;Flow Bytes/s;Fwd Packets/s;Fwd Header Length
+without fingerprint (X6),"constrained, TCP locked",22680,Fuzzers,0.8709,0.4044,True,3,Fwd Packet Length Mean;Fwd IAT Min;Fwd Header Length
+without fingerprint (X6),"constrained, TCP locked",24748,Reconnaissance,0.6596,0.2418,True,1,Fwd IAT Total
+without fingerprint (X6),"constrained, TCP locked",26675,Fuzzers,0.9727,0.7760,False,5,Fwd IAT Min;Fwd Packet Length Std;Packet Length Mean;Flow Duration;Packet Length Max
+without fingerprint (X6),"constrained, TCP locked",26999,Exploits,0.8180,0.4294,True,2,Fwd Packet Length Mean;Fwd IAT Std
+without fingerprint (X6),"constrained, TCP locked",27363,Exploits,0.9972,0.9384,False,4,Fwd IAT Min;Total Fwd Packet;Packet Length Mean;Fwd IAT Mean
+without fingerprint (X6),"constrained, TCP locked",27526,Reconnaissance,0.9155,0.4302,True,3,Fwd Packet Length Mean;Fwd IAT Min;Fwd Header Length
+without fingerprint (X6),"constrained, TCP locked",27789,Exploits,0.8995,0.3583,True,2,Fwd IAT Std;Fwd Packet Length Mean
+without fingerprint (X6),"constrained, TCP locked",27806,Fuzzers,0.8670,0.4695,True,2,Fwd IAT Std;Fwd IAT Mean
+without fingerprint (X6),"constrained, TCP locked",30834,Fuzzers,0.9516,0.4903,True,2,Fwd Header Length;Fwd IAT Std
+without fingerprint (X6),"constrained, TCP locked",31614,Shellcode,0.8549,0.3879,True,3,Fwd Header Length;Fwd IAT Total;Fwd Packet Length Mean
+without fingerprint (X6),"constrained, TCP locked",32426,Fuzzers,0.8821,0.4907,True,2,Fwd Packet Length Mean;Fwd IAT Min
+without fingerprint (X6),"constrained, TCP locked",33630,Fuzzers,0.9834,0.8759,False,5,Fwd IAT Min;Flow IAT Min;Fwd IAT Total;Flow Bytes/s;Fwd Header Length
+without fingerprint (X6),"constrained, TCP locked",34265,Fuzzers,0.9655,0.3219,True,3,Fwd Header Length;Fwd IAT Std;Fwd IAT Total
+without fingerprint (X6),"constrained, TCP locked",38830,Reconnaissance,0.9892,0.7030,False,5,Fwd Header Length;Fwd IAT Total;Fwd Packets/s;Total Length of Fwd Packet;Fwd IAT Std
+without fingerprint (X6),"constrained, TCP locked",39611,Exploits,0.9292,0.3444,True,3,Fwd Header Length;Fwd IAT Min;Fwd IAT Total
+without fingerprint (X6),"constrained, TCP locked",40158,Analysis,0.7900,0.3775,True,2,Fwd IAT Min;Subflow Fwd Bytes
+without fingerprint (X6),"constrained, TCP locked",41769,Reconnaissance,0.9052,0.4503,True,2,Fwd Header Length;Fwd IAT Std
+without fingerprint (X6),"constrained, TCP locked",42876,Generic,0.8923,0.2876,True,3,Fwd IAT Std;Fwd IAT Mean;Fwd IAT Max
+without fingerprint (X6),"constrained, TCP locked",43150,Fuzzers,0.9561,0.4702,True,5,Fwd IAT Min;Fwd Header Length;Total Length of Fwd Packet;Fwd IAT Total;Flow IAT Std
+without fingerprint (X6),"constrained, TCP locked",44030,Shellcode,0.9680,0.4231,True,5,Fwd Header Length;Fwd IAT Min;Fwd IAT Total;Total Length of Fwd Packet;Packet Length Mean
+without fingerprint (X6),"constrained, TCP locked",45098,Fuzzers,0.7526,0.4912,True,3,Fwd IAT Min;Flow IAT Min;Fwd Header Length
+without fingerprint (X6),"constrained, TCP locked",46448,Generic,0.9308,0.1988,True,2,Total Fwd Packet;Fwd IAT Total
+without fingerprint (X6),"constrained, TCP locked",46537,Exploits,0.9789,0.5796,False,5,Fwd IAT Min;Fwd Header Length;Fwd IAT Total;Packet Length Mean;Fwd Packet Length Mean
+without fingerprint (X6),"constrained, TCP locked",47356,Fuzzers,0.8668,0.4821,True,5,Fwd IAT Min;Flow IAT Std;Fwd IAT Std;Packet Length Mean;Packet Length Max
+without fingerprint (X6),"constrained, TCP locked",47723,Exploits,0.9959,0.9167,False,5,Fwd IAT Min;Fwd Header Length;Fwd IAT Std;Flow IAT Std;Fwd IAT Mean
+without fingerprint (X6),"constrained, TCP locked",47837,Fuzzers,0.9618,0.4337,True,5,Fwd IAT Min;Fwd Packet Length Max;Subflow Fwd Bytes;Fwd Header Length;Fwd IAT Total
+without fingerprint (X6),"constrained, TCP locked",48085,Fuzzers,0.9684,0.4266,True,5,Fwd IAT Min;Fwd Header Length;Fwd IAT Total;Fwd IAT Std;Packet Length Mean
+without fingerprint (X6),"constrained, TCP locked",50234,Exploits,0.9984,0.8150,False,4,Fwd IAT Min;Fwd Packets/s;Fwd IAT Mean;Fwd IAT Mean;Fwd Packet Length Mean
+without fingerprint (X6),"constrained, TCP locked",50531,Generic,0.9509,0.4972,True,3,Fwd Header Length;Fwd Packet Length Mean;Total Length of Fwd Packet
+without fingerprint (X6),"constrained, TCP locked",51159,Exploits,0.9975,0.5275,False,5,Fwd IAT Min;Fwd Header Length;Fwd Packets/s;Fwd IAT Mean;Fwd Packet Length Max
+without fingerprint (X6),"constrained, TCP locked",52187,Reconnaissance,0.9776,0.4545,True,5,Fwd Packet Length Mean;Fwd IAT Min;Fwd Header Length;Fwd IAT Total;Total Length of Fwd Packet
+without fingerprint (X6),"constrained, TCP locked",52274,DoS,0.9919,0.7806,False,5,Subflow Fwd Bytes;Fwd IAT Min;Fwd Header Length;Fwd IAT Std;Fwd IAT Total
+without fingerprint (X6),"constrained, TCP locked",54063,Fuzzers,0.8871,0.4816,True,2,Fwd IAT Std;Fwd Packet Length Mean
+without fingerprint (X6),"constrained, TCP locked",54351,Fuzzers,0.9445,0.4680,True,3,Fwd IAT Min;Fwd IAT Std;Fwd IAT Mean
+without fingerprint (X6),"constrained, TCP locked",56304,Exploits,0.9694,0.5267,False,5,Fwd Header Length;Subflow Fwd Bytes;Fwd IAT Total;Flow Bytes/s;Fwd Packets/s
+without fingerprint (X6),"constrained, TCP locked",59162,Fuzzers,0.8463,0.3315,True,3,Fwd Packet Length Mean;Fwd IAT Min;Fwd Header Length
+without fingerprint (X6),"constrained, TCP locked",59345,Exploits,0.9967,0.9614,False,2,Fwd IAT Min;Fwd IAT Mean

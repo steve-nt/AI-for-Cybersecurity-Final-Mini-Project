@@ -1,0 +1,10 @@
+model,flows,gradient boosting (B2),gradient boosting (B2),gradient boosting (B2),without fingerprint (X6),without fingerprint (X6),without fingerprint (X6)
+run,,constrained,"constrained, TCP locked",unconstrained,constrained,"constrained, TCP locked",unconstrained
+attack_type,,,,,,,
+Analysis,1,1,1,1,1,1,1
+DoS,1,1,0,1,0,0,1
+Exploits,15,15,6,15,4,4,15
+Fuzzers,21,21,15,21,18,18,21
+Generic,3,3,3,3,3,3,3
+Reconnaissance,7,7,5,7,6,6,7
+Shellcode,2,2,1,2,2,2,2
