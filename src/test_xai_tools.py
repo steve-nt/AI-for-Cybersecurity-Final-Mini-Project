@@ -1,4 +1,4 @@
-"""Tests for the explanation toolkit (TASK T7), on small synthetic models so they run in seconds.
+"""Tests for the explanation toolkit, on small synthetic models so they run in seconds.
 
 The attack label depends only on features 0 and 1, so a working toolkit must rank those two first.
 

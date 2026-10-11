@@ -196,7 +196,9 @@ fewer alerts, which looks like good news on a dashboard.
 **What an attacker would fake.** Sorting the top features by what an attacker controls, 69% of the SHAP
 weight sits on features they can change cheaply, above all their own TCP settings. Giving all 16,052
 test attacks the most common benign settings (`Fwd Seg Size Min` = 32, window 5,792), and nothing else,
-drops recall to **0.000 for boosting**, 0.011 for the tree and 0.066 for logistic regression.
+drops recall to **0.000 for boosting**, 0.011 for the tree and 0.066 for logistic regression. A greedy
+attack search in the separate notebook, allowed only changes the attacker controls, needs even less: one
+change to `Fwd Seg Size Min` evades boosting for all 50 attacks it tried.
 
 ## 6. Adaptability
 
@@ -223,7 +225,9 @@ The weights were not tuned, since that would need Fuzzers labels the analyst doe
 recall, but not all of it (0.845 against 0.988). In a real system nobody announces a new attack, and the
 alert count went *down*. We would watch the share of uncertain predictions (it nearly doubled here, and
 needs no labels), compare incoming feature distributions with the training data, have analysts label a
-small random sample every week (including flows called benign), and retrain regularly.
+small random sample every week (including flows called benign), and retrain regularly. A learning curve
+in the separate notebook shows how far labels go: 500 labels weighted 100 times reach 0.956 (FAR 0.027,
+the original model's level), and 25 weighted labels already beat 250 unweighted ones.
 
 ## 7. Discussion
 
@@ -256,21 +260,29 @@ but with visibly less certainty than boosting's 0.999). With `Bwd Packets/s` mis
 "cannot decide". It also survives noise far better: at noise 0.05 its macro-F1 is 0.897, against 0.472
 for the 2-feature tree and 0.536 for the forest. The costs: lower accuracy, only two features (rules grow
 as 3 to the power of the number of features), hand-made choices of levels and threshold, and an Unknown
-that only helps if undecided flows go to an analyst.
+that only helps if undecided flows go to an analyst. On the whole test set (separate notebook), a
+missing window leaves the BRB unable to decide 65% of the flows, while boosting, given the median
+instead, misses 79% of the attacks with no sign of doubt.
 
 **G, adaptability.** A new attack type cost 30 points of recall on it while the dashboard looked better.
-A hundred weighted labels recovered half of the loss.
+A hundred weighted labels recovered half of the loss, five hundred about 90%.
 
 **Would we deploy this?** Not as it is. On this dataset it is excellent, but its accuracy rests on
 recognising a few attacker machines, which says nothing about attackers elsewhere. An additional check
 (separate notebook) trained boosting without the three TCP-settings features: test macro-F1 0.971
 instead of 0.972, recall at noise 0.001 0.831 instead of 0.513, and a SHAP ranking led by behaviour
-features (`Bwd Packets/s`, 46% of the weight). We would deploy that model, with the BRB as a readable
-second opinion that sends undecided flows to an analyst, and with the monitoring of Part G.
+features (`Bwd Packets/s`, 46% of the weight). We would deploy that model rather than the original, but
+not trust it alone: the same attack search still makes **34 of 50** caught attacks look benign, with three
+or four cheap changes each (waiting about 10 ms longer between the attacker's own packets, padding them).
+We would run it with the BRB as a readable second opinion that sends undecided flows to an analyst, with
+the monitoring of Part G, and add features computed over many flows, which one attacker's timing cannot
+easily shape.
 
-**What would an attacker fake?** Their own TCP settings: two system settings, at no cost to the attack,
-defeat all three models here. Removing those features is necessary; the behaviour features that remain
-are harder, but not impossible, to fake (timing and padding are cheap; the victim's replies are not).
+**What would an attacker fake?** Their own TCP settings: one or two system settings, at no cost to the
+attack, defeat all three models here. Removing those features is necessary but not sufficient: the timing
+and padding that remain are also cheap to change, and fooled the model without them in two thirds of the
+attacks tried. Only the victim's replies are out of the attacker's reach; an unrestricted search evades
+by changing exactly those, which is why it overstates what a real attacker can do.
 
 **Which numbers do we least trust?** (1) **The 0.972 macro-F1 itself**: it measures how well the model
 recognises the UNSW-NB15 attacker machines, not attacks in general. (2) **The 0.028 FAR**, because it

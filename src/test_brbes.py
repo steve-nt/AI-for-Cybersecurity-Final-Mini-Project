@@ -1,6 +1,6 @@
-"""Unit tests for the BRBES engine (TASK T6).
+"""Unit tests for the BRBES engine.
 
-The expected numbers are the worked example in TASKLIST.md section 4, computed beforehand with two
+The expected numbers are a small worked example, computed beforehand with two
 independent ER implementations (analytical and recursive).
 
 Run:  python -m pytest src/test_brbes.py

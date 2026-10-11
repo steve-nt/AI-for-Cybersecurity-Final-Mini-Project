@@ -1,4 +1,4 @@
-"""TASK T7: explanation toolkit.
+"""Explanation toolkit, from the course labs.
 
 SHAP and LIME helpers, plus the measurements used to judge them (lab step 4), identical for every model:
   faithfulness  deletion_test()        remove each explanation's top-k features -> how much the prediction drops
@@ -70,7 +70,7 @@ def importance_table(values, feature_names):
 # LIME
 # ---------------------------------------------------------------------------
 def make_lime(X_background, feature_names, seed=SEED):
-    """LIME explainer. X_background = training rows (TASKLIST: 10,000 rows drawn with seed 42)."""
+    """LIME explainer. X_background = training rows (the labs used 10,000 rows drawn with seed 42)."""
     return LimeTabularExplainer(np.asarray(X_background, dtype=float), feature_names=list(feature_names),
                                 class_names=CLASS_NAMES, discretize_continuous=True,
                                 random_state=seed)

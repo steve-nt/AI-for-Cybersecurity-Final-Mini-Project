@@ -626,3 +626,25 @@ Main findings:
 - The X4 figure was checked by eye after two label and legend fixes.
 - The figure colours passed the dataviz palette validator. Its contrast warning is covered by the legend and the different marker shapes.
 - The new text has no em or en dashes.
+
+## 2026-10-11 12:10 EEST: small fixes before the number check
+
+**What**
+- `report/Mini_Project_Report.md`: added the results of the three new extras, each marked as coming from the separate notebook:
+  - section 5: the attack search evades boosting for all 50 attacks with one `Fwd Seg Size Min` change;
+  - section 6: the learning curve, 500 labels with weight 100 reach 0.956;
+  - discussion F: with the window missing, the BRB cannot decide 65% of flows, while boosting misses 79% of attacks;
+  - discussion G: 500 labels recover about 90% of the loss.
+
+  "Would we deploy this?" now says the model without the fingerprint is still evaded in 34 of 50 cases by cheap timing and padding changes, so it should not be trusted alone. "What would an attacker fake?" now says removing the TCP features is necessary but not sufficient. The report is now 4,353 words.
+- `report/Mini_Project_Report.docx`: rebuilt with `report/build_docx.py`.
+- `parts/60_adaptability.ipynb`, `mini_project_unsw_nb15.ipynb`: G3 text "167,507 training flows" corrected to 167,457 (the 0.03% stays correct).
+- `src/brbes.py`, `src/xai_tools.py`, `src/test_brbes.py`, `src/test_xai_tools.py`: removed the leftover references to the Lab 3 task list ("TASK T6/T7", "TASKLIST.md section 4", "TASKLIST P7") from docstrings and comments. Code unchanged.
+
+**Why**
+The user asked for the small fixes before the number check. Without the X3 numbers, the report's deployment advice read as more confident than the evidence. The `src/` files ship with the hand-in and referred to a task list that is not part of it.
+
+**Verified**
+- `pytest src`: 16 passed.
+- The hand-in notebook was rebuilt and run with `tools/assemble.py --strict` once the machine was quiet (load 0.97 at the start): 116 s including assembly, no errors. No table in `results/tables/` changed.
+- The report has no dashes and no task IDs.

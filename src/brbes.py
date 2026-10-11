@@ -1,4 +1,4 @@
-"""TASK T6: Belief Rule-Based Expert System (BRBES) inference engine.
+"""Belief Rule-Based Expert System (BRBES) inference engine, from the course labs.
 
 Implements the five belief-rule steps of RIMER plus the decision:
   1. Knowledge representation  RuleBase (rules with belief degrees beta, rule weights theta,
@@ -13,7 +13,7 @@ Implements the five belief-rule steps of RIMER plus the decision:
 References: Yang, J.-B. (2001), EJOR 131(1); Yang, J.-B., Liu, J., Wang, J., Sii, H.-S., Wang, H.-W.
 (2006), IEEE Trans. SMC-A 36(2) (RIMER); Wang, Y.-M., Yang, J.-B., Xu, D.-L. (2006), EJOR 174(3);
 course lecture "Expert Systems and Rule-Based Reasoning for Cyber Defense" (Prof. M. S. Hossain).
-The formulas are written out in TASKLIST.md section 4. Everything is vectorised over rows (flows).
+Everything is vectorised over rows (flows).
 """
 import itertools
 from dataclasses import dataclass, field
@@ -75,7 +75,7 @@ def all_combinations(levels):
 
 
 def make_levels(x_train, q=(0.05, 0.50, 0.95)):
-    """Referential values of one feature from training percentiles (TASKLIST P7).
+    """Referential values of one feature from training percentiles.
 
     If two coincide (many zeros or many -1 values), Low becomes the repeated value and the other
     levels are taken from the values above it.
@@ -219,7 +219,7 @@ def choose_threshold(u_val, y_val, grid=None):
 
 
 # ---------------------------------------------------------------------------
-# Step 1 from data (TASKLIST P7)
+# Step 1 from data
 # ---------------------------------------------------------------------------
 def share_to_belief(p, utilities=UTILITIES):
     """Attack share p in [0, 1] -> beliefs over the risk levels whose expected utility is 100 * p.
@@ -231,7 +231,7 @@ def share_to_belief(p, utilities=UTILITIES):
 
 def build_rule_base(X2_train, y_train, levels, theta=1.0, delta=None, n0=20.0, sample_weight=None,
                     features=None, level_names=LEVEL_NAMES):
-    """Rule base whose beliefs come from the training data (TASKLIST P7).
+    """Rule base whose beliefs come from the training data.
 
     For each rule: soft support n_k = sum alpha_A alpha_B, soft attack count a_k = sum y alpha_A alpha_B,
     attack share p_k = (a_k + 1) / (n_k + 2), beliefs = share_to_belief(p_k), then scaled by
