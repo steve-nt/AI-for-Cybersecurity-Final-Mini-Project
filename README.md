@@ -76,6 +76,7 @@ Run every command from the project root, with the environment active.
 | Also include the optional extras (not part of the hand-in) | `python tools/assemble.py --with-extras --output extras_run.ipynb` |
 | Rebuild the feature glossary table | `python tools/feature_glossary.py` |
 | Check every number in the report against the result tables (after running both notebooks) | `python tools/check_report_numbers.py` |
+| Build the presentation slides from `presentation/slides.md` (needs `python-pptx`) | `python presentation/build_slides.py` |
 
 The notebook needs three things next to it, besides the data:
 
@@ -128,5 +129,5 @@ extras, and writes and runs the hand-in notebook.
 | `models/` | Saved models and slow results (see [Run time](#run-time)) |
 | `reference/` | Earlier course labs used as models for structure and code |
 | `report/` | Report source and the scripts that build the PDF and Word versions |
-| `presentation/` | The talk: slide contents and speaker notes, the live demo plan, the rehearsal plan and expected questions |
+| `presentation/` | The talk: the slide deck and the script that builds it, slide contents and speaker notes, the live demo plan, the rehearsal plan and expected questions |
 | `requirements.txt` | Pinned library versions |

@@ -14,8 +14,16 @@ See [demo.md](demo.md) for the steps and [rehearsal.md](rehearsal.md) for the ti
 
 ## How to build the deck from the template
 
-Make a copy of `AutoPenBench_Seminar.pptx` (the seminar deck) and keep its look; replace only the
-content. What the template does, and what to keep:
+The deck is `presentation/Mini_Project_Presentation.pptx`, built by `presentation/build_slides.py` from
+this file and the seminar deck `AutoPenBench_Seminar.pptx` (its masters and theme are reused, its slides
+removed). Titles, source lines, cards, big numbers, tables, takeaway lines and speaker notes are read
+from here, so **edit this file and rebuild** rather than editing the PPTX by hand:
+
+```bash
+.venv/bin/python presentation/build_slides.py --preview   # needs python-pptx; previews go to /tmp/slide_preview
+```
+
+The script keeps the template's look, which is:
 
 | Element | In the template | Keep for this deck |
 |---|---|---|

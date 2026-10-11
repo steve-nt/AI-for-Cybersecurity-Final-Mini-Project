@@ -715,3 +715,18 @@ The user said the group is two people. The brief requires every member to speak 
 
 **Verified**
 `tools/check_report_numbers.py`: all 446 numbers still match. `tools/assemble.py --no-execute` (to /tmp) gives the same cell sources as the hand-in notebook. The Word title page reads "Team: Group 6, Authors: Kirill Silchenko, Stefanos Ntentopoulos". No task-list references in the report; no em or en dashes in the changed text.
+
+## 2026-10-11 17:15 EEST: slide deck built from slides.md with the seminar template
+
+**What**
+- `presentation/build_slides.py`: new. Reads every slide's title, source line, cards, big numbers, tables, takeaway line and speaker notes from `presentation/slides.md`, opens `AutoPenBench_Seminar.pptx`, removes its 12 slides but keeps its masters and theme, and draws 15 talk slides, a Questions slide and 4 backup slides with the template's positions, Century Schoolbook, cream background and navy, blue, teal and grey. Figures come from `results/figures/`; the backup rule table is read from `results/tables/F2_rules.csv`. `--preview` draws PNG previews (C059, metric-compatible with Century Schoolbook) and reports text that does not fit its box.
+- `presentation/Mini_Project_Presentation.pptx`: new, 20 slides, 979 KB, speaker notes on slides 1 to 15 in the template's "Target time ... Presenter ..." format.
+- `presentation/slides.md`: the build section now points to the script (edit the Markdown and rebuild).
+- `README.md`: a how-to-run row for the slides; the `presentation/` row mentions the deck and the script.
+- `.venv`: python-pptx 1.0.2 installed (with xlsxwriter); not added to `requirements.txt`, since only the slides need it.
+
+**Why**
+The user asked for the PPTX to be built from slides.md using the seminar deck as the template. Generating it from the Markdown keeps the deck, the plan and the speaker notes in step, and every number on the slides is one already checked in the report.
+
+**Verified**
+All text fits its boxes in the preview; every slide was looked at as an image (after moving figures and cards up to leave a gap above the takeaway lines). The PPTX reopens with python-pptx, has 20 slide parts and 15 notes parts, passes a zip integrity test, and contains no em or en dashes. LibreOffice is not installed, so it was not rendered by an office program.
