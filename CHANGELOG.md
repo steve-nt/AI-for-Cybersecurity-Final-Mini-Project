@@ -730,3 +730,14 @@ The user asked for the PPTX to be built from slides.md using the seminar deck as
 
 **Verified**
 All text fits its boxes in the preview; every slide was looked at as an image (after moving figures and cards up to leave a gap above the takeaway lines). The PPTX reopens with python-pptx, has 20 slide parts and 15 notes parts, passes a zip integrity test, and contains no em or en dashes. LibreOffice is not installed, so it was not rendered by an office program.
+
+## 2026-10-11 21:10 EEST: Task list brought up to date for the two-person group and the presentation
+
+**What**
+- `TASKLIST.md`: one-person wording replaced (header note, section 1.4 row, T1 items, the H2 section 8 outline, the section 5 teacher question); P1 and P2 planning items ticked with a result note pointing to `presentation/slides.md`, `demo.md`, `rehearsal.md` and the built deck; open items added or split out: PowerPoint check and PDF copy of the slides, backup recording, day-before checks, run-throughs 1 and 2 with the cross-quiz, confirming the two unconfirmed who-did-what sentences, the report PDF export; H5 zip list now includes `models/` and excludes the backup video. The dated 2026-10-10 report result note is kept as history, with an update note below it.
+
+**Why**
+The user asked to update the task list after the summary of what is left: it still described a one-person group and did not show which presentation steps were done.
+
+**Verified**
+No "one-person" or "yourself" wording left outside the dated history note and the git section; no em or en dashes in the added lines.

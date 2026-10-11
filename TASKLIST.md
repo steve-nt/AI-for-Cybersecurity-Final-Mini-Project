@@ -1,7 +1,7 @@
 # Final Mini Project Task List: An Explainable and Robust Cyber-Defence Model
 
 - **Course:** AI for Cybersecurity (D7084E / D7041E)
-- **Group:** two people, Kirill Silchenko (Parts A, B and F) and Stefanos Ntentopoulos (Parts C, D, E and G); each presents the parts they built (corrected 2026-10-11; earlier sections still say one person)
+- **Group:** two people, Kirill Silchenko (Parts A, B and F) and Stefanos Ntentopoulos (Parts C, D, E and G); each presents the parts they built (first planned as one person; changed on 2026-10-11)
 - **Hand-in deadline:** Thursday 15 October 2026, **08:00** (notebook, README and report on Canvas)
 - **Presentation:** Thursday 15 October 2026, 14:45–18:00. 13 minutes, then questions. You must be
   there and run (or show running) the code
@@ -278,7 +278,7 @@ results for the report: the report's numbers come from the assembled notebook (H
 | "Subsample if you need to … you can choose 4,000 to 5,000 rows" | We use **all 305,105 clean rows** | The 5-minute limit still applies: keep the settings searches small (section 1.5) and measure the run time in H4. Say in the report that we did not subsample, and where we searched settings on a 20% part of the training set |
 | "Train … one black box (random forest or gradient boosting)" | A forest is too slow on all rows | Gradient boosting; say why in the report |
 | Part F: "compare it with a tree and a forest that see only those same two features" | – | We do exactly that: a forest on **two** features is fast |
-| Every member presents their part | One person | You present all parts (13 minutes); see P1 |
+| Every member presents their part | Two people | Each presents the parts they built: Kirill A, B, F and the conclusion, Stefanos C, D, E, G (13 minutes); see P1 |
 
 ### 1.5 Decisions already made
 
@@ -658,13 +658,12 @@ appear), **What to do** (tick the boxes), **Pitfalls**, **Done when**, and **Goe
 traps are (the test-set rule, the 5-minute limit, the AI declaration).
 
 - [ ] Read the brief (`15_oct_Final Mini Project.pdf`), section 0 of this file, and sections 1 and 2.
-- [x] Decide group size and data size: one person, all rows (2026-10-09). Sections 1.5 and the plan
-      reflect this.
+- [x] Decide group size and data size: all rows (2026-10-09). The group was first planned as one person;
+      it is two people since 2026-10-11 (see the header).
 - [ ] Read section 1.5 once more and change anything you disagree with *now*, before code depends on it.
 - [x] Check the exact dataset name, link and citation on the dataset web page (done 2026-10-09; the
       result is at the end of section 5, ready for H1 and H2).
-- [ ] Ask the teacher the questions in section 5 (one email), especially whether a one-person group
-      presents in the same 13-minute slot.
+- [ ] Ask the teacher the questions in section 5 (one email).
 
 **Done when:** you know what every part asks, and the decisions in section 1.5 are final.
 
@@ -1577,27 +1576,47 @@ results in a separate notebook and say so).
 
 #### P1 · Slides
 
-**Why:** 13 minutes to show Parts A–G and the live code. You present every part yourself.
+**Why:** 13 minutes to show Parts A to G and the live code. Each of you presents the parts you built:
+Kirill A, B and F (and the conclusion), Stefanos C, D, E and G. A member who does not speak gets F.
 
-- [ ] Time plan: problem, data, baseline 1.5 min; Part B 1.5 min; Part C 1.5 min; Part D 2.5 min;
+- [x] Time plan: problem, data, baseline 1.5 min; Part B 1.5 min; Part C 1.5 min; Part D 2.5 min;
       Part E 1.5 min; Part F 2 min; Part G 1.5 min; conclusion (would you deploy it?) 1 min. The demo
       runs in the background from the start (P2).
-- [ ] At most 1–2 slides per part; one number per slide that matters; figures from `results/figures/`.
-- [ ] Prepare for questions on any part (the brief warns about it): re-read section 0 and your report.
+- [x] At most 1 or 2 slides per part; one number per slide that matters; figures from `results/figures/`.
+- [ ] Prepare for questions on any part (the brief warns about it): re-read section 0 and the report,
+      and answer the questions in `presentation/rehearsal.md` out loud, both of you, on every part.
+- [ ] Open `presentation/Mini_Project_Presentation.pptx` once in PowerPoint: check fonts and line breaks
+      (it was only checked with preview images), and export a PDF copy for the USB stick.
+
+**Result (2026-10-11):** `presentation/slides.md` holds the 15 talk slides, a Questions slide and 4 backup
+slides, with the speaker notes, presenter and target time per slide: 12:20 in total, Kirill slides 1 to 4,
+11, 12 and 15 (about 5:45), Stefanos slides 5 to 10, 13 and 14 (about 6:35), handovers after slides 4, 10,
+12 and 14. `presentation/build_slides.py` builds `presentation/Mini_Project_Presentation.pptx` from it in
+the style of `AutoPenBench_Seminar.pptx` (`--preview` renders PNGs and reports text that overflows). To
+change a slide, edit `slides.md` and rebuild.
 
 #### P2 · Live demo
 
 **Why:** "Run your code during the presentation or show a demo of it running. A slide showing results you
 obtained earlier is not enough."
 
-- [ ] Plan: open the hand-in notebook and press "Restart and Run All" at the start of the talk (it takes
-      under 5 minutes); show the results tables when the run reaches them.
-- [ ] Backup: a screen recording of a full real run (say in the talk that it is a recording, the brief
-      requires it). Test the laptop, the projector connection and the environment the day before.
+- [x] Plan: open the hand-in notebook and press "Restart and Run All" at the start of the talk (it takes
+      under 5 minutes); show the results tables when the run reaches them. Written up in
+      `presentation/demo.md`: Run All on slide 1, the test table on slide 4, a demo cell on slide 14
+      (one Exploits flow, attack probability 0.9996, then 0.0032 and 0.0000 after copying two benign TCP
+      settings). The person not speaking drives the laptop, except on slide 14.
+- [ ] Backup: a screen recording of a full real run plus the demo cell, on Wed 14 Oct, saved as
+      `presentation/backup_run.mp4` (not in git, not in the zip) and on a USB stick. Say in the talk
+      that it is a recording if it is used (the brief requires it).
+- [ ] The day before: test the laptop, the projector connection and the environment (checklist in
+      `presentation/demo.md`).
 
 #### P3 · Rehearsal
 
-- [ ] At least one full run-through with a timer on Wed 14 or Thu 15 morning. Cut slides, not parts.
+- [ ] Run-through 1 together on Wed 14 Oct, with a stopwatch lap per slide and the real notebook run
+      (lap table in `presentation/rehearsal.md`). Cut slides, not parts and not a speaker.
+- [ ] Run-through 2 on Thu 15 Oct morning, in the same setup. Before it, quiz each other: Kirill answers
+      five questions on Stefanos's parts, Stefanos five on Kirill's.
 
 ---
 
@@ -1641,7 +1660,8 @@ to run".
      would we deploy this? What would an attacker fake (E4, X3)? Which number do we least trust, and why
      (candidates: the 26% attack share vs about 2.5% in real traffic; the shortcut features; recall on
      the small attack types; LIME on low-fit cases)? Where would the method fail outside this dataset?
-  8. **Who did what**: one line: all work by you (a one-person group).
+  8. **Who did what**: by part: Kirill Silchenko Parts A, B and F, Stefanos Ntentopoulos Parts C, D, E
+     and G, and what was done together.
 - [x] After section 8: **Use of AI** (required, or F): which AI assistant was used and what for (for
       example: choosing the dataset, planning the work, explaining concepts, drafting and reviewing code,
       checking the text). Then **References**: the two dataset papers (section 5), scikit-learn, SHAP,
@@ -1651,6 +1671,15 @@ to run".
 - [x] The report must not mention this file, task IDs or checkboxes; describe the work itself.
 
 **Result (2026-10-10):** `report/Mini_Project_Report.md` written (about 4,150 words, the eight headings, Use of AI, 12 references, 4 tables and 4 figures, all captioned and referred to) and built as `report/Mini_Project_Report.docx` with `report/build_docx.py` (title page: one author, "One-person group"). On request only Markdown and Word; no PDF built. A throwaway PDF render came to about 5.5 pages at 9.5 pt, so the Word version should be about 6 to 7 pages plus the title page: check in Word. The figures are copies without their plot titles (`report/report_figures.py`), because the titles carry step labels. The brief asks for the report as a PDF on Canvas: export it from Word (or run `report/build_report.py`). Numbers were checked by hand against `results/tables/`; H3 should still do the systematic check. The additional checks (1% labels, the model without the TCP-settings features, bootstrap intervals) are quoted as coming from the separate extras notebook.
+
+**Update (2026-10-11):** two authors now. The author line, the docx title page (Group 6, both names) and
+section 8 were rewritten by part. Two sentences in section 8 were written without confirmation and must
+be checked by both of you: "Each member made the additional checks for their own parts." and "Both chose
+the dataset and wrote the notebook, the README and this report together."
+
+- [ ] Confirm or correct those two sentences in `report/Mini_Project_Report.md`, then rebuild the docx
+      (`python report/build_docx.py`).
+- [ ] Export the report to PDF from Word and check the page count and the title page.
 
 #### H3 · Number check
 
@@ -1690,7 +1719,9 @@ identical, in 107 s.
 
 - [ ] Canvas, **before 15 Oct 08:00** (aim for the evening of 14 Oct):
   - the code: a zip (or the GitHub link) with `mini_project_unsw_nb15.ipynb`, `README.md`,
-    `requirements.txt`, `src/`, `tools/`, `parts/`, `results/`, without the data and without `.venv`;
+    `requirements.txt`, `src/`, `tools/`, `parts/`, `results/` and `models/` (the cache, so the run
+    takes about 2 minutes instead of 25), without the data, without `.venv` and without
+    `presentation/backup_run.mp4`;
   - the report as PDF.
 - [ ] Download the zip again and check it opens.
 
@@ -1724,7 +1755,7 @@ identical, in 107 s.
 
 | Question | Our default until answered |
 |---|---|
-| We are a one-person group. Same 13-minute slot and the same requirements? | Yes; 13 minutes, all parts presented by one person |
+| We are a two-person group, and each presents the parts they built. Same 13-minute slot? | Yes; 13 minutes, both speak (Kirill about 5:45, Stefanos about 6:35) |
 | We use **all** 305,105 rows, not a 4,000–5,000-row sample. Fine, as long as the notebook runs in under 5 minutes? | Yes; H4 measures it |
 | On all rows a random forest takes about 8 minutes to train, so the black box is gradient boosting (the brief allows it). Part F still uses a random forest on the two BRB features. Fine? | Yes |
 | The brief asks for "one notebook". Parts D and F import tested helpers from `src/` (`xai_tools.py`, `brbes.py`). Is that fine? | Yes; `src/` is in the zip and the README says so. Fallback: paste the two files into notebook cells |
