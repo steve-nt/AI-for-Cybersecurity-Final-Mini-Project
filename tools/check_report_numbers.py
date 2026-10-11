@@ -2,8 +2,8 @@
 
 The report states its numbers in plain text, so it stays readable as Markdown. This script holds a check
 for each of them, tied to the sentence it appears in, and compares it with:
-  - the CSV files the notebooks write to results/tables/ (most numbers: the hand-in notebook for Parts A
-    to G, parts/70_extras.ipynb for the additional checks marked "separate notebook" in the report);
+  - the CSV files the hand-in notebook writes to results/tables/ (Parts A to G and the additional
+    checks X2 to X9 at its end);
   - the printed output of the executed hand-in notebook (a few numbers that are only printed);
   - a short list of settings and design choices (seed, grids, levels), which are not results.
 
@@ -16,7 +16,7 @@ Three kinds of check:
 Finally every number in the report text must be covered by one of these fragments, so a number added
 later without a check is reported too.
 
-Run from the repository root after running the hand-in notebook and parts/70_extras.ipynb:
+Run from the repository root after running the hand-in notebook:
     .venv/bin/python tools/check_report_numbers.py
 """
 import itertools
@@ -218,7 +218,7 @@ C("boosting's weakest large type is Fuzzers ({:.3f})", per_type.loc["Fuzzers", "
 fuzzers_missed = round(per_type.loc["Fuzzers", "test_flows"] * (1 - per_type.loc["Fuzzers", "boosting"]))
 C("about half of the {:,} attacks it misses", int(confusion.loc["boosting", "true_attack_called_benign"]))
 A("which accounts for about half of the", 0.4 <= fuzzers_missed / confusion.loc["boosting", "true_attack_called_benign"] <= 0.6)
-S("(200 resamples, in the separate notebook", "setting of the bootstrap")
+S("(200 resamples, among the additional checks", "setting of the bootstrap")
 S("gives 95% intervals", "the confidence level of the bootstrap intervals")
 C("intervals of about ±{:.3f} on macro-F1", (boost_ci["ci_high"] - boost_ci["ci_low"]) / 2)
 C("so the {:.3f} lead over the tree is small but real", boost_vs_tree["difference"])

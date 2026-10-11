@@ -741,3 +741,23 @@ The user asked to update the task list after the summary of what is left: it sti
 
 **Verified**
 No "one-person" or "yourself" wording left outside the dated history note and the git section; no em or en dashes in the added lines.
+
+## 2026-10-11 22:06 EEST: Additional checks moved into the hand-in notebook
+
+**What**
+- `tools/assemble.py`: the additional checks X2 to X9 are now included by default; `--with-extras` replaced by `--without-extras`; docstring and notebook title cell say so.
+- `parts/70_extras.ipynb`: intro retitled "Additional checks" (they now run inside the hand-in notebook). X2, X6 and X9 save their slow scoring in the model cache (validation scores for the cutoff choice, score rows, noise and hidden-attack tables, the SHAP ranking, the eight models' test probabilities), as Parts E, F and G already do. X9's bootstrap now counts how often each test flow is drawn and prepares the sorting once per model; a new check compares it with `score_proba` on the full test set and on one resample.
+- `parts/20_few_labels.ipynb` to `parts/60_adaptability.ipynb`: "optional extra Xn (separate notebook)" now reads "additional check Xn (at the end of the notebook)".
+- `mini_project_unsw_nb15.ipynb`: rebuilt and run, 148 cells.
+- `models/d8137a9708/`: 12 new cache files (112 in total, 19 MB).
+- `report/Mini_Project_Report.md` and `.docx`: the six "separate notebook" mentions now point to the additional checks at the end of the notebook; the AI statement says all results come from the notebook.
+- `tools/check_report_numbers.py`: docstring and one fragment updated for the new wording.
+- `README.md`: run time about 4 minutes (240 s measured), the quick build option, cache size, layout text.
+- `presentation/slides.md`, `build_slides.py`, `demo.md`, `rehearsal.md`: run time and "separate notebook" wording; deck rebuilt.
+- `TASKLIST.md`: update note under the final run.
+
+**Why**
+An external review pointed out that the brief requires the one notebook to reproduce every number in the report, while six results came from a separate notebook. The first run with the extras took 258 to 313 s, too close to or over the 5-minute limit, so the slow scoring was cached and the bootstrap made faster.
+
+**Verified**
+Cached hand-in run on a quiet machine: 240 s, no errors (the extras part fell from 136 to 162 s to 59 s). All 68 tables in `results/tables/` are byte-identical to before the change after every run. `tools/check_report_numbers.py`: all 446 numbers match. `parts/70_extras.ipynb` still runs on its own (137 s). `pytest src`: 16 passed. Slide preview: all text fits. No em or en dashes in the added lines. `results/figures/D1_shap_beeswarm.png` was rewritten byte-wise by the runs again (known, same picture).

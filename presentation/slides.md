@@ -78,7 +78,7 @@ Per part: A 1:10, B 0:55, C 1:00, D 2:25, E 1:30, F 1:40, G 1:00, conclusion 0:5
 **Speaker notes.** Target time: 35 seconds. Presenter: Kirill.
 
 > Before we start, we press Run All in the notebook. It runs everything from the raw CSV files, from top to
-> bottom, and takes about two minutes; we will look at it twice during the talk. The trained models load
+> bottom, and takes about four minutes; we will look at it twice during the talk. The trained models load
 > from a saved cache, because training them all from scratch takes about 25 minutes.
 >
 > We are Kirill and Stefanos. Our project is a network intrusion detector on CIC-UNSW-NB15. It scores
@@ -283,7 +283,7 @@ the test table and at the cell counter on the left. Then switch back. Details in
 
 ## Slide 10: What an attacker would fake (Part E)
 
-**Source line:** Notebook Part E · results/tables/E4_feature_groups.csv, E4_whatif_benign_tcp.csv; separate notebook of additional checks
+**Source line:** Notebook Part E · results/tables/E4_feature_groups.csv, E4_whatif_benign_tcp.csv; additional check X3, X3_attack_summary.csv
 
 **Layout:** big number on the left, three cards on the right.
 
@@ -299,7 +299,7 @@ the test table and at the cell counter on the left. Then switch back. Details in
 > What would an attacker fake? I sorted the features by who controls them. 69% of the SHAP weight is on
 > features the attacker can change cheaply, above all the TCP settings of their own machine. If every
 > test attack simply copies the most common benign settings, and nothing else, boosting's recall drops
-> to zero. A greedy attack search, in the separate notebook of extra checks, allowed only changes the
+> to zero. A greedy attack search, among the additional checks at the end of the notebook, allowed only changes the
 > attacker controls, needed a single change for all 50 attacks it tried. I will show that live after
 > Part F, which Kirill presents now.
 

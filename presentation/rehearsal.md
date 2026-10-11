@@ -95,8 +95,8 @@ had identical features but different labels, and were dropped too.
 **Why not the larger CICFlowMeter_out.csv?** It contains IP addresses, and all attacks come from one
 address range, so the address alone would give the label away.
 
-**Did you subsample?** No. All 305,105 flows are used, and the notebook still runs in about 2 minutes
-(with the saved models).
+**Did you subsample?** No. All 305,105 flows are used, and the notebook still runs in about 4 minutes
+(with the saved models), including the additional checks.
 
 **How did you choose the settings? Did you touch the test set?** Every candidate was trained on a 20% part
 of the training set and scored on validation; the best macro-F1 won. The test set was used once at the
@@ -107,7 +107,7 @@ minutes to train and SHAP on 300 flows over 12 minutes, against seconds for boos
 retrain and explain the black box many times.
 
 **Is boosting really better than the tree?** By 0.003 macro-F1. A paired bootstrap (200 resamples, in the
-separate notebook of extra checks) gives intervals of about plus or minus 0.002, so the lead is small but
+additional checks at the end of the notebook) gives intervals of about plus or minus 0.002, so the lead is small but
 real.
 
 **Why these four scores?** Accuracy is misleading at 26% attacks (always-benign gets 0.737). Recall says

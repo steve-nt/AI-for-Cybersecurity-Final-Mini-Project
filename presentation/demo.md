@@ -5,7 +5,7 @@ you obtained earlier is not enough. If a full run is too slow, run a reduced ver
 recording of the real run and say which it is." A talk without a run or a demo is an F.
 
 **The plan:** run the full hand-in notebook, `mini_project_unsw_nb15.ipynb`, on all 305,105 flows, live.
-Press *Restart Kernel and Run All* at the start of the talk; it finishes in about 2 minutes while the
+Press *Restart Kernel and Run All* at the start of the talk; it finishes in about 4 minutes while the
 slides go on. Show it twice: the test scores on slide 4, and one extra cell on slide 14. A screen
 recording of a real run is the backup.
 
@@ -24,13 +24,16 @@ scikit-learn version, and a run without it gives the same numbers (`random_state
 
 | Run | Machine | Time |
 |---|---|---|
-| Hand-in notebook, quiet machine | 8 cores, 19 GB RAM | 107 s and 116 s |
-| Hand-in notebook, other programs busy | same | 239 s and 245 s |
-| Hand-in notebook plus the demo cell (11 Oct, afternoon) | same | 142 s |
-| Without `models/` (full retraining) | same | about 25 minutes |
+| Hand-in notebook, current version with the additional checks at the end (11 Oct, evening, quiet machine) | 8 cores, 19 GB RAM | 240 s |
+| Earlier version without the additional checks, quiet machine | same | 107 s and 116 s |
+| Earlier version, other programs busy | same | 239 s and 245 s |
+| Earlier version plus the demo cell (11 Oct, afternoon) | same | 142 s |
+| Without `models/` (full retraining) | same | about 25 minutes for Parts A to G, more with the additional checks |
 
 So close everything else before the talk (browser tabs, IDE indexing, other notebooks): a busy laptop
-doubles the run time. Even at 245 s the run is finished long before slide 14 (at about 10:45).
+doubles the run time. The additional checks add about 60 s at the end of the run. Part B is reached
+after about 1.5 to 2 minutes, in time for slide 4, and even on a busy laptop the run finishes well before
+slide 14 (at about 10:45).
 
 ## The day before (Wednesday 14 October)
 

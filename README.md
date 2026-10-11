@@ -13,7 +13,8 @@ The main finding is a shortcut: the models recognise the attacker machines' TCP 
 (`Fwd Seg Size Min`, `FWD Init Win Bytes`) rather than attack behaviour.
 
 - **Notebook to hand in:** `mini_project_unsw_nb15.ipynb`. It runs from top to bottom in about
-  2 minutes (see [Run time](#run-time)) and holds Parts A to G in order.
+  4 minutes (see [Run time](#run-time)) and holds Parts A to G in order, followed by the additional
+  checks that the report quotes.
 - **Report:** `report/` (PDF built from the Markdown source).
 
 ## Dataset
@@ -73,9 +74,9 @@ Run every command from the project root, with the environment active.
 |---|---|
 | Run the hand-in notebook, top to bottom | `jupyter nbconvert --to notebook --execute --inplace mini_project_unsw_nb15.ipynb` (or *Run All* in Jupyter) |
 | Rebuild the hand-in notebook from the part notebooks, and run it | `python tools/assemble.py --strict` |
-| Also include the optional extras (not part of the hand-in) | `python tools/assemble.py --with-extras --output extras_run.ipynb` |
+| A quicker build with Parts A to G only, without the additional checks (not the hand-in) | `python tools/assemble.py --without-extras --output quick_run.ipynb` |
 | Rebuild the feature glossary table | `python tools/feature_glossary.py` |
-| Check every number in the report against the result tables (after running both notebooks) | `python tools/check_report_numbers.py` |
+| Check every number in the report against the result tables (after running the hand-in notebook) | `python tools/check_report_numbers.py` |
 | Build the presentation slides from `presentation/slides.md` (needs `python-pptx`) | `python presentation/build_slides.py` |
 
 The notebook needs three things next to it, besides the data:
@@ -88,12 +89,15 @@ The notebook needs three things next to it, besides the data:
 
 ### Run time
 
-On an 8-core machine with 19 GB RAM the hand-in notebook runs in **107 seconds** with the saved models
-in `models/`, and in **about 25 minutes** without them. The brief's limit is 5 minutes, so `models/` is
+On an 8-core machine with 19 GB RAM the hand-in notebook runs in **about 4 minutes** with the saved
+models in `models/` (240 seconds measured on 11 October, of which about 60 for the additional checks;
+how long Parts A to G take varies with the machine's load, from 107 to 170 seconds). Without them, Parts A to G alone take **about 25 minutes**, and the
+additional checks retrain their models as well. The brief's limit is 5 minutes, so `models/` is
 shipped with the code.
 
 `models/` holds every trained model and the slow results (the LIME runs, the noise and missing-feature
-sweeps, the retrained models of Parts F and G, and the optional extras): 100 files, 17 MB. The first run creates them and later
+sweeps, the retrained models of Parts F and G, and the models and slow scores of the additional checks): 112
+files, 19 MB. The first run creates them and later
 runs load them. They sit in a sub-folder named after a fingerprint of the feature list, the split sizes,
 the seed and the scikit-learn version, so a different setup never loads old results; it retrains
 instead. Delete `models/` to force a full retraining. `random_state=42` is used everywhere, so a run
@@ -109,8 +113,8 @@ installs shap and lime if they are missing.
 The work is split into part notebooks, one per part of the brief. Each cell starts with the step it
 belongs to (`# STEP C2`, or `<!-- STEP C2 -->` in Markdown). Cells that only stand in for another
 notebook's step during development are marked `# STANDIN`. `tools/assemble.py` collects the `STEP`
-cells from all part notebooks, puts them in order (A0 to G4), drops the stand-ins and the optional
-extras, and writes and runs the hand-in notebook.
+cells from all part notebooks, puts them in order (A0 to G4, then the additional checks X2 to X9),
+drops the stand-ins, and writes and runs the hand-in notebook.
 
 | Path | Contents |
 |---|---|
@@ -122,7 +126,7 @@ extras, and writes and runs the hand-in notebook.
 | `parts/40_robustness.ipynb` | Part E: noise, missing features, what an attacker could fake |
 | `parts/50_brb.ipynb` | Part F: the belief rule base and its comparison with small trees |
 | `parts/60_adaptability.ipynb` | Part G: Fuzzers hidden from training, then adapted to |
-| `parts/70_extras.ipynb` | Optional extras: fewer labels (1%, 5%), a constrained evasion attack, a learning curve for the hidden attack, a model without the shortcut features, the BRB with missing inputs and an edited rule, bootstrap confidence intervals |
+| `parts/70_extras.ipynb` | Additional checks, at the end of the hand-in notebook: fewer labels (1%, 5%), a constrained evasion attack, a learning curve for the hidden attack, a model without the shortcut features, the BRB with missing inputs and an edited rule, bootstrap confidence intervals |
 | `src/` | `xai_tools.py` and `brbes.py` (from the course labs) and their tests |
 | `tools/` | `assemble.py`, `feature_glossary.py`, `check_report_numbers.py` |
 | `results/tables/`, `results/figures/` | Every table and figure, named after the step that made it |

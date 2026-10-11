@@ -1715,6 +1715,13 @@ before the cache (only `F1_feature_choice.csv` now rounds its SHAP shares to 4 d
 the project (no `.venv`, no generated tables or figures) rebuilt all 50 hand-in tables and 13 figures,
 identical, in 107 s.
 
+**Update (2026-10-11):** the additional checks X2 to X9 are now part of the hand-in notebook (148 cells),
+because the report quotes their numbers and the brief requires the notebook to reproduce every number in
+the report. `tools/assemble.py` includes them by default (`--without-extras` leaves them out). To stay
+under 5 minutes, the slow scoring in X2, X6 and X9 is saved in the cache like the sweeps of Part E (12 new
+files, 112 in total), and X9's bootstrap was rewritten with per-flow counts (same results). Cached run on a
+quiet machine: 240 s, no errors, all 68 tables byte-identical to before, number check passes.
+
 #### H5 · Upload
 
 - [ ] Canvas, **before 15 Oct 08:00** (aim for the evening of 14 Oct):

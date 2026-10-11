@@ -90,7 +90,7 @@ Every model is far above the baseline. Gradient boosting is best, but only just:
 the decision tree. Logistic regression catches the most attacks but raises the most false alarms
 (1,857 against 1,241 for boosting). Recall is at least 0.957 for every attack type and model; boosting's
 weakest large type is Fuzzers (0.988), which accounts for about half of the 124 attacks it misses.
-A paired bootstrap over the test flows (200 resamples, in the separate notebook of additional checks)
+A paired bootstrap over the test flows (200 resamples, among the additional checks at the end of the notebook)
 gives 95% intervals of about ±0.002 on macro-F1, so the 0.003 lead over the tree is small but real.
 
 **Realistic traffic.** In the full UNSW-NB15 recording only 2.53% of flows are attacks, not 26%. In a
@@ -197,7 +197,7 @@ fewer alerts, which looks like good news on a dashboard.
 weight sits on features they can change cheaply, above all their own TCP settings. Giving all 16,052
 test attacks the most common benign settings (`Fwd Seg Size Min` = 32, window 5,792), and nothing else,
 drops recall to **0.000 for boosting**, 0.011 for the tree and 0.066 for logistic regression. A greedy
-attack search in the separate notebook, allowed only changes the attacker controls, needs even less: one
+attack search at the end of the notebook, allowed only changes the attacker controls, needs even less: one
 change to `Fwd Seg Size Min` evades boosting for all 50 attacks it tried.
 
 ## 6. Adaptability
@@ -226,7 +226,7 @@ recall, but not all of it (0.845 against 0.988). In a real system nobody announc
 alert count went *down*. We would watch the share of uncertain predictions (it nearly doubled here, and
 needs no labels), compare incoming feature distributions with the training data, have analysts label a
 small random sample every week (including flows called benign), and retrain regularly. A learning curve
-in the separate notebook shows how far labels go: 500 labels weighted 100 times reach 0.956 (FAR 0.027,
+at the end of the notebook shows how far labels go: 500 labels weighted 100 times reach 0.956 (FAR 0.027,
 the original model's level), and 25 weighted labels already beat 250 unweighted ones.
 
 ## 7. Discussion
@@ -260,7 +260,7 @@ but with visibly less certainty than boosting's 0.999). With `Bwd Packets/s` mis
 "cannot decide". It also survives noise far better: at noise 0.05 its macro-F1 is 0.897, against 0.472
 for the 2-feature tree and 0.536 for the forest. The costs: lower accuracy, only two features (rules grow
 as 3 to the power of the number of features), hand-made choices of levels and threshold, and an Unknown
-that only helps if undecided flows go to an analyst. On the whole test set (separate notebook), a
+that only helps if undecided flows go to an analyst. On the whole test set (an additional check), a
 missing window leaves the BRB unable to decide 65% of the flows, while boosting, given the median
 instead, misses 79% of the attacks with no sign of doubt.
 
@@ -269,7 +269,7 @@ A hundred weighted labels recovered half of the loss, five hundred about 90%.
 
 **Would we deploy this?** Not as it is. On this dataset it is excellent, but its accuracy rests on
 recognising a few attacker machines, which says nothing about attackers elsewhere. An additional check
-(separate notebook) trained boosting without the three TCP-settings features: test macro-F1 0.971
+(at the end of the notebook) trained boosting without the three TCP-settings features: test macro-F1 0.971
 instead of 0.972, recall at noise 0.001 0.831 instead of 0.513, and a SHAP ranking led by behaviour
 features (`Bwd Packets/s`, 46% of the weight). We would deploy that model rather than the original, but
 not trust it alone: the same attack search still makes **34 of 50** caught attacks look benign, most with two
@@ -312,7 +312,7 @@ The AI assistant Claude (Anthropic) [12], through the Claude Code tool, was used
 to compare candidate datasets, plan the work, explain concepts, write and review the notebook code, run
 the experiments, check numbers against the result tables, and draft and edit the text of the README and
 this report. The authors made the project decisions (dataset, using all rows, which models, which extra
-checks) and are responsible for the content. All results come from the output of the notebook and of the separate notebook of additional checks;
+checks) and are responsible for the content. All results come from the output of the notebook;
 only the timings in Section 2 and the choice of the hidden attack come from earlier trial runs.
 
 ## References

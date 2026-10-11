@@ -407,7 +407,7 @@ def build(deck, plan):
                       f"{float(fields[4]):.2f}", f"{float(fields[-1]):.2f}"])
     deck.table(rules, LEFT, 4.5, [12.5, 4.0, 4.0, 4.0, 5.5], size=16, row_h=1.15)
     backup("B4", "Backup: labels needed for the hidden attack",
-           "Separate notebook of additional checks · results/figures/X4_learning_curve.png", "X4_learning_curve.png")
+           "Notebook, additional check X4 · results/figures/X4_learning_curve.png", "X4_learning_curve.png")
 
 
 # ---------------------------------------------------------------------------
