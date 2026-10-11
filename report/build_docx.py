@@ -212,21 +212,6 @@ def convert(markdown, images):
     return "".join(body)
 
 
-def one_author(document):
-    """The template lists the Lab 3 group; this is a one-person project, so keep only its author."""
-    run = r'<w:r\b[^>]*>(?:(?!</w:r>).)*?'
-    first = re.search(run + r'<w:t>Kirill Silchenko</w:t></w:r>', document, re.S)
-    second = re.search(run + r'<w:t>Stefanos Ntentopoulos -</w:t>', document, re.S)
-    if not first or not second:
-        sys.exit("ERROR: the author lines were not found in the template")
-    document = document[:first.start()] + document[second.start():]
-    for old, new in ((">Group 6<", ">One-person group<"), (">Authors:<", ">Author:<")):
-        if old not in document:
-            sys.exit(f"ERROR: {old!r} was not found in the template")
-        document = document.replace(old, new)
-    return document
-
-
 def main():
     if not TEMPLATE.is_file():
         sys.exit(f"ERROR: {TEMPLATE.relative_to(ROOT)} is missing (the title page template).")
@@ -270,7 +255,6 @@ def main():
     if TEMPLATE_TITLE not in document:
         sys.exit(f"ERROR: the title {TEMPLATE_TITLE!r} was not found in the template")
     document = document.replace(TEMPLATE_TITLE, TITLE)
-    document = one_author(document)
     page_break = '<w:p><w:r><w:br w:type="page"/></w:r></w:p>'
     body = page_break + convert(markdown, images)
     section = re.search(r"<w:sectPr\b.*?</w:sectPr>", document, re.S).group()

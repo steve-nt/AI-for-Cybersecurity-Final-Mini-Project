@@ -1,6 +1,6 @@
 # Mini Project: An Explainable and Robust Cyber-Defence Model
 
-**AI for Cybersecurity (D7084E / D7041E)** · Stefanos Ntentopoulos (stente-5@student.ltu.se), one-person group · October 2026
+**AI for Cybersecurity (D7084E / D7041E)** · Kirill Silchenko (kirsil-5@student.ltu.se) and Stefanos Ntentopoulos (stente-5@student.ltu.se) · October 2026
 
 ## 1. Problem and data
 
@@ -298,16 +298,21 @@ labels, as Part G showed.
 
 ## 8. Who did what
 
-Stefanos Ntentopoulos (one-person group): all of the work, namely choosing the dataset, the data
-cleaning and split, all models and experiments of Parts A to G, the notebook, the README and this report.
+**Kirill Silchenko:** the problem statement, loading and cleaning the data, the split and the trivial
+baseline (Part A), the decision tree, logistic regression and gradient boosting (Part B), and the belief
+rule base with its fair comparison (Part F). **Stefanos Ntentopoulos:** learning with fewer labels and
+pseudo-labelling (Part C), the SHAP and LIME explanations and their checks (Part D), noise, missing
+features and what an attacker could fake (Part E), and the hidden attack and its adaptation (Part G).
+Each member made the additional checks for their own parts. Both chose the dataset and wrote the
+notebook, the README and this report together.
 
 ## Use of AI
 
 The AI assistant Claude (Anthropic) [12], through the Claude Code tool, was used throughout the project:
 to compare candidate datasets, plan the work, explain concepts, write and review the notebook code, run
 the experiments, check numbers against the result tables, and draft and edit the text of the README and
-this report. The author made the project decisions (dataset, using all rows, which models, which extra
-checks) and is responsible for the content. All results come from the output of the notebook and of the separate notebook of additional checks;
+this report. The authors made the project decisions (dataset, using all rows, which models, which extra
+checks) and are responsible for the content. All results come from the output of the notebook and of the separate notebook of additional checks;
 only the timings in Section 2 and the choice of the hidden attack come from earlier trial runs.
 
 ## References

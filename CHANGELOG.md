@@ -682,3 +682,36 @@ The user asked for the number check. The brief fails a notebook whose numbers do
 - Planted errors in a temporary copy of the report were all caught: a changed table value, a swapped validation/test pair, a changed printed value, a changed count, and a new number without a check.
 - The hand-in notebook ran without errors in 245 s, under machine load. The extras notebook also ran without errors. No other table changed.
 - No dashes and no task-list references in the report or the check script.
+
+## 2026-10-11 15:48 EEST: presentation plans (slides, live demo, rehearsal)
+
+**What**
+- `presentation/slides.md`: new. How to build the deck from the seminar deck `AutoPenBench_Seminar.pptx` (layout, font, colours, source line, takeaway line, notes format), a time plan of 15 slides plus Questions and four backup slides (12:20 of the 13 minutes), and for every slide its content and speaker notes with a target time.
+- `presentation/demo.md`: new. Plan for running the hand-in notebook live (Run All on slide 1, shown on slides 4 and 14), what to say about the saved models, measured run times, checklists for the day before and for the setup, the live demo cell with its expected output, fallbacks and the backup recording.
+- `presentation/rehearsal.md`: new. Rules for cutting, clock marks, lap tables for two run-throughs, and expected questions per part with short answers.
+- `README.md`: one row for `presentation/` in the table of paths.
+- `results/figures/D1_shap_beeswarm.png`: rewritten byte-wise by the check run below (as on every run); the tables did not change.
+
+**Why**
+The user asked for Markdown files for the presentation, using the seminar deck as the template. The speaker notes were timed at 130 words a minute; slide 1 needed 35 s instead of 25 s, so slides 1, 7 and 8 were retimed. Every number on the slides comes from the report, which the number check covers.
+
+**Verified**
+The demo cell was run on a copy of the hand-in notebook (`/tmp`, 142 s for the whole run): the Exploits flow goes from 0.9996 to 0.0032 after `Fwd Seg Size Min` is set to 32, and to 0.0000 after the window is set to 5792. The X3 claim on slide 10 (one change to `Fwd Seg Size Min` for all 50 attacks) was checked in `X3_attack_per_flow.csv`. No em or en dashes in the new files.
+
+## 2026-10-11 15:54 EEST: the group is two people (Kirill Silchenko and Stefanos Ntentopoulos)
+
+**What**
+- `report/Mini_Project_Report.md`: author line names both members with their e-mail addresses; "Who did what" rewritten (Kirill: Parts A, B and F; Stefanos: Parts C, D, E and G; each did the additional checks for their own parts; dataset choice, notebook, README and report together); "The author" became "The authors" in Use of AI.
+- `report/build_docx.py`: `one_author()` removed, so the title page keeps the template's "Group 6" and both authors. `report/Mini_Project_Report.docx` rebuilt (535 KB).
+- `tools/assemble.py` and `mini_project_unsw_nb15.ipynb`: title cell names both members (only that Markdown cell changed; no rerun needed).
+- `README.md`: header names both members.
+- `presentation/slides.md`: presenters per slide (Kirill slides 1 to 4, 11, 12 and 15; Stefanos 5 to 10, 13 and 14), a presenter column in the time plan (Kirill about 5:45, Stefanos about 6:35, total still 12:20), handover sentences in the notes, "we" instead of "I" where both speak for the group, and the rule that the person not speaking drives the laptop.
+- `presentation/demo.md`: who presses Run All, who drives the laptop and who talks at each live point.
+- `presentation/rehearsal.md`: both must speak; run-throughs together with the handovers; presenter column in the lap table; who answers first for each group of questions; a cross-quiz; a "Who did what?" answer.
+- `TASKLIST.md`: the group line at the top corrected.
+
+**Why**
+The user said the group is two people. The brief requires every member to speak and explain the part they built, and the who-did-what section is graded, so the report, README and notebook had to stop saying "one-person group". The split of the parts (Kirill A, B and F) and Kirill's e-mail address come from the user.
+
+**Verified**
+`tools/check_report_numbers.py`: all 446 numbers still match. `tools/assemble.py --no-execute` (to /tmp) gives the same cell sources as the hand-in notebook. The Word title page reads "Team: Group 6, Authors: Kirill Silchenko, Stefanos Ntentopoulos". No task-list references in the report; no em or en dashes in the changed text.

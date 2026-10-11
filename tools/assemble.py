@@ -44,7 +44,7 @@ MD_MARKER = re.compile(r"^<!--\s*(STEP|STANDIN)\b\s*(.*?)\s*-->")
 TITLE = """# Mini Project: An Explainable and Robust Cyber-Defence Model
 
 AI for Cybersecurity (D7084E / D7041E)
-Stefanos Ntentopoulos (stente-5@student.ltu.se)
+Kirill Silchenko (kirsil-5@student.ltu.se) and Stefanos Ntentopoulos (stente-5@student.ltu.se)
 
 Is a network flow an attack or normal traffic? A detector trained on all 305,105 clean flows of
 CIC-UNSW-NB15 (UNSW-NB15 with CICFlowMeter features), and Parts A-G of the brief in order: the problem,

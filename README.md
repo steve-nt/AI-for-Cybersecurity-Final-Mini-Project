@@ -1,7 +1,7 @@
 # Mini Project: An Explainable and Robust Cyber-Defence Model
 
-AI for Cybersecurity (D7084E / D7041E), Stefanos Ntentopoulos (stente-5@student.ltu.se), a one-person
-group.
+AI for Cybersecurity (D7084E / D7041E), Kirill Silchenko (kirsil-5@student.ltu.se) and Stefanos Ntentopoulos
+(stente-5@student.ltu.se).
 
 Is a network flow an attack or normal traffic? We train a decision tree, a logistic regression and
 gradient boosting on all 305,105 clean flows of CIC-UNSW-NB15, and work through Parts A to G of the
@@ -128,4 +128,5 @@ extras, and writes and runs the hand-in notebook.
 | `models/` | Saved models and slow results (see [Run time](#run-time)) |
 | `reference/` | Earlier course labs used as models for structure and code |
 | `report/` | Report source and the scripts that build the PDF and Word versions |
+| `presentation/` | The talk: slide contents and speaker notes, the live demo plan, the rehearsal plan and expected questions |
 | `requirements.txt` | Pinned library versions |

@@ -1,7 +1,7 @@
 # Final Mini Project Task List: An Explainable and Robust Cyber-Defence Model
 
 - **Course:** AI for Cybersecurity (D7084E / D7041E)
-- **Group:** one person (you do every part and present every part)
+- **Group:** two people, Kirill Silchenko (Parts A, B and F) and Stefanos Ntentopoulos (Parts C, D, E and G); each presents the parts they built (corrected 2026-10-11; earlier sections still say one person)
 - **Hand-in deadline:** Thursday 15 October 2026, **08:00** (notebook, README and report on Canvas)
 - **Presentation:** Thursday 15 October 2026, 14:45–18:00. 13 minutes, then questions. You must be
   there and run (or show running) the code
