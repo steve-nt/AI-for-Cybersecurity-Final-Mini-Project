@@ -1,0 +1,37 @@
+feature,group,unit,step,train_median
+Flow Duration,Free,microseconds,2987722.7039,53666.0000
+Total Fwd Packet,Costly,packets,76.1912,9.0000
+Total Length of Fwd Packet,Costly,bytes,90619.5026,454.0000
+Fwd Packet Length Max,Free,bytes,200.9413,66.0000
+Fwd Packet Length Min,Free,bytes,34.8239,0.0000
+Fwd Packet Length Mean,Free,bytes,106.1359,16.7368
+Fwd Packet Length Std,Free,bytes,90.7738,19.9893
+Flow Bytes/s,Costly,bytes per second,11989631.4954,25969.9980
+Flow Packets/s,Costly,packets per second,25433.7020,780.9499
+Flow IAT Mean,Free,microseconds,227062.8086,1341.1389
+Flow IAT Std,Free,microseconds,464109.9049,3328.1286
+Flow IAT Max,Free,microseconds,1378403.4616,14929.0000
+Flow IAT Min,Free,microseconds,9417.9007,2.0000
+Fwd IAT Total,Free,microseconds,2984116.7161,37609.0000
+Fwd IAT Mean,Free,microseconds,251974.6994,1705.7356
+Fwd IAT Std,Free,microseconds,527440.3515,2776.8083
+Fwd IAT Max,Free,microseconds,1377062.7301,9525.0000
+Fwd IAT Min,Free,microseconds,10516.0947,2.0000
+Fwd Header Length,Free,bytes,1683.9275,224.0000
+Fwd Packets/s,Free,packets per second,25436.6675,361.8600
+Packet Length Max,Costly,bytes,308.4716,501.0000
+Packet Length Mean,Costly,bytes,117.4110,84.6667
+Fwd Segment Size Avg,Free,bytes,106.1359,16.7368
+Subflow Fwd Packets,Costly,packets,39.8602,0.0000
+Subflow Fwd Bytes,Costly,bytes,46986.9004,0.0000
+FWD Init Win Bytes,Free,bytes,5330.4842,5792.0000
+Fwd Act Data Pkts,Costly,packets,70.8492,4.0000
+Fwd Seg Size Min,Free,bytes,4.3478,32.0000
+Active Mean,Free,microseconds,453296.2391,0.0000
+Active Std,Free,microseconds,334737.8247,0.0000
+Active Max,Free,microseconds,734820.2017,0.0000
+Active Min,Free,microseconds,381173.0476,0.0000
+Idle Mean,Free,microseconds,1346859.4738,0.0000
+Idle Std,Free,microseconds,114267.2817,0.0000
+Idle Max,Free,microseconds,1367102.5964,0.0000
+Idle Min,Free,microseconds,1338495.5012,0.0000

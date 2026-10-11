@@ -600,7 +600,7 @@ Replace ☐ with ☑ when a task is done. "Needs" = what must exist first.
 | P3 | Rehearsal | Full run-through with a timer | P1, P2 | ☐ |
 | H1 | README | Dataset, where to get it, libraries, how to run (required) | T2, T3 | ☑ |
 | H2 | Report, 6–8 pages | The eight headings of the brief, captioned figures, AI-use statement | all parts | ☑ |
-| H3 | Number check | Every number in the report matches the notebook | H2, H4 | ☐ |
+| H3 | Number check | Every number in the report matches the notebook | H2, H4 | ☑ |
 | H4 | Final run | Fresh run of the assembled notebook, under 5 minutes | all parts | ☑ |
 | H5 | Upload | Notebook + README + code as zip or repository link, report as PDF, before 15 Oct 08:00 | H1–H4 | ☐ |
 
@@ -1533,7 +1533,7 @@ results in a separate notebook and say so).
   model (seed 42); timing and sizes only up, rates only down, TCP settings set to one of the 10 most common
   training values, Fixed never, all within the training range, at most 5 steps. B2: constrained 50/50
   evaded with one change (`Fwd Seg Size Min`), 31/50 with the TCP settings locked. X6 model: 34/50 evaded
-  with 3 to 4 cheap changes (forward timing, padding); unconstrained 50/50 for both. Saved:
+  25 of them with 2 or 3 cheap changes (forward timing, padding); unconstrained 50/50 for both. Saved:
   `X3_attack_per_flow.csv`, `X3_attack_summary.csv`, `X3_attack_per_type.csv`.
 - **X4 · Learning curve for Part G.** Fuzzers recall after adding 10, 25, 50, 100, 250, 500 labelled
   rows: how many are needed to get back to the "seen" recall?
@@ -1654,9 +1654,18 @@ to run".
 
 #### H3 · Number check
 
-- [ ] Every number in the report comes from the H4 run's `results/tables/` (or its printed output).
+- [x] Every number in the report comes from the H4 run's `results/tables/` (or its printed output).
       Either rewrite `tools/check_report_numbers.py` for our tables (it compares the report text with the
       CSVs automatically), or tick every number by hand.
+
+**Result (2026-10-11):** `tools/check_report_numbers.py` rewritten for this report. Each number is
+checked in its own sentence: 106 values from the tables, 21 printed values, 21 claims, 28 settings; a
+coverage pass confirms that all 446 numbers in the report text are covered. All match. Planted errors
+(a changed value, a swapped pair, a new unchecked number) are all caught. Found and fixed on the way:
+X3 "three or four changes each" (most evasions needed 2 or 3), LIME samples "changed neither" (now
+"improved neither"), the trial-run timings and the AI statement's "all numbers from the notebook" (now
+names the trial runs). New tables so every number has a source: `D3_shap_values.csv`,
+`X3_step_sizes.csv`, and a column in `X3_attack_summary.csv`.
 
 #### H4 · Final run
 

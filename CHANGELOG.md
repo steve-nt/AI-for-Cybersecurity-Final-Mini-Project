@@ -648,3 +648,37 @@ The user asked for the small fixes before the number check. Without the X3 numbe
 - `pytest src`: 16 passed.
 - The hand-in notebook was rebuilt and run with `tools/assemble.py --strict` once the machine was quiet (load 0.97 at the start): 116 s including assembly, no errors. No table in `results/tables/` changed.
 - The report has no dashes and no task IDs.
+
+## 2026-10-11 12:33 EEST: number check of the report (H3)
+
+**What**
+- `tools/check_report_numbers.py`: rewritten for this project; the old version checked the Lab 4.2 report. Each number in `report/Mini_Project_Report.md` is checked within its own sentence: the fragment, with the run's values filled in, must appear in the report. There are four kinds of check:
+  - values from `results/tables/`;
+  - text printed by the hand-in notebook;
+  - claims, checked as conditions (for example "more than half");
+  - settings, each with a reason.
+
+  A coverage pass then lists every number in the report text that no check accounts for, so a number added later without a check fails the run. The tolerance is half a unit of the 4th decimal, for values read back from 4-decimal CSVs.
+- `parts/30_explanation.ipynb` (D3): saves the SHAP values of the three explained flows to `results/tables/D3_shap_values.csv`. The report's +5.7, +3.5 and −3.0 log-odds had appeared only in a figure.
+- `parts/70_extras.ipynb` (X3):
+  - The step sizes are now saved to `results/tables/X3_step_sizes.csv`, the source of "about 10 ms".
+  - `X3_attack_summary.csv` gets a column `evaded_with_2_or_3_changes`.
+  - The interpretation said "3 to 4 changes per flow". The mean of 3.5 included the failed searches; 25 of the 34 evasions needed 2 or 3 changes, so the text now says that, and the table header now says the mean is over all 50 flows.
+- `report/Mini_Project_Report.md`, fixes found by the check:
+  - "most with two or three cheap changes" (was "three or four ... each");
+  - more LIME samples "improved neither" stability nor agreement (was "changed neither": stability got slightly worse for one flow);
+  - the forest timings in Section 2 are now marked as a trial run;
+  - the AI statement said all numbers come from the notebook. It now names the separate notebook and the trial runs.
+- `report/Mini_Project_Report.docx`: rebuilt.
+- `mini_project_unsw_nb15.ipynb`: rebuilt and run for the D3 change.
+- `README.md`: the number check is in the how-to-run table and the folder table.
+- `TASKLIST.md`: H3 is ticked, with the result.
+
+**Why**
+The user asked for the number check. The brief fails a notebook whose numbers do not match the report, so every number now has a traceable source and an automatic check.
+
+**Verified**
+- `python tools/check_report_numbers.py` checks 446 numbers (106 table values, 21 printed values, 21 claims, 28 settings), and all match.
+- Planted errors in a temporary copy of the report were all caught: a changed table value, a swapped validation/test pair, a changed printed value, a changed count, and a new number without a check.
+- The hand-in notebook ran without errors in 245 s, under machine load. The extras notebook also ran without errors. No other table changed.
+- No dashes and no task-list references in the report or the check script.

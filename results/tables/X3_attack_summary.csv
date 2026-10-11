@@ -1,7 +1,7 @@
-model,run,evaded,mean_p_after,mean_features_changed,evaded_share
-gradient boosting (B2),unconstrained,50,0.0818,1.0600,1.0000
-gradient boosting (B2),constrained,50,0.0020,1.0000,1.0000
-gradient boosting (B2),"constrained, TCP locked",31,0.4996,3.5600,0.6200
-without fingerprint (X6),unconstrained,50,0.0036,1.0000,1.0000
-without fingerprint (X6),constrained,34,0.5286,3.4600,0.6800
-without fingerprint (X6),"constrained, TCP locked",34,0.5286,3.4600,0.6800
+model,run,evaded,mean_p_after,mean_features_changed,evaded_share,evaded_with_2_or_3_changes
+gradient boosting (B2),unconstrained,50,0.0818,1.0600,1.0000,3
+gradient boosting (B2),constrained,50,0.0020,1.0000,1.0000,0
+gradient boosting (B2),"constrained, TCP locked",31,0.4996,3.5600,0.6200,23
+without fingerprint (X6),unconstrained,50,0.0036,1.0000,1.0000,0
+without fingerprint (X6),constrained,34,0.5286,3.4600,0.6800,25
+without fingerprint (X6),"constrained, TCP locked",34,0.5286,3.4600,0.6800,25

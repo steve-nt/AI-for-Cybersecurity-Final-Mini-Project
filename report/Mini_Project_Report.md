@@ -45,8 +45,8 @@ were not tuned too closely to the validation set.
 **Models** (scikit-learn 1.6.1 [3], seed 42). Two glass boxes: a **decision tree** and **logistic
 regression** (features scaled inside a pipeline, so the scaler only learns from training rows). One
 black box: **gradient boosting** [4] (`HistGradientBoostingClassifier`). We chose boosting over a
-random forest for speed: on all training rows a 300-tree forest took about 8 minutes to train and SHAP
-on 300 flows over 12 minutes, against seconds for boosting, and every later part retrains or explains
+random forest for speed: in a trial run, a 300-tree forest on all training rows took about 8 minutes to
+train and SHAP on 300 flows over 12 minutes, against seconds for boosting, and every later part retrains or explains
 the black box many times.
 
 **How settings were chosen.** Each candidate setting was trained on a stratified 20% part of the
@@ -156,7 +156,7 @@ the model in general, not the flow.
 (1) LIME's quartile ranges put the attacker window 16,383 and the benign 5,792 into neighbouring ranges
 and the values 8 and 20 into one range, although the model treats them oppositely; without ranges and
 with samples drawn around the flow, LIME's top 3 for the detection became exactly SHAP's. (2) More
-samples (20,000 instead of 5,000) changed neither stability nor agreement. (3) Correlated twin features
+samples (20,000 instead of 5,000) improved neither stability nor agreement. (3) Correlated twin features
 did not explain it: the differing features correlate at most 0.30. (4) **Poor local fit is the main
 reason:** LIME's R² stayed between 0.06 and 0.29 in every variant, and its own prediction for the
 detection was 0.25 where the model says 1.00. The model behaves like a switch (changing one TCP value
@@ -272,8 +272,8 @@ recognising a few attacker machines, which says nothing about attackers elsewher
 (separate notebook) trained boosting without the three TCP-settings features: test macro-F1 0.971
 instead of 0.972, recall at noise 0.001 0.831 instead of 0.513, and a SHAP ranking led by behaviour
 features (`Bwd Packets/s`, 46% of the weight). We would deploy that model rather than the original, but
-not trust it alone: the same attack search still makes **34 of 50** caught attacks look benign, with three
-or four cheap changes each (waiting about 10 ms longer between the attacker's own packets, padding them).
+not trust it alone: the same attack search still makes **34 of 50** caught attacks look benign, most with two
+or three cheap changes (waiting about 10 ms longer between the attacker's own packets, padding them).
 We would run it with the BRB as a readable second opinion that sends undecided flows to an analyst, with
 the monitoring of Part G, and add features computed over many flows, which one attacker's timing cannot
 easily shape.
@@ -307,7 +307,8 @@ The AI assistant Claude (Anthropic) [12], through the Claude Code tool, was used
 to compare candidate datasets, plan the work, explain concepts, write and review the notebook code, run
 the experiments, check numbers against the result tables, and draft and edit the text of the README and
 this report. The author made the project decisions (dataset, using all rows, which models, which extra
-checks) and is responsible for the content. All numbers come from the notebook's own output.
+checks) and is responsible for the content. All results come from the output of the notebook and of the separate notebook of additional checks;
+only the timings in Section 2 and the choice of the hidden attack come from earlier trial runs.
 
 ## References
 

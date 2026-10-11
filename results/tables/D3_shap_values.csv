@@ -1,0 +1,68 @@
+feature,detection,negative,mistake
+Flow Duration,0.0151,-0.0701,0.0640
+Total Fwd Packet,0.1395,-0.0108,0.0027
+Total Bwd packets,0.0986,-0.0344,-0.0250
+Total Length of Fwd Packet,-0.0099,0.1049,0.0557
+Total Length of Bwd Packet,0.9057,-0.0632,1.4752
+Fwd Packet Length Max,0.0075,-0.0037,0.0649
+Fwd Packet Length Min,0.0042,-0.0129,0.0144
+Fwd Packet Length Mean,-0.0236,0.0061,-0.0492
+Fwd Packet Length Std,-0.0452,0.0039,-0.0381
+Bwd Packet Length Max,0.1904,0.0013,-0.0860
+Bwd Packet Length Min,-0.1989,-1.2380,0.0777
+Bwd Packet Length Mean,0.2787,-0.3314,-0.1505
+Bwd Packet Length Std,0.0525,0.0001,0.0118
+Flow Bytes/s,0.0087,-0.6808,0.3703
+Flow Packets/s,-0.0084,-0.0362,0.1192
+Flow IAT Mean,-0.0143,-0.0422,0.0666
+Flow IAT Std,0.0272,-0.0083,0.1010
+Flow IAT Max,-0.0031,-0.1026,0.0094
+Flow IAT Min,0.1098,-0.8033,-0.0071
+Fwd IAT Total,0.0711,0.0437,0.0242
+Fwd IAT Mean,0.1259,-0.0076,0.0728
+Fwd IAT Std,0.1302,0.0502,0.0298
+Fwd IAT Max,-0.0329,0.0778,0.0153
+Fwd IAT Min,-0.0230,-0.1081,-0.0006
+Bwd IAT Total,-0.0365,0.1072,-0.0384
+Bwd IAT Mean,0.0061,-0.0022,0.0014
+Bwd IAT Std,-0.0052,-0.0063,-0.0054
+Bwd IAT Max,0.0333,0.0050,0.0217
+Bwd IAT Min,0.0109,-2.1736,0.0209
+Fwd PSH Flags,0.0000,0.0000,0.0000
+Fwd Header Length,0.0146,0.0500,0.0061
+Bwd Header Length,-0.0417,-0.0139,0.0493
+Fwd Packets/s,-0.0218,-0.0594,0.0156
+Bwd Packets/s,1.6363,-2.9813,1.3148
+Packet Length Min,0.0000,0.0000,0.0000
+Packet Length Max,0.4785,-0.0162,0.4828
+Packet Length Mean,0.0505,0.0710,0.0695
+Packet Length Std,0.0561,-0.0258,0.1175
+Packet Length Variance,0.0000,0.0000,0.0000
+FIN Flag Count,0.0531,-0.0024,0.0001
+SYN Flag Count,-0.0092,0.0034,-0.0117
+RST Flag Count,-0.0003,-0.0001,-0.0005
+PSH Flag Count,0.2761,-0.0157,-0.0102
+ACK Flag Count,0.0171,-0.0034,0.0092
+Down/Up Ratio,0.0015,-0.0006,0.0006
+Average Packet Size,-0.0173,-0.0080,-0.0122
+Fwd Segment Size Avg,-0.0023,-0.0010,-0.0020
+Bwd Segment Size Avg,0.0000,0.0000,0.0000
+Bwd Bytes/Bulk Avg,0.1844,-0.0122,0.0900
+Bwd Packet/Bulk Avg,0.5081,0.0018,0.0044
+Bwd Bulk Rate Avg,0.0260,-0.6462,0.0375
+Subflow Fwd Packets,0.0014,0.0000,-0.0001
+Subflow Fwd Bytes,0.0001,0.0000,-0.0004
+Subflow Bwd Packets,0.0000,-0.0000,0.0000
+Subflow Bwd Bytes,0.0000,0.0000,0.0002
+FWD Init Win Bytes,3.4443,-1.2876,3.4579
+Bwd Init Win Bytes,0.0118,0.0192,0.0124
+Fwd Act Data Pkts,0.0010,0.0162,0.0187
+Fwd Seg Size Min,6.0122,1.5832,5.6808
+Active Mean,0.0000,0.0000,0.0000
+Active Std,0.0000,0.0000,0.0000
+Active Max,0.0000,0.0000,0.0000
+Active Min,0.0000,0.0000,0.0000
+Idle Mean,0.0000,0.0000,0.0000
+Idle Std,0.0000,0.0000,0.0000
+Idle Max,0.0000,0.0000,0.0000
+Idle Min,-0.0000,-0.0000,-0.0000

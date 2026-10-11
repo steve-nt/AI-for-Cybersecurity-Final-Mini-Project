@@ -75,6 +75,7 @@ Run every command from the project root, with the environment active.
 | Rebuild the hand-in notebook from the part notebooks, and run it | `python tools/assemble.py --strict` |
 | Also include the optional extras (not part of the hand-in) | `python tools/assemble.py --with-extras --output extras_run.ipynb` |
 | Rebuild the feature glossary table | `python tools/feature_glossary.py` |
+| Check every number in the report against the result tables (after running both notebooks) | `python tools/check_report_numbers.py` |
 
 The notebook needs three things next to it, besides the data:
 
@@ -122,7 +123,7 @@ extras, and writes and runs the hand-in notebook.
 | `parts/60_adaptability.ipynb` | Part G: Fuzzers hidden from training, then adapted to |
 | `parts/70_extras.ipynb` | Optional extras: fewer labels (1%, 5%), a constrained evasion attack, a learning curve for the hidden attack, a model without the shortcut features, the BRB with missing inputs and an edited rule, bootstrap confidence intervals |
 | `src/` | `xai_tools.py` and `brbes.py` (from the course labs) and their tests |
-| `tools/` | `assemble.py`, `feature_glossary.py` |
+| `tools/` | `assemble.py`, `feature_glossary.py`, `check_report_numbers.py` |
 | `results/tables/`, `results/figures/` | Every table and figure, named after the step that made it |
 | `models/` | Saved models and slow results (see [Run time](#run-time)) |
 | `reference/` | Earlier course labs used as models for structure and code |
