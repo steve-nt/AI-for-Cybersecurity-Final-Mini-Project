@@ -80,8 +80,8 @@ visitors.
 **Why is it here?** Everything is learned from these files. They were recorded in 2015 in a university lab
 in Australia, where researchers ran normal traffic and real attacks on purpose.
 
-**Why is the door locked?** The data are **not** included in the hand-in or in our shared code storage
-(git), because they are too big (196 MB). The README says where to download them, and gives a
+**Why is the door locked?** The data are **not** included in the hand-in, because they are too big
+(196 MB). The README says where to download them, and gives a
 "fingerprint" of each file (called a SHA-256 hash) so you can check you got exactly the same files.
 
 **Not on display:** a bigger file, `CICFlowMeter_out.csv`, which also holds the computers' addresses. All
@@ -312,13 +312,14 @@ on the final exam):
 At the hand-in, two packages leave the museum:
 
 - **The report** as a PDF, from the library.
-- **A zip file** with the main hall, the entrance hall, the shopping list, the toolbox, two of the three
-  machines from the machine room (the assembly machine and the glossary machine), the workshops, the
+- **A zip file** with the main hall, the entrance hall, the shopping list, the toolbox, one machine from
+  the machine room (the assembly machine), the workshops, the
   gallery and the storage room.
 
 The vault (the data) stays behind because it is too big; the README tells the teacher where to download
 it. The theatre, the archive and the visitor centre stay behind as well, because they are for us, not
-part of the work being graded. So does the number-checking machine: it needs the report's text file, which
-is not in the zip, and it checks our writing rather than the project itself. The exact list and command are in [Files-To-Submit.md](Files-To-Submit.md).
+part of the work being graded. So do the other two machines. The number-checking machine needs the report's text file, which is not in
+the zip, and it checks our writing rather than the project itself. The glossary machine was only needed
+once: the notebook reads its finished table, which is in the gallery. The exact list and command are in [Files-To-Submit.md](Files-To-Submit.md).
 
 Thank you for visiting!

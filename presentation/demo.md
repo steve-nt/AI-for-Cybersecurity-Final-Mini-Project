@@ -125,6 +125,6 @@ Record one full, real run with the demo cell at the end, exactly as in the talk,
 - **Content:** restart and clear outputs, Run All, scroll along as cells fill, show the test table, wait
   for the end, paste and run the demo cell. About 3 to 4 minutes.
 - **File:** `presentation/backup_run.mp4`, plus a copy on the USB stick. It is a large file; leave it out
-  of git and of the Canvas zip.
+  of the Canvas zip.
 - **In the talk:** if it is used, say clearly "this is a recording of a full real run from 14 October".
   The brief allows that, but only if you say which it is.

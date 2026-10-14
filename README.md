@@ -26,8 +26,8 @@ and nine attack types. This is not the original 49-feature UNSW-NB15 table.
 
 - **Where to get it:** https://www.unb.ca/cic/datasets/cic-unsw-nb15.html (the download page asks for a
   name and e-mail address).
-- **Files needed**, in a folder `UNSW-NB15/` in the project root. The data are **not in git**
-  (196 MB, over GitHub's file limit):
+- **Files needed**, in a folder `UNSW-NB15/` in the project root. The data are **not included**
+  with the code (196 MB):
 
   | File | Contents | SHA-256 |
   |---|---|---|
@@ -76,7 +76,6 @@ Run every command from the project root, with the environment active.
 | Run the hand-in notebook, top to bottom | `jupyter nbconvert --to notebook --execute --inplace mini_project_unsw_nb15.ipynb` (or *Run All* in Jupyter) |
 | Rebuild the hand-in notebook from the part notebooks, and run it | `python tools/assemble.py --strict` |
 | A quicker build with Parts A to G only, without the additional checks (not the hand-in) | `python tools/assemble.py --without-extras --output quick_run.ipynb` |
-| Rebuild the feature glossary table | `python tools/feature_glossary.py` |
 | Build the presentation slides from `presentation/slides.md` (needs `python-pptx`) | `python presentation/build_slides.py` |
 
 The notebook needs three things next to it, besides the data:
@@ -84,7 +83,7 @@ The notebook needs three things next to it, besides the data:
 - **`src/`**: Parts D and F import `src/xai_tools.py` (SHAP and LIME helpers) and `src/brbes.py` (the
   belief rule base engine). Keep the folder next to the notebook.
 - **`results/tables/T4_feature_glossary.csv`**: the plain-language meaning of every feature, read by
-  Parts D, E and F. It is in git; `tools/feature_glossary.py` rebuilds it.
+  Parts D, E and F. It is shipped with the code.
 - **`models/`**: the saved models (see below). Optional, but without it the run is slow.
 
 ### Run time
@@ -133,7 +132,7 @@ earlier. The test set is sealed at the end of step A3, so a cell that used it be
 | `parts/60_adaptability.ipynb` | Part G: Fuzzers hidden from training, then adapted to |
 | `parts/70_extras.ipynb` | Additional checks, at the end of the hand-in notebook: fewer labels (1%, 5%), a constrained evasion attack, a learning curve for the hidden attack, a model without the shortcut features, the BRB with missing inputs and an edited rule, bootstrap confidence intervals |
 | `src/` | `xai_tools.py` and `brbes.py` (from the course labs) and their tests |
-| `tools/` | `assemble.py` and `feature_glossary.py` |
+| `tools/` | `assemble.py` |
 | `results/tables/`, `results/figures/` | Every table and figure, named after the step that made it |
 | `models/` | Saved models and slow results (see [Run time](#run-time)) |
 | `reference/` | Earlier course labs used as models for structure and code |

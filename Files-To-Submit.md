@@ -23,10 +23,10 @@ Before exporting:
 
 ## 2. The code (zip)
 
-**`AI-for-Cybersecurity-Final-Mini-Project.zip`**, built from the project root (about 22 MB, 221 files):
+**`AI-for-Cybersecurity-Final-Mini-Project.zip`**, built from the project root (about 22 MB, 220 files):
 
 ```bash
-zip -rq -9 AI-for-Cybersecurity-Final-Mini-Project.zip mini_project_unsw_nb15.ipynb README.md requirements.txt src tools/assemble.py tools/feature_glossary.py parts results models -x '*/__pycache__/*' '*/.pytest_cache/*' '*.ipynb_checkpoints*'
+zip -rq -9 AI-for-Cybersecurity-Final-Mini-Project.zip mini_project_unsw_nb15.ipynb README.md requirements.txt src tools/assemble.py parts results models -x '*/__pycache__/*' '*/.pytest_cache/*' '*.ipynb_checkpoints*'
 ```
 
 | Path | Why it is in the zip |
@@ -38,7 +38,6 @@ zip -rq -9 AI-for-Cybersecurity-Final-Mini-Project.zip mini_project_unsw_nb15.ip
 | `results/` | Needed by the notebook: `results/tables/T4_feature_glossary.csv`. Also every result table and figure the report refers to |
 | `models/` | The saved models and slow results. Without them the run takes about 25 minutes or more instead of about 4, over the brief's 5-minute limit |
 | `tools/assemble.py` | Builds the hand-in notebook from `parts/`, and checks that no cell before step T0 uses the test set |
-| `tools/feature_glossary.py` | Builds `results/tables/T4_feature_glossary.csv`, the plain-language meaning of every feature, which the notebook reads |
 | `parts/` | The part notebooks the hand-in notebook is assembled from; the README describes them |
 
 ### Not in the zip
@@ -49,6 +48,7 @@ zip -rq -9 AI-for-Cybersecurity-Final-Mini-Project.zip mini_project_unsw_nb15.ip
 | `.venv/`, `__pycache__/`, `.ipynb_checkpoints/` | Environment and caches; `requirements.txt` recreates the environment |
 | `presentation/`, `AutoPenBench_Seminar.pptx`, `presentation/backup_run.mp4` | For the talk, not part of the hand-in |
 | `report/` sources (Markdown, build scripts, fonts) | The report goes in as the PDF upload |
+| `tools/feature_glossary.py` | Built `results/tables/T4_feature_glossary.csv` once; the notebook only reads that table, which is in `results/` |
 | `tools/check_report_numbers.py` | Checks the report text against the tables; it needs `report/Mini_Project_Report.md`, which is not in the zip, and it is about writing the report, not about the project |
 | `TASKLIST.md`, `CHANGELOG.md`, `Dataset_Choice.md` | Internal planning and history |
 | `reference/`, `PreviousLabs/`, the brief (`15_oct_Final Mini Project.*`) | Course material, not our work |
