@@ -814,3 +814,25 @@ A review by a team member pointed out that the notebook scored the test set befo
 
 **Verified**
 A static check of every code cell: each name a cell reads comes from the same defining cell as before, apart from the new names and the test set now coming from T0. Full run: 215 s, no errors; the test table appears about 95 s into the run. All 68 tables in `results/tables/` byte-identical to the last commit. `--strict`: no cell between the seal and T0 uses the test set. `tools/check_report_numbers.py`: all 446 numbers match. `pytest src`: 16 passed. Standalone runs of `parts/00_setup`, `10_baseline_models`, `20_few_labels`, `50_brb` and `70_extras` without errors. Slide preview: all text fits. An earlier run took 356 s while the machine was busy (data loading alone twice as slow); one run was cut off by a session restart and left the notebook without outputs until the next run.
+
+## 2026-10-14 21:06 EEST: Plain-English guide to the whole project
+
+**What**
+- `Plain-English-Guide.md`: created. Explains the project without jargon: key terms, the data, Parts A to G, the additional checks, the deployment verdict, how the two-phase notebook and the model cache work, who did what, and what gets handed in.
+
+**Why**
+The user asked for a Markdown file that explains everything in plain English, for example to prepare both members for questions on any part at the presentation. All numbers are taken from the report.
+
+**Verified**
+Dash check: 0 em or en dashes. No code, notebook or report files changed.
+
+## 2026-10-14 21:10 EEST: Likely professor questions with answers
+
+**What**
+- `Professor-Questions.md`: created. About 70 likely questions with short answers, grouped by topic (big picture, data, metrics, models, Parts C to G, reproducibility, judgement, AI use), each section naming who answers first.
+
+**Why**
+The user asked for a Markdown file of possible questions from the professor and their answers, to prepare both members for questions on any part. Answers use the numbers in the report; it goes deeper than the question list in `presentation/rehearsal.md` (for example the split by time, neural networks, the fairness of the deletion test).
+
+**Verified**
+Dash check: 0 em or en dashes. No code, notebook or report files changed.
