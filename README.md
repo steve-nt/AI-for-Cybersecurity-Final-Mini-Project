@@ -77,7 +77,6 @@ Run every command from the project root, with the environment active.
 | Rebuild the hand-in notebook from the part notebooks, and run it | `python tools/assemble.py --strict` |
 | A quicker build with Parts A to G only, without the additional checks (not the hand-in) | `python tools/assemble.py --without-extras --output quick_run.ipynb` |
 | Rebuild the feature glossary table | `python tools/feature_glossary.py` |
-| Check every number in the report against the result tables (after running the hand-in notebook) | `python tools/check_report_numbers.py` |
 | Build the presentation slides from `presentation/slides.md` (needs `python-pptx`) | `python presentation/build_slides.py` |
 
 The notebook needs three things next to it, besides the data:
@@ -134,7 +133,7 @@ earlier. The test set is sealed at the end of step A3, so a cell that used it be
 | `parts/60_adaptability.ipynb` | Part G: Fuzzers hidden from training, then adapted to |
 | `parts/70_extras.ipynb` | Additional checks, at the end of the hand-in notebook: fewer labels (1%, 5%), a constrained evasion attack, a learning curve for the hidden attack, a model without the shortcut features, the BRB with missing inputs and an edited rule, bootstrap confidence intervals |
 | `src/` | `xai_tools.py` and `brbes.py` (from the course labs) and their tests |
-| `tools/` | `assemble.py`, `feature_glossary.py`, `check_report_numbers.py` |
+| `tools/` | `assemble.py` and `feature_glossary.py` |
 | `results/tables/`, `results/figures/` | Every table and figure, named after the step that made it |
 | `models/` | Saved models and slow results (see [Run time](#run-time)) |
 | `reference/` | Earlier course labs used as models for structure and code |

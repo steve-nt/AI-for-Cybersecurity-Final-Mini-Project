@@ -858,3 +858,17 @@ The user asked for a final Markdown file that explains which part of the code do
 
 **Verified**
 Counts checked against the files: 155 notebook cells, 68 files in `results/tables/`, 14 figures, 112 cache files. Dash check: 0 em or en dashes. No code, notebook or report files changed.
+
+## 2026-10-14 22:03 EEST: Report number checker left out of the hand-in zip
+
+**What**
+- `Files-To-Submit.md`: the zip command now names `tools/assemble.py` and `tools/feature_glossary.py` instead of the whole `tools/` folder (about 22 MB, 221 files); the table has one row per tool, and `tools/check_report_numbers.py` is listed under "Not in the zip" with the reason.
+- `README.md`: removed the run-table row for `check_report_numbers.py`; the `tools/` row now lists only `assemble.py` and `feature_glossary.py`.
+- `tools/feature_glossary.py`: removed "(task T4)" from the first docstring line.
+- `Museum-Tour.md`: the hand-in paragraph says which two tools go into the zip and why the number checker stays behind.
+
+**Why**
+The user asked whether showing the tools to the professor was wise, and then approved these changes. The number checker cannot run from the zip (it reads `report/Mini_Project_Report.md`, which is not included) and concerns writing the report rather than the project. The task ID was a reference to the internal plan in a file that goes into the hand-in.
+
+**Verified**
+Built the zip with the new command into /tmp: 221 files, 22 MB, both tools included, the checker absent; the test zip was deleted. The README no longer mentions the checker. Dash check: 0 em or en dashes in the edited files.

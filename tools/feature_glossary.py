@@ -1,4 +1,4 @@
-"""Build the feature glossary: what each CIC-UNSW-NB15 feature means, in plain words (task T4).
+"""Build the feature glossary: what each CIC-UNSW-NB15 feature means, in plain words.
 
 The meanings are written by hand below (from the CICFlowMeter feature documentation). Everything
 else is measured on the training split, so it always matches the data:

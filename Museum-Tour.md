@@ -312,11 +312,13 @@ on the final exam):
 At the hand-in, two packages leave the museum:
 
 - **The report** as a PDF, from the library.
-- **A zip file** with the main hall, the entrance hall, the shopping list, the toolbox, the machine room,
-  the workshops, the gallery and the storage room.
+- **A zip file** with the main hall, the entrance hall, the shopping list, the toolbox, two of the three
+  machines from the machine room (the assembly machine and the glossary machine), the workshops, the
+  gallery and the storage room.
 
 The vault (the data) stays behind because it is too big; the README tells the teacher where to download
 it. The theatre, the archive and the visitor centre stay behind as well, because they are for us, not
-part of the work being graded. The exact list and command are in [Files-To-Submit.md](Files-To-Submit.md).
+part of the work being graded. So does the number-checking machine: it needs the report's text file, which
+is not in the zip, and it checks our writing rather than the project itself. The exact list and command are in [Files-To-Submit.md](Files-To-Submit.md).
 
 Thank you for visiting!
