@@ -847,3 +847,14 @@ The user asked for a Markdown file explaining all the abbreviations in the proje
 
 **Verified**
 Dash check: 0 em or en dashes. Steps X1, X5 and X8 do not occur in the notebook, and the file says so. No code, notebook or report files changed.
+
+## 2026-10-14 21:38 EEST: Museum-style tour of the project files
+
+**What**
+- `Museum-Tour.md`: created. A walk through the project for readers without technical knowledge, with each folder as a room and each file as an exhibit: what it is, where it is, why it is there and when it is useful. It covers the README, the data, the hand-in notebook (both phases and the step that opens the test set), `parts/`, `src/`, `models/`, `results/`, `tools/`, `report/`, `presentation/`, the archive, `requirements.txt` and the guides. It ends by following the 0.972 score from the data to the report, and by listing what goes into the hand-in.
+
+**Why**
+The user asked for a final Markdown file that explains which part of the code does what, where and why, written as a museum tour for students without technical knowledge.
+
+**Verified**
+Counts checked against the files: 155 notebook cells, 68 files in `results/tables/`, 14 figures, 112 cache files. Dash check: 0 em or en dashes. No code, notebook or report files changed.
