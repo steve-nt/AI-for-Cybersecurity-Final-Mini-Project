@@ -131,13 +131,13 @@ Per part: A 1:10, B 0:55, C 1:00, D 2:25, E 1:30, F 1:40, G 1:00, conclusion 0:5
 
 - Big number: **+0.003**, what the black box buys over a readable tree.
 
-**Takeaway line:** Settings chosen on validation; test used once, and it agrees within 0.003.
+**Takeaway line:** Settings chosen on validation, test opened only after; they agree within 0.003.
 
 **Speaker notes.** Target time: 55 seconds. Presenter: Kirill.
 
 > Two glass boxes, a decision tree and logistic regression, and one black box, gradient boosting. Every
 > setting, the tree depth, the regularisation and the boosting grid, was chosen on the validation set,
-> and the test set was used once at the end. Validation and test agree within 0.003 on every score.
+> and the notebook only opens the test set after all choices are made. Validation and test agree within 0.003 on every score.
 >
 > All three are far above the baseline. Boosting is best, but only by 0.003 macro-F1 over a depth-12
 > tree. Logistic regression catches the most attacks but raises the most false alarms. I read that small
@@ -150,13 +150,15 @@ Per part: A 1:10, B 0:55, C 1:00, D 2:25, E 1:30, F 1:40, G 1:00, conclusion 0:5
 
 **Layout:** a short cue slide ("Live: the notebook"), then switch to the notebook window.
 
-**What to show:** the section "Part B: scores on the test set, next to the trivial baseline". Point at
-the test table and at the cell counter on the left. Then switch back. Details in [demo.md](demo.md).
+**What to show:** the heading "Final evaluation on the test set" (step T0, where the test set is
+opened), and just below it the section "Part B: scores on the test set, next to the trivial baseline".
+Point at the test table and at the cell counter on the left. Then switch back. Details in [demo.md](demo.md).
 
 **Speaker notes.** Target time: 30 seconds. Presenter: Kirill.
 
-> This is the notebook we started almost three minutes ago. It is already past Part B: here is the test
-> table, computed just now, with the same 0.972 as on the slide. It is now working through the
+> This is the notebook we started almost three minutes ago. Every setting was chosen first, on
+> validation, and only here is the test set opened. Here is the test table, computed just now, with the
+> same 0.972 as on the slide. It is now working through the
 > explanation part. We come back at the end. Stefanos now takes Parts C, D and E.
 
 ---

@@ -27,8 +27,9 @@ split is 60/20/20, stratified on the attack type (seed 42): 183,063 training, 61
 **The trivial baseline** calls every flow benign: accuracy 0.737, recall 0, macro-F1 0.424, PR-AUC
 0.263 (the attack share) and FAR 0. Every later score is compared with it.
 
-**Results on validation and on test.** All settings were chosen on the validation set; the test set
-was then used once. Table 1 shows that the two agree to within 0.003 on every score, so the settings
+**Results on validation and on test.** All settings were chosen on the validation set before the test
+set was opened: the notebook first makes every choice with the test set sealed, then opens it and only
+reports results on it (see Method). Table 1 shows that the two agree to within 0.003 on every score, so the settings
 were not tuned too closely to the validation set.
 
 | Model | Macro-F1 val / test | Recall val / test | PR-AUC val / test | FAR val / test |
@@ -54,6 +55,14 @@ training set (36,612 flows) and scored on the validation set; the best macro-F1 
 trained on all training rows. Tree depth from {3, 5, 8, 12, unlimited}: 12. Logistic regression `C`
 from {0.01, 0.1, 1, 10}: 10. Boosting learning rate {0.05, 0.1} by leaves per tree {31, 63}: 0.1 and
 31. All four boosting settings were within 0.001 macro-F1 of each other, so the choice matters little.
+
+**The test set is held back until every setting is fixed.** The notebook runs in two phases. The first
+chooses every setting on the validation set: the three models (above), the pseudo-labelling cutoffs
+(Part C and the additional check with fewer labels), the BRB's features and threshold, and the depth of
+the tree on the BRB's features (Part F). During this phase the test set is sealed: only its size and the
+class balance of the split are known, and any cell that used it would stop with an error. Then the test
+set is opened, and the second phase only reports results on it and chooses nothing. Every test score in
+this report comes from that second phase.
 
 **Part C, fewer labels.** We keep the labels of 10% of the training flows (18,306, stratified) and hide
 the rest. The **lower line** is boosting trained on those 18,306 flows alone; the upper line is the

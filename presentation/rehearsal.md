@@ -61,7 +61,7 @@ own slides alone with a timer, and you do run-through 2 together.
 After run-through 1:
 
 - [ ] Total under 13:00? If not, apply the cuts above and run the slides that changed again.
-- [ ] Did the notebook reach Part B by slide 4, and finish by slide 14? Write the run time here: ______
+- [ ] Did the notebook reach the test table (after "Final evaluation on the test set") by slide 4, and finish by slide 14? Write the run time here: ______
 - [ ] Any slide where you read from the screen instead of talking? Make its text shorter.
 - [ ] Were the four handovers (after slides 4, 10, 12 and 14) smooth? The next speaker stands ready
       before the last sentence of the previous one.
@@ -99,8 +99,9 @@ address range, so the address alone would give the label away.
 (with the saved models), including the additional checks.
 
 **How did you choose the settings? Did you touch the test set?** Every candidate was trained on a 20% part
-of the training set and scored on validation; the best macro-F1 won. The test set was used once at the
-end. Validation and test agree within 0.003 on every score.
+of the training set and scored on validation; the best macro-F1 won. The test set is sealed in the notebook
+until every setting is fixed (step T0, "Final evaluation on the test set"); a cell that used it earlier
+would fail. Validation and test agree within 0.003 on every score.
 
 **Why gradient boosting and not a random forest?** Speed. In a trial run, a 300-tree forest took about 8
 minutes to train and SHAP on 300 flows over 12 minutes, against seconds for boosting, and later parts

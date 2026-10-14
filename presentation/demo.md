@@ -31,8 +31,8 @@ scikit-learn version, and a run without it gives the same numbers (`random_state
 | Without `models/` (full retraining) | same | about 25 minutes for Parts A to G, more with the additional checks |
 
 So close everything else before the talk (browser tabs, IDE indexing, other notebooks): a busy laptop
-doubles the run time. The additional checks add about 60 s at the end of the run. Part B is reached
-after about 1.5 to 2 minutes, in time for slide 4, and even on a busy laptop the run finishes well before
+doubles the run time. The additional checks add about 60 s at the end of the run. The test set is
+opened (step T0) and the test table of Part B appears about 95 s into the run, in time for slide 4, and even on a busy laptop the run finishes well before
 slide 14 (at about 10:45).
 
 ## The day before (Wednesday 14 October)
@@ -58,8 +58,9 @@ slide 14 (at about 10:45).
    so the audience sees empty cells being filled (the proof that it runs now). Do **not** save afterwards;
    the handed-in file keeps its outputs.
 4. Zoom the notebook to about 150% (`Ctrl` and `+`) so tables can be read from the back.
-5. In the table of contents (left sidebar), the headings "Part B: scores on the test set, next to the
-   trivial baseline" and "Part G: what we would do" are the two places to jump to.
+5. In the table of contents (left sidebar), the headings "Final evaluation on the test set" (with "Part
+   B: scores on the test set, next to the trivial baseline" just below it) and "Part G: what we would
+   do" are the places to jump to.
 6. Open the slides in presenter view on the other window. Practise the window switch (`Alt+Tab`) once.
 7. Have the demo cell (below) ready to paste: open `presentation/demo.md` in a text editor, or keep the
    code in the clipboard.
@@ -71,7 +72,7 @@ The person who is not speaking drives the laptop (slides and notebook), except o
 | Clock | Slide | Action |
 |---|---|---|
 | 0:00 | 1 | Stefanos (not speaking) switches to Jupyter and presses *Run > Run All Cells* (the kernel is fresh) while Kirill says so, then switches back to the slides. |
-| about 2:40 | 4 | Kirill talks; Stefanos switches to Jupyter. Jump to "Part B: scores on the test set". Kirill points at the test table (gradient boosting 0.9718) and at the `[*]` running further down. Switch back; Stefanos takes over. |
+| about 2:40 | 4 | Kirill talks; Stefanos switches to Jupyter. Jump to "Final evaluation on the test set": Kirill says that every setting was chosen before this point, on validation, then points at the test table just below (gradient boosting 0.9718) and at the `[*]` running further down. Switch back; Stefanos takes over. |
 | about 10:45 | 14 | Stefanos talks and also drives the laptop on this slide, to paste and run the cell. Switch to Jupyter. Scroll to the end: the last cells have numbers and the G3 figure. Add a cell at the very end, paste the demo cell, run it with `Shift+Enter`. Switch back; Kirill closes. |
 
 ### The demo cell (slide 14)
@@ -108,7 +109,7 @@ After the talk, close the notebook **without saving**, so the demo cell does not
 
 | Problem | What to do |
 |---|---|
-| At slide 4 the run has not reached Part B yet | Show the `[*]` on the cell that is running and the filled cells above it, say "it is still on Part A", and go on. Show the test table on slide 14 instead. |
+| At slide 4 the run has not reached the final evaluation yet | Show the `[*]` on the cell that is running and the filled cells above it, say "it is still choosing settings on validation", and go on. Show the test table on slide 14 instead. |
 | At slide 14 the run is still going | Show where it is (the `[*]`) and say how far it got. A new cell would only wait in the queue behind the run, so paste the demo cell anyway and let it run when the run ends, during the questions. If there is no time, play the demo cell part of the backup video and say it is a recording. |
 | An error stops the run | Do not debug in front of the audience. Say "the live run stopped here; this is a recording of a full real run from Wednesday", and play the backup video from the right point. |
 | The laptop or the projector fails | Play the backup video from the USB stick on the room computer, and say it is a recording. |

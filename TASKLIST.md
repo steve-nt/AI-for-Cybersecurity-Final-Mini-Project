@@ -1722,6 +1722,17 @@ under 5 minutes, the slow scoring in X2, X6 and X9 is saved in the cache like th
 files, 112 in total), and X9's bootstrap was rewritten with per-flow counts (same results). Cached run on a
 quiet machine: 240 s, no errors, all 68 tables byte-identical to before, number check passes.
 
+**Update (2026-10-14): two phases.** A review pointed out that the notebook scored the test set (A4, B3)
+before later settings were chosen (C2 cutoff, F2 threshold), so "the test set is touched once, at the end"
+was not literally true even though every choice used validation only. The notebook now runs in two
+phases: development (A0 to A4, B1, B2, C1 to C3, X2, D1, F1 to F3, every choice on validation), then
+step T0 opens the test set, then evaluation (A4T, B3, B4, C4, D2 to D6, E, F3T, F4, F5, G, X2T to X9).
+The test set is sealed at the end of A3 (`_SEALED_TEST`; only `N_TEST` and `TEST_INDEX` stay), so an
+early use fails, and `assemble.py --strict` checks the same before running. A4, F3 and X2 were split
+into a validation half and a test half (A4T, F3T, X2T). Run: 215 s, no errors, all 68 tables
+byte-identical, the test table appears about 95 s into the run. Report, README and presentation
+wording updated.
+
 #### H5 · Upload
 
 - [ ] Canvas, **before 15 Oct 08:00** (aim for the evening of 14 Oct):

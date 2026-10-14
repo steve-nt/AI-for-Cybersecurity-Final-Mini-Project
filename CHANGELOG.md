@@ -794,3 +794,23 @@ The user asked for the improved command. The previous entry's change had been ma
 
 **Verified**
 The command was run into /tmp (then deleted): 223 files, no cache or checkpoint files.
+
+## 2026-10-14 20:07 EEST: Two-phase notebook: every setting chosen before the test set is opened
+
+**What**
+- `tools/assemble.py`: new step order in two phases. Development: A0 to A4, B1, B2, C1 to C3, X2, D1, F1 to F3. Then T0. Evaluation: A4T, B3, B4, C4, D2 to D6, E1 to E4, F3T, F4, F5, G1 to G4, X2T, X3 to X9. `--strict` also fails if a code cell between the seal (end of A3) and T0 uses the test set. The docstring and the notebook title cell explain the phases.
+- `parts/00_setup.ipynb`: the split keeps `N_TEST` and `TEST_INDEX`; the cache fingerprint uses `N_TEST` (same fingerprint); the last A3 cell seals the test set (`_SEALED_TEST`, then deletes `X_test`, `y_test`, `type_test`); new step T0 ("Final evaluation on the test set", Markdown and code) opens it and checks size, rows and columns.
+- `parts/10_baseline_models.ipynb`: A4 now scores the baseline on validation only; new A4T scores it on test and writes the same `A4_baseline.csv`.
+- `parts/20_few_labels.ipynb`: C1's disjointness check uses `TEST_INDEX`.
+- `parts/50_brb.ipynb`: the F3 test comparison and its interpretation are now step F3T, with a heading; the F3 text says so.
+- `parts/70_extras.ipynb`: X2 split into the cutoff choice on validation (X2, in the development phase, written as a function so no names leak) and the scores (X2T).
+- `mini_project_unsw_nb15.ipynb`: rebuilt and run, 155 cells.
+- `report/Mini_Project_Report.md` and `.docx`: "the test set was then used once" replaced; a Method paragraph describes the two phases and the sealed test set.
+- `README.md`, `presentation/slides.md` (slide 3 takeaway and notes, slide 4), `presentation/demo.md`, `presentation/rehearsal.md`: the two phases, and slide 4 now also shows the T0 heading. Deck rebuilt.
+- `TASKLIST.md`: update note under the final run.
+
+**Why**
+A review by a team member pointed out that the notebook scored the test set before some settings (the C2 cutoff, the F2 threshold) were chosen, so the brief's "the test set is touched once, at the end" and the report's claim were not literally true, although every choice already used validation only. The user agreed to fix the order in the code, not only the wording.
+
+**Verified**
+A static check of every code cell: each name a cell reads comes from the same defining cell as before, apart from the new names and the test set now coming from T0. Full run: 215 s, no errors; the test table appears about 95 s into the run. All 68 tables in `results/tables/` byte-identical to the last commit. `--strict`: no cell between the seal and T0 uses the test set. `tools/check_report_numbers.py`: all 446 numbers match. `pytest src`: 16 passed. Standalone runs of `parts/00_setup`, `10_baseline_models`, `20_few_labels`, `50_brb` and `70_extras` without errors. Slide preview: all text fits. An earlier run took 356 s while the machine was busy (data loading alone twice as slow); one run was cut off by a session restart and left the notebook without outputs until the next run.

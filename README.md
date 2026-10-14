@@ -13,8 +13,9 @@ The main finding is a shortcut: the models recognise the attacker machines' TCP 
 (`Fwd Seg Size Min`, `FWD Init Win Bytes`) rather than attack behaviour.
 
 - **Notebook to hand in:** `mini_project_unsw_nb15.ipynb`. It runs from top to bottom in about
-  4 minutes (see [Run time](#run-time)) and holds Parts A to G in order, followed by the additional
-  checks that the report quotes.
+  4 minutes (see [Run time](#run-time)) and holds Parts A to G and the additional checks that the
+  report quotes, in two phases: first every setting is chosen on the validation set while the test set
+  is sealed, then the test set is opened (step T0) and the rest only reports results on it.
 - **Report:** `report/` (PDF built from the Markdown source).
 
 ## Dataset
@@ -113,8 +114,13 @@ installs shap and lime if they are missing.
 The work is split into part notebooks, one per part of the brief. Each cell starts with the step it
 belongs to (`# STEP C2`, or `<!-- STEP C2 -->` in Markdown). Cells that only stand in for another
 notebook's step during development are marked `# STANDIN`. `tools/assemble.py` collects the `STEP`
-cells from all part notebooks, puts them in order (A0 to G4, then the additional checks X2 to X9),
-drops the stand-ins, and writes and runs the hand-in notebook.
+cells from all part notebooks, puts them in order, drops the stand-ins, and writes and runs the
+hand-in notebook. The order has two phases: the development phase holds every step that chooses a
+setting, on the validation set (A0 to A4, B1, B2, C1 to C3, X2, D1, F1 to F3); step T0 opens the test
+set; the evaluation phase holds every step that scores on it (A4T, B3, B4, C4, D2 to D6, E1 to E4, F3T,
+F4, F5, G1 to G4, X2T to X9). A step ending in T is the test half of a step whose setting is chosen
+earlier. The test set is sealed at the end of step A3, so a cell that used it before T0 would fail, and
+`--strict` also checks this before running.
 
 | Path | Contents |
 |---|---|
