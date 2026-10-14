@@ -836,3 +836,14 @@ The user asked for a Markdown file of possible questions from the professor and 
 
 **Verified**
 Dash check: 0 em or en dashes. No code, notebook or report files changed.
+
+## 2026-10-14 21:15 EEST: Glossary of abbreviations
+
+**What**
+- `Abbreviations.md`: created. Every abbreviation and short name used in the project, in nine tables: course and data, security and networking, the short words in the feature names and the TCP flags, scores and statistics, models and methods, the notebook step names (A0 to X9, T0, the T steps), files and tools, reference venues, and presentation day.
+
+**Why**
+The user asked for a Markdown file explaining all the abbreviations in the project. The list was collected by searching the notebook, report, README, presentation files and guides for abbreviations, and the step names were read from the notebook's own headings.
+
+**Verified**
+Dash check: 0 em or en dashes. Steps X1, X5 and X8 do not occur in the notebook, and the file says so. No code, notebook or report files changed.
