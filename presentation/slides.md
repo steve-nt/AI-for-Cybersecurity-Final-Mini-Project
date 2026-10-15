@@ -1,3 +1,5 @@
+https://ltuse-my.sharepoint.com/:f:/r/personal/stente-5_student_ltu_se/Documents/AI-for-Cybersecurity-Final-Mini-Project/AI-for-Cybersecurity-Final-Mini-Project?d=w49efcc9936324ce6ad7794e40e66884a&csf=1&web=1&e=D5CU4c
+
 # Slides: An Explainable and Robust Cyber-Defence Model
 
 Presentation on Thursday 15 October 2026, from 14:45. **13 minutes, then questions.** Two presenters, and

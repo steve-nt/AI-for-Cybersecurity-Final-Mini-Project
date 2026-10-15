@@ -327,8 +327,164 @@ concepts, write and review code, run experiments, check numbers and draft text. 
 the responsibility are ours.
 
 **How do we know you understand the code the AI wrote?**
-Be ready to open any cell and explain it line by line. Good ones to practise: the data cleaning, the
-sealed test set, the pseudo-labelling loop, the deletion test, and the BRB inference.
+By opening any cell and explaining it line by line. The five cells below are the most likely to be asked
+about, because each one carries a key claim of the report. Practise them out loud, with the notebook open.
+Each section below says where to find the cell, what each line does, and the follow-up questions to
+expect.
+
+**How to find a cell quickly:** every cell starts with its step label, so press `Ctrl+F` in Jupyter and
+search for it (for example `# STEP C2`). The cell numbers below count every cell of
+`mini_project_unsw_nb15.ipynb` from the top, title included (155 in total). Jupyter does not show these
+numbers, but they tell you roughly how far down to scroll.
+
+### Practice cell 1: the data cleaning (Kirill)
+
+**Where:** heading "Part A: load and clean the data", step `# STEP A2`, cell 10 (the cell that starts
+`raw_counts = ...`).
+
+| Code | What it does |
+|---|---|
+| `raw_counts = df["attack_type"].value_counts()` | Counts the flows of each type before cleaning, for the class-balance table in the next cell |
+| `pd.util.hash_pandas_object(df, index=False)` | Turns each whole row (the 76 features and the label) into one number, a "hash". Identical rows get identical hashes |
+| `.duplicated()` and `df[~...]` | Marks every row whose hash was already seen, and keeps only the first copy. 447,915 rows become 306,173 |
+| `row_key = pd.util.hash_pandas_object(df[feature_columns], ...)` | The same trick, but on the 76 features only, without the label |
+| `df.groupby(row_key)["attack_type"].transform("nunique") > 1` | For each group of rows with identical features, counts how many different labels it has. More than one label is a contradiction |
+| `df = df[~conflict]` | Drops **all** rows of a contradictory group, both labels. 306,173 become 305,105 |
+| `assert CLEAN_COUNTS == {...}` | Stops the notebook if the counts are ever different, so the numbers in the report cannot silently change |
+
+**Follow-up questions:**
+- *Why a hash and not `drop_duplicates()`?* Same result (the comment says this was checked), but 4
+  seconds instead of 21.
+- *Could two different rows get the same hash?* In theory, yes, but with 64-bit hashes the chance is
+  negligible for 448,000 rows, and the result was checked against `drop_duplicates()`.
+- *Why drop both rows of a contradiction and not keep the majority label?* No model can get both right,
+  and we cannot know which label is the true one. It is only 1,068 rows.
+
+### Practice cell 2: the sealed test set (Kirill, and both should know it)
+
+**Where:** two places.
+- **The seal:** heading "Part A: split 60 / 20 / 20", step `# STEP A3`, cell 17, at the very end of the
+  cell (it starts with the comment "Everything the later parts rely on").
+- **The opening:** heading "Final evaluation on the test set", step `# STEP T0`, cell 56.
+
+| Code | What it does |
+|---|---|
+| `N_TEST, TEST_INDEX = len(X_test), X_test.index` (earlier, in the split cell) | Keeps only the test set's size and row numbers. The model cache needs the size, and Part C needs the row numbers to check that its labelled flows are not test flows |
+| `_SEALED_TEST = (X_test, y_test, type_test)` | Puts the test features, labels and attack types into one box with an unusual name |
+| `del X_test, y_test, type_test` | Deletes the usual names. Any later cell that writes `X_test` stops with a `NameError` |
+| In T0: `X_test, y_test, type_test = _SEALED_TEST` | Takes them out of the box again |
+| `del _SEALED_TEST` | Removes the box |
+| `assert len(X_test) == N_TEST and X_test.index.equals(TEST_INDEX) ...` | Checks that what came out is exactly what went in: same size, same rows, same columns |
+
+**Follow-up questions:**
+- *Couldn't a cell just use `_SEALED_TEST` and peek?* Yes; Python cannot truly lock a variable. That is
+  why `tools/assemble.py --strict` also reads every code cell between the seal and T0, and refuses to
+  build the notebook if any of them mentions `X_test`, `y_test`, `type_test` or `_SEALED_TEST`. The two
+  checks together make an accidental peek impossible.
+- *Why not simply put the test cells at the end?* The whole point is to prove the order: everything chosen
+  first, then opened. The seal turns the order into something the code checks, not something we promise.
+
+### Practice cell 3: the pseudo-labelling loop (Stefanos)
+
+**Where:** heading "Part C: pseudo-labelling (semi-supervised learning)", step `# STEP C2`, cell 34 (it
+starts `def pseudo_label(cutoff, rounds=2):`).
+
+| Code | What it does |
+|---|---|
+| `X_now, y_now = X_lab, y_lab` | Starts from the 18,306 labelled flows (10% of training) |
+| `pool = X_unlab` | The 164,757 unlabelled flows still to be guessed |
+| `model = make_boost().fit(X_now, y_now)` | Trains a fresh boosting model, with the settings chosen in Part B, on what we have so far |
+| `p = model.predict_proba(pool)[:, 1]` | The attack probability of every unlabelled flow |
+| `sure = (p >= cutoff) \| (p <= 1 - cutoff)` | "Very sure": at least 95% attack, or at least 95% benign (cutoff 0.95) |
+| `guess = ... (p[sure] >= 0.5)` | The guessed label of each sure flow: attack if more than half |
+| `right = guess == y_hidden.loc[guess.index]` | **Only for counting** how many guesses are right; `y_hidden` is never used for training |
+| `X_now = pd.concat([X_now, pool[sure]])`, `y_now = pd.concat([y_now, guess])` | The sure flows join the training data, with their guessed labels |
+| `pool = pool[~sure]` | They leave the pool, so round 2 only looks at the flows that were not sure in round 1 |
+| `model = make_boost().fit(X_now, y_now)` (after the loop) | The final model, trained on the real labels plus the guesses |
+| `for cutoff in [0.99, 0.95, 0.90]:` and `CUTOFF = ...idxmax()` | Tries three cutoffs, scores each on **validation**, keeps the best macro-F1 (on a tie, the strictest): 0.95 |
+
+**Follow-up questions:**
+- *Why two rounds?* Round 1 adds the easiest flows, round 2 the next easiest. Round 2 already got worse
+  (90% right instead of 99.5%), so more rounds would add more wrong labels.
+- *Why do the confident guesses not help?* They are flows the model already gets right, so they teach it
+  nothing new.
+- *What does `cached(...)` do here?* It loads the trained models from `models/` if they exist, otherwise
+  trains and saves them. The result is the same either way.
+
+### Practice cell 4: the deletion test (Stefanos)
+
+**Where:** heading "Part D: fidelity, the deletion test", step `# STEP D4`, cell 79. The calculation
+itself is the function `deletion_test()` in `src/xai_tools.py`.
+
+In the notebook cell:
+
+| Code | What it does |
+|---|---|
+| `attack_called = np.flatnonzero(pred_test == 1)` | All test flows the model calls an attack |
+| `rng.choice(attack_called, size=500, replace=False)` | 500 of them at random, with seed 42 |
+| `shap_del = explainer(X_del).values` | The SHAP values of each of the 500 flows: how much each feature pushed that flow's decision |
+| `xai_tools.deletion_test(..., TRAIN_MEDIAN[...], ks=(1, 3, 5, 10))` | Runs the test, replacing features with their training median (a "typical" value) |
+| `first = ...np.abs(shap_del).argmax(axis=1)` | Which feature SHAP names first for each flow, and its median. Answer: `Fwd Seg Size Min` for all 500, median 32 |
+
+Inside `deletion_test()`:
+
+| Code | What it does |
+|---|---|
+| `original = predict_fn(X_rows)`, `predicted = original.argmax(1)` | The model's decision for each flow before any change |
+| `p_before = original[np.arange(n), predicted]` | How sure it was of that decision |
+| `np.argsort(-np.abs(a), axis=1)` | For each flow, its features sorted from most to least important by SHAP |
+| `orders["random"] = ... rng.permutation(d)` | The fair comparison: the same test with features in random order |
+| `masked[rows, cols] = fill_values[cols]` | Replaces each flow's top k features with their training median |
+| `drop = p_before - p_after` | How much the model's confidence fell |
+| `share_flipped` | The share of flows whose decision changed. SHAP, k = 1: 100%. One random feature: 2.8% |
+
+**Follow-up questions:**
+- *Why compare with random features?* Without a baseline, "the probability dropped" means nothing; any
+  change might lower it a little. SHAP's features matter far more than random ones, so SHAP is faithful.
+- *Is the median fair?* Not entirely: the median 32 is the benign machines' value, which is also why it
+  flips everything. That is the shortcut shown as cause and effect. Edited flows can also be unrealistic,
+  which the report names as a limitation.
+
+### Practice cell 5: the BRB, from building to a decision (Kirill)
+
+**Where:** three cells, plus the engine in `src/brbes.py`.
+- **Building:** heading "Part F: building the BRB", step `# STEP F2`, cell 50.
+- **The threshold:** the next code cell, cell 51.
+- **One decision, step by step:** heading "Part F: the belief output for one flow, step by step", step
+  `# STEP F4`, cell 111. Its printed trace is the easiest way to explain it.
+
+Building (cell 50 and `build_rule_base()`):
+
+| Code | What it does |
+|---|---|
+| `brbes.make_levels(X_train[f])` | Low, Medium and High for each feature: the training 5th percentile, median and 95th percentile |
+| `brbes.build_rule_base(X_train[TOP2], y_train, levels)` | Makes the 3 × 3 = 9 rules and fills in their beliefs from the training data |
+| `support`, `attacks` (inside) | For each rule: how many training flows match it, and how many of those are attacks (a flow between two levels counts partly for both) |
+| `share = (attacks + 1.0) / (support + 2.0)` | The rule's attack share, with +1 and +2 so that a rule with no data says 50%, not 0/0 |
+| `share_to_belief(share)` | Turns the share into beliefs over Low, Medium and High risk, for example 80% attack becomes Medium 0.4, High 0.6 |
+| `* (support / (support + n0))` with `n0 = 20` | Shrinks the beliefs of rules with little data; the rest becomes **Unknown**. A rule with 20 flows keeps half of its belief as Unknown, one with 20,000 almost none |
+
+Deciding (`infer()` and `utility()`, used in cells 51 and 111):
+
+| Step | What it does |
+|---|---|
+| `input_transform()` | Matches each input to the levels. A value between Low and Medium belongs partly to both; a missing value matches nothing |
+| `activation_weights()` | How strongly each rule fires: the product of its inputs' matches, scaled so all weights add up to 1. A missing input is left out of the product |
+| `belief_update()` | If one of the two inputs is missing, every rule's beliefs are halved; the other half becomes Unknown |
+| `er_aggregate()` | Evidential reasoning: combines the beliefs of all firing rules into one belief over Low, Medium, High and Unknown |
+| `utility()` | The risk score: Low 0, Medium 50, High 100. Unknown is counted as 0 (`u_min`), as 100 (`u_max`) and halfway (`u_avg`) |
+| `brbes.choose_threshold(u_val, y_val)` (cell 51) | The alert line with the best macro-F1 on **validation**: 48.5 |
+| `undecided = (u_min < BRB_THRESHOLD) & (u_max >= BRB_THRESHOLD)` (cell 114) | "Cannot decide": the range from best to worst case crosses the alert line |
+
+**Follow-up questions:**
+- *Why +1 and +2?* So that a rule nobody has seen says "50%, no idea" instead of dividing by zero. It is
+  Laplace smoothing.
+- *Why n0 = 20?* A hand-made choice, not tuned: below about 20 flows a rule should visibly admit doubt.
+  It hardly matters here, because most rules have thousands of flows.
+- *What happens if both inputs are missing?* No rule fires, and the answer is 100% Unknown: the risk could
+  be anything from 0 to 100.
+- *Where did the engine come from?* From our Lab 3, with its own tests in `src/test_brbes.py` (for
+  example, that a missing input gives exactly the expected Unknown).
 
 **Who did what?**
 Kirill: Parts A, B and F. Stefanos: Parts C, D, E and G. Each made the additional checks for their own

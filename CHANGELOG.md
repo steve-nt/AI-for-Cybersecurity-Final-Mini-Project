@@ -890,3 +890,14 @@ The user decided to hand in only `assemble.py` from `tools/`, and asked to remov
 
 **Verified**
 All 68 files in `results/tables/` are identical to the copy taken before the run, except the edited glossary Markdown line (changed before the copy). The strict seal check passed. `tools/check_report_numbers.py`: all 446 numbers match. No mention of git, GitHub or `feature_glossary.py` is left in the notebook, the part notebooks, the README, `src/`, `tools/assemble.py`, `results/` or the report. Test zip: 220 files, 22 MB, deleted afterwards. Dash check: 0.
+
+## 2026-10-15 13:12 EEST: Where to find the five practice cells, explained line by line
+
+**What**
+- `Professor-Questions.md`: the answer to "How do we know you understand the code the AI wrote?" now has five practice sections: the data cleaning (A2, cell 10), the sealed test set (A3, cell 17, and T0, cell 56), the pseudo-labelling loop (C2, cell 34), the deletion test (D4, cell 79, and `deletion_test()` in `src/xai_tools.py`), and the BRB (F2, cells 50 and 51, F4, cell 111, and `src/brbes.py`). Each gives the heading, the step label to search for, a line-by-line table in plain words, and likely follow-up questions with answers.
+
+**Why**
+The user asked where these cells are in the notebook and for more detail about them, to prepare for questions on the AI-written code.
+
+**Verified**
+Cell numbers and first lines read from the executed `mini_project_unsw_nb15.ipynb` (title counted as cell 1). Numbers checked against the code and tables: 447,915, 306,173 and 305,105 rows, 164,757 unlabelled flows, the belief formula (80% attack gives Medium 0.4, High 0.6), n0 = 20, and every rule's support of at least 3,309 flows (`F2_rules.csv`). Dash check: 0.
